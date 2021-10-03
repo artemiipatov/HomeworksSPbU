@@ -96,21 +96,45 @@ int binarySearch(const int wantedElement, int sequence[], const int left, const 
 
 bool testQSortCorrectExecution()
 {
-    int testArray[40] = { 0 };
+    bool passTest = true;
 
-    srand((unsigned)time(NULL));
-    for (int index = 0; index < 40; index++)
+    // One element array test
+    int testArray[1] = { 5 };
+    if (quickSort(0, 1, testArray) != 0 || !(testArray[0] == 5))
     {
-        testArray[index] = rand() % 1000;
+        return false;
     }
 
-    quickSort(0, 40, testArray);
-
-    for (int index = 1; index < 40; index++)
+    // identical elements test
+    int testArray1[12] = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+    if (quickSort(0, 12, testArray1) != 0)
     {
-        if (testArray[index - 1] > testArray[index])
+        return false;
+    }
+    for (int index = 0; index < 12; index++)
+    {
+        if (testArray1[index] != 5)
         {
             return false;
+        }
+    }
+
+    // random elements tests
+    srand(4);
+    for (int number = 0; number < 4; number++)
+    {
+        int testArray2[30] = { 0 };
+        for (int index = 0; index < 30; index++)
+        {
+            testArray2[index] = rand() % 10;
+        }
+        quickSort(0, 30, testArray2);
+        for (int index = 1; index < 30; index++)
+        {
+            if (testArray2[index - 1] > testArray2[index])
+            {
+                return false;
+            }
         }
     }
     return true;
