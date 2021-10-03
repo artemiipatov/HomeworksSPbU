@@ -70,8 +70,6 @@ int quickSort(int start, int end, int sequence[])
 
 bool testQSortCorrectExecution()
 {
-    bool passTest = true;
-
     // One element array test
     int testArray[1] = { 5 };
     if (quickSort(0, 1, testArray) != 0 || !(testArray[0] == 5))
