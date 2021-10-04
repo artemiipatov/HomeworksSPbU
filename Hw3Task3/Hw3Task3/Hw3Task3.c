@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int insertionSort(int sequence[], int start, int end)
+void insertionSort(int sequence[], int start, int end)
 {
     for (int index = start + 1; index < end; index++)
     {
