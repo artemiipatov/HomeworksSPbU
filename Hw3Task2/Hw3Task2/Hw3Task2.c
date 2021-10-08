@@ -230,4 +230,5 @@ int main()
     }
     free(sequence);
     free(wantedNumbers);
+    return 0;
 }
