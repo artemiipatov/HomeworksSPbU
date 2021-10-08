@@ -18,12 +18,12 @@ void insertionSort(int sequence[], int start, int end)
     }
 }
 
-int quickSort(int start, int end, int sequence[])
+void quickSort(int start, int end, int sequence[])
 {
     if (end - start + 1 < 10)
     {
         insertionSort(sequence, start, end);
-        return 0;
+        return;
     }
 
     const int mainElement = sequence[start];
@@ -85,7 +85,7 @@ int findMostFrequent(int sequence[], int length)
             maxNumber = counter;
             mostFrequentElement = sequence[index - 1];
         }
-        if (sequence[index] != sequence[index-1])
+        if (sequence[index] != sequence[index - 1])
         {
             counter = 1;
         }
@@ -96,17 +96,17 @@ int findMostFrequent(int sequence[], int length)
 bool testMostFrequentElement()
 {
     // One element array test
-    int testArray2[1] = { 5 };
-    quickSort(0, 1, testArray2);
-    if (findMostFrequent(testArray2, 1) != 5)
+    int testArray1[1] = { 5 };
+    quickSort(0, 1, testArray1);
+    if (findMostFrequent(testArray1, 1) != 5)
     {
         return false;
     }
 
     // identical elements test
-    int testArray1[12] = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    quickSort(0, 12, testArray1);
-    if (findMostFrequent(testArray1, 12) != 5)
+    int testArray2[12] = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+    quickSort(0, 12, testArray2);
+    if (findMostFrequent(testArray2, 12) != 5)
     {
         return false;
     }
@@ -114,29 +114,22 @@ bool testMostFrequentElement()
     // usual array test
     int testArray3[11] = { 1, 0, 4, 1, 9, 2, 8, 9, 2, 4, 9 };
     quickSort(0, 11, testArray3);
-    if (9 == findMostFrequent(testArray2, 11))
-    {
-        return false;
-    }
-
-    return true;
+    return 9 == findMostFrequent(testArray3, 11);
 }
 
 bool testQSortCorrectExecution()
 {
     // One element array test
     int testArray[1] = { 5 };
-    if (quickSort(0, 1, testArray) != 0 || !(testArray[0] == 5))
+    quickSort(0, 1, testArray);
+    if (!(testArray[0] == 5))
     {
         return false;
     }
 
     // identical elements test
     int testArray1[12] = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    if (quickSort(0, 12, testArray1) != 0)
-    {
-        return false;
-    }
+    quickSort(0, 12, testArray1);
     for (int index = 0; index < 12; index++)
     {
         if (testArray1[index] != 5)
@@ -183,6 +176,7 @@ int main()
     if (sequence == NULL)
     {
         printf("Allocation failure");
+        return -1;
     }
 
     // Array generating
@@ -206,4 +200,7 @@ int main()
     // Printing answer
     const int answer = findMostFrequent(sequence, length);
     printf("\nMost frequent element: %d", answer);
+
+    free(sequence);
+    return 0;
 }
