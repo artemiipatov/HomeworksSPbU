@@ -18,12 +18,12 @@ void insertionSort(int sequence[], int start, int end)
     }
 }
 
-int quickSort(int start, int end, int sequence[])
+void quickSort(int start, int end, int sequence[])
 {
     if (end - start + 1 < 10)
     {
         insertionSort(sequence, start, end);
-        return 0;
+        return;
     }
 
     const int mainElement = sequence[start];
@@ -72,17 +72,16 @@ bool testQSortCorrectExecution()
 {
     // One element array test
     int testArray[1] = { 5 };
-    if (quickSort(0, 1, testArray) != 0 || !(testArray[0] == 5))
+    quickSort(0, 1, testArray);
+    if (!(testArray[0] == 5))
     {
         return false;
     }
 
     // identical elements test
     int testArray1[12] = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    if (quickSort(0, 12, testArray1) != 0)
-    {
-        return false;
-    }
+    quickSort(0, 12, testArray1);
+    
     for (int index = 0; index < 12; index++)
     {
         if (testArray1[index] != 5)
