@@ -151,5 +151,6 @@ int main()
     {
         printf("%d ", sequence[index]);
     }
+    free(sequence);
     return 0;
 }
