@@ -207,6 +207,7 @@ int main()
     if (wantedNumbers == NULL)
     {
         printf("Allocation failure");
+        free(sequence);
         return -1;
     }
     for (int index = 0; index < numberOfWantedNumbers; index++)
