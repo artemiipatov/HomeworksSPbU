@@ -20,7 +20,7 @@ void decimalToBinary(int binaryNumber[], int decimalNumber)
 {
     for (int index = 0; index < sizeof(int) * 8; index++)
     {
-        binaryNumber[index] = abs(decimalNumber % 2);
+        binaryNumber[index] = decimalNumber & 1;
         decimalNumber >>= 1;
     }
 }
@@ -32,20 +32,13 @@ void binaryAddition(int firstBinaryNumber[], int secondBinaryNumber[], int sum[]
     {
         const int sumOfTwoDigits = firstBinaryNumber[index] + secondBinaryNumber[index] + transition;
         sum[index] = sumOfTwoDigits % 2;
-        if (sumOfTwoDigits > 1)
-        {
-            transition = 1;
-        }
-        else
-        {
-            transition = 0;
-        }
+        transition = sumOfTwoDigits > 1 ? 1 : 0;
     }
 }
 
 bool compareArrays(int firstArray[], int secondArray[])
 {
-    const sizeInt = sizeof(int) * 8;
+    const int sizeInt = sizeof(int) * 8;
     for (int index = 0; index < sizeInt; index++)
     {
         if (firstArray[index] != secondArray[sizeInt - index - 1])
@@ -138,12 +131,8 @@ bool testCorrectExecutionOfAllFunctions()
     {
         return false;
     }
-    if (binaryToDecimal(binarySum3) != -19432)
-    {
-        return false;
-    }
 
-    return true;
+    return binaryToDecimal(binarySum3) == -19432;
 }
 
 int main()
