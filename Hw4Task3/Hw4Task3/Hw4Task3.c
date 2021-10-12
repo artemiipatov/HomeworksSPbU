@@ -135,25 +135,6 @@ void saveData(PhoneBookEntry* notesArray, int currentIndex, bool testOrNot)
     return;
 }
 
-bool compareTwoArraysOfStruct(PhoneBookEntry* firstArray, PhoneBookEntry* secondArray, int currentIndex)
-{
-    for (int index = 0; index < currentIndex; index++)
-    {
-        if (strcmp(firstArray[index].name, secondArray[index].name) != 0)
-        {
-            return false;
-        }
-    }
-    for (int index = 0; index < currentIndex; index++)
-    {
-        if (strcmp(firstArray[index].phone, secondArray[index].phone) != 0)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 bool testReadDataFromFile(PhoneBookEntry* testArray)
 {
     readDataFromFile(testArray, 0, true);
@@ -298,6 +279,7 @@ int main()
             saveData(notesArray, currentIndex, false);
         }
     }
+    return 0;
 }
 
 /*
