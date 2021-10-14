@@ -24,7 +24,10 @@
     <ClCompile Include="mostFrequentElementSearch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests.c">
+    <ClCompile Include="testMostFrequentElement.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testQuickSort.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +38,10 @@
     <ClInclude Include="mostFrequentElementSearch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tests.h">
+    <ClInclude Include="testMostFrequentElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testQuickSort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

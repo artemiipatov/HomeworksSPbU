@@ -1,6 +1,7 @@
 #include "sort.h"
-#include "tests.h"
 #include "mostFrequentElementSearch.h"
+#include "testMostFrequentElement.h"
+#include "testQuickSort.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -31,6 +32,7 @@ int main()
     int* sequence = (int*)calloc((length + 1), sizeof(int));
     if (sequence == NULL)
     {
+        fclose(inputData);
         printf("Allocation failure");
         return -1;
     }

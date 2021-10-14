@@ -144,12 +144,14 @@
     </ClCompile>
     <ClCompile Include="mostFrequentElementSearch.c" />
     <ClCompile Include="sort.c" />
-    <ClCompile Include="tests.c" />
+    <ClCompile Include="testMostFrequentElement.c" />
+    <ClCompile Include="testQuickSort.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mostFrequentElementSearch.h" />
     <ClInclude Include="sort.h" />
-    <ClInclude Include="tests.h" />
+    <ClInclude Include="testMostFrequentElement.h" />
+    <ClInclude Include="testQuickSort.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
