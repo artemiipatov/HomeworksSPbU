@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "phonebookFunctions.h"
 #include "tests.h"
 #include <stdio.h>
@@ -10,16 +11,17 @@ int main()
         printf("Test failed");
         return -1;
     }
+
     printf("0 - exit\n");
     printf("1 - add note\n"); 
     printf("2 - print all notes\n");
     printf("3 - find telephone number using name\n");
     printf("4 - find name using telephone number\n");
     printf("5 - save data to file\n");
+
     int userInput = 1;
-    PhoneBookEntry* notesArray[100] = { "\0" };
-    int currentIndex = 0;
-    currentIndex = readDataFromFile(notesArray, currentIndex, "data.txt");
+    PhoneBookEntry notesArray[100] = { '\0' };
+    int currentIndex = readDataFromFile(notesArray, 0, "data.txt");
     while (userInput != 0)
     {
         printf("\nType any number: ");
@@ -33,10 +35,10 @@ int main()
             }
             case 1: //add note
             {
-                char name[30];
+                char name[30] = { '\0' };
                 printf("\nName: ");
                 fgets(name, 30, stdin);
-                char phone[30];
+                char phone[30] = { '\0' };
                 printf("Phone number: ");
                 fgets(phone, 30, stdin);
                 addNote(notesArray, name, phone, currentIndex);
@@ -51,7 +53,7 @@ int main()
             }
             case 3: //find telephone number using name
             {
-                char* toSearchName[30];
+                char toSearchName[30] = { '\0' };
                 printf("\nName: ");
                 fgets(toSearchName, 30, stdin);
                 const int indexWithWantedNote = findPhoneNumberUsingName(notesArray, toSearchName, currentIndex);
@@ -61,13 +63,13 @@ int main()
                 }
                 else
                 {
-                    printNameOrPhoneNumber(notesArray, indexWithWantedNote, false);
+                    printf("Phone number: %s", notesArray[indexWithWantedNote].phone);
                 }
                 break;
             }
             case 4: //find name using telephone number
             {
-                char* toSearchPhoneNumber[30];
+                char toSearchPhoneNumber[30] = { '\0' };
                 printf("\nPhone number: ");
                 fgets(toSearchPhoneNumber, 30, stdin);
                 const int indexWithWantedNote = findNameUsingPhoneNumber(notesArray, toSearchPhoneNumber, currentIndex);
@@ -77,7 +79,7 @@ int main()
                 }
                 else
                 {
-                    printNameOrPhoneNumber(notesArray, indexWithWantedNote, true);
+                    printf("Name: %s", notesArray[indexWithWantedNote].name);
                 }
                 break;
             }

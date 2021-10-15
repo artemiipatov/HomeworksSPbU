@@ -1,7 +1,9 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "tests.h"
 #include "phonebookFunctions.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 bool testReadDataFromFile(PhoneBookEntry* testArray)
 {
@@ -38,18 +40,19 @@ bool testSearchFunctions(PhoneBookEntry* testArray)
 bool testSaveDataToFile(PhoneBookEntry* testArray)
 {
     saveData(testArray, 3, "test.txt");
-    readDataFromFile(testArray, 3, "test.txt");
+    PhoneBookEntry dataFromFile[3] = { '\0' };
+    readDataFromFile(dataFromFile, 0, "test.txt");
     char* assistantArray[6] = { "isaac newton\n", "051-6320-123\n", "rene descartes\n", "03240-1234-534\n", "Adam Smith\n", "7(911)-123-45-67\n" };
     for (int index = 0; index < 5; index += 2)
     {
-        if (strcmp(testArray[index / 2].name, assistantArray[index]) != 0)
+        if (strcmp(dataFromFile[index / 2].name, assistantArray[index]) != 0)
         {
             return false;
         }
     }
     for (int index = 1; index < 6; index += 2)
     {
-        if (strcmp(testArray[index / 2].phone, assistantArray[index]) != 0)
+        if (strcmp(dataFromFile[index / 2].phone, assistantArray[index]) != 0)
         {
             return false;
         }
@@ -72,6 +75,6 @@ bool uniteTestingFuctions()
     fprintf(file, "%s", "03240-1234-534\n");
     fclose(file);
 
-    PhoneBookEntry testArray[6];
+    PhoneBookEntry testArray[3] = { '\0' };
     return testReadDataFromFile(testArray) && testAddNote(testArray) && testSearchFunctions(testArray) && testSaveDataToFile(testArray);
 }

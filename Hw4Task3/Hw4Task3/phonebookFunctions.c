@@ -1,5 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "phonebookFunctions.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int readDataFromFile(PhoneBookEntry* notesArray, int currentIndex, const char fileName[])
 {
@@ -15,7 +18,13 @@ int readDataFromFile(PhoneBookEntry* notesArray, int currentIndex, const char fi
     while (!feof(notes))
     {
         char* buffer = malloc(sizeof(char) * 30);
-        const int readBytes = fgets(buffer, 30, notes);
+        if (buffer == NULL)
+        {
+            printf("Allocation failure");
+            fclose(notes);
+            return -1;
+        }
+        const char* readBytes = fgets(buffer, 30, notes);
         if (readBytes < 0)
         {
             free(buffer);
@@ -27,17 +36,17 @@ int readDataFromFile(PhoneBookEntry* notesArray, int currentIndex, const char fi
     fclose(notes);
     for (int index = 0; index < linesRead - 1; index += 2)
     {
-        strcpy(notesArray[currentIndex].name, data[index]);
-        strcpy(notesArray[currentIndex].phone, data[index + 1]);
+        strcpy_s(notesArray[currentIndex].name, sizeof(notesArray[currentIndex].name), data[index]);
+        strcpy_s(notesArray[currentIndex].phone, sizeof(notesArray[currentIndex].phone), data[index + 1]);
         ++currentIndex;
     }
     return currentIndex;
 }
 
-void addNote(PhoneBookEntry* notesArray, const char* name, const char* phone, const int currentIndex)
+void addNote(PhoneBookEntry* notesArray, const char name[], const char phone[], const int currentIndex)
 {
-    strcpy(notesArray[currentIndex].name, name);
-    strcpy(notesArray[currentIndex].phone, phone);
+    strcpy_s(notesArray[currentIndex].name, sizeof(notesArray[currentIndex].name), name);
+    strcpy_s(notesArray[currentIndex].phone, sizeof(notesArray[currentIndex].phone), phone);
 }
 
 void printAllNotes(const PhoneBookEntry* notesArray, int currentIndex)
@@ -49,7 +58,7 @@ void printAllNotes(const PhoneBookEntry* notesArray, int currentIndex)
     }
 }
 
-int findPhoneNumberUsingName(const PhoneBookEntry* notesArray, const char* toSearchName, const int currentIndex)
+int findPhoneNumberUsingName(const PhoneBookEntry* notesArray, const char toSearchName[], const int currentIndex)
 {
     for (int index = 0; index < currentIndex; index++)
     {
@@ -61,7 +70,7 @@ int findPhoneNumberUsingName(const PhoneBookEntry* notesArray, const char* toSea
     return -1;
 }
 
-int findNameUsingPhoneNumber(const PhoneBookEntry* notesArray, const char* toSearchPhoneNumber, const int currentIndex)
+int findNameUsingPhoneNumber(const PhoneBookEntry* notesArray, const char toSearchPhoneNumber[], const int currentIndex)
 {
     for (int index = 0; index < currentIndex; index++)
     {
@@ -71,18 +80,6 @@ int findNameUsingPhoneNumber(const PhoneBookEntry* notesArray, const char* toSea
         }
     }
     return -1;
-}
-
-void printNameOrPhoneNumber(const PhoneBookEntry* notesArray, const int indexWithWantedNote, const bool nameOrPhone)
-{
-    if (nameOrPhone)
-    {
-        printf("Name: %s", notesArray[indexWithWantedNote].name);
-    }
-    else
-    {
-        printf("Phone number: %s", notesArray[indexWithWantedNote].phone);
-    }
 }
 
 void saveData(const PhoneBookEntry* notesArray, const int currentIndex, const char fileName[])
