@@ -1,4 +1,6 @@
 #include "testMostFrequentElement.h"
+#include "sort.h"
+#include "mostFrequentElementSearch.h"
 #include <stdbool.h>
 
 bool testMostFrequentElement()
