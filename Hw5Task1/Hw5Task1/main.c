@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include "stack.h"
+#include "stackTests.h"
 
 int main()
 {
+    if (!testMaster())
+    {
+        printf("Tests failed");
+        return -1;
+    }
     StackElement* head = NULL;
     char sequence[30] = { '\0' };
     printf("Print postfix expression: ");

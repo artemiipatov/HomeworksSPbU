@@ -30,9 +30,4 @@ bool testMaster()
 {
     StackElement* testHead = NULL;
     return testPush(&testHead) && testPop(&testHead) && testIsEmpty(&testHead) && testDeleteStack(&testHead) && testIsEmpty(&testHead);
-    //testPush(&testHead);
-    //testPop(&testHead);
-    //testIsEmpty(&testHead);
-    //testDeleteStack(&testHead);
-    //testIsEmpty(&testHead);
 }
