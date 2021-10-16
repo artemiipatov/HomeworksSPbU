@@ -3,10 +3,6 @@
 #include <stdlib.h>
 #include "stack.h"
 
-// добавленеи элемента на стек
-// удаление элемента со стека
-// проверка стека на пустоту
-
 void push(StackElement** head, int number)
 {
     StackElement* newElement = malloc(sizeof(StackElement));
