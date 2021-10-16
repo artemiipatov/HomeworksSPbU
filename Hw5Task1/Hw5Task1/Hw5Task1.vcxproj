@@ -139,11 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="calculatorFunctions.c" />
+    <ClCompile Include="calculatorTests.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="stack.c" />
     <ClCompile Include="stackTests.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="calculatorFunctions.h" />
+    <ClInclude Include="calculatorTests.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="stackTests.h" />
   </ItemGroup>

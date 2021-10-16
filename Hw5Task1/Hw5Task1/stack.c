@@ -2,9 +2,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "stack.h"
-#include "stackTests.h"
 
-void push(StackElement** head, int number)
+void push(StackElement** head, const int number)
 {
     StackElement* newElement = malloc(sizeof(StackElement));
     if (newElement == NULL)
@@ -23,7 +22,7 @@ int pop(StackElement** head)
         return -1;
     }
     StackElement* temp = (*head)->next;
-    int value = (*head)->value;
+    const int value = (*head)->value;
     free(*head);
     *head = temp;
     return value;

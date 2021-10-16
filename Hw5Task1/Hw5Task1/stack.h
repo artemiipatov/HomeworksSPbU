@@ -1,12 +1,13 @@
 #pragma once
 #include <stdbool.h>
 
-typedef struct StackElement {
+typedef struct StackElement
+{
     int value;
     struct StackElement* next;
 } StackElement;
 
-void push(StackElement** head, int number);
+void push(StackElement** head, const int number);
 
 int pop(StackElement** head);
 

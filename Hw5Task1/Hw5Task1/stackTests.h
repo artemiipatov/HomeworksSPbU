@@ -15,4 +15,4 @@ bool testIsEmpty(StackElement** testHead);
 bool testDeleteStack(StackElement** testHead);
 
 // unite all stack testing functions
-bool testMaster();
+bool stackTestingMaster();

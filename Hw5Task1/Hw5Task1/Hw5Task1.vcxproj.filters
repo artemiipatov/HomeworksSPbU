@@ -24,12 +24,24 @@
     <ClCompile Include="stackTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="calculatorTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calculatorFunctions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stackTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calculatorTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calculatorFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

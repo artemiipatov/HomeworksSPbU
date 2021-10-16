@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include "stack.h"
 #include "stackTests.h"
+#include "calculatorFunctions.h"
+#include "calculatorTests.h"
 
 int main()
 {
-    if (!testMaster())
+    if (!(stackTestingMaster() && testCalculator()))
     {
         printf("Tests failed");
         return -1;
@@ -21,26 +23,22 @@ int main()
             {
                 case '*':
                 {
-                    push(&head, pop(&head) * pop(&head));
+                    multiply(&head);
                     break;
                 }
                 case '/':
                 {
-                    const int divisor = pop(&head);
-                    const int dividend = pop(&head);
-                    push(&head, dividend / divisor);
+                    divide(&head);
                     break;
                 }
                 case '-':
                 {
-                    const int subtrahend = pop(&head);
-                    const int minuend = pop(&head);
-                    push(&head, minuend - subtrahend);
+                    subtract(&head);
                     break;
                 }
                 case '+':
                 {
-                    push(&head, pop(&head) + pop(&head));
+                    add(&head);
                     break;
                 }
                 default:

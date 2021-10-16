@@ -26,7 +26,7 @@ bool testDeleteStack(StackElement** testHead)
     return (*testHead) == NULL;
 }
 
-bool testMaster()
+bool stackTestingMaster()
 {
     StackElement* testHead = NULL;
     return testPush(&testHead) && testPop(&testHead) && testIsEmpty(&testHead) && testDeleteStack(&testHead) && testIsEmpty(&testHead);
