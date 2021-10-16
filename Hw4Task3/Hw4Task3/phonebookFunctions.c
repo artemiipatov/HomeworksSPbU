@@ -40,6 +40,10 @@ int readDataFromFile(PhoneBookEntry* notesArray, int currentIndex, const char fi
         strcpy_s(notesArray[currentIndex].phone, sizeof(notesArray[currentIndex].phone), data[index + 1]);
         ++currentIndex;
     }
+    for (int index = 0; index < linesRead; index++)
+    {
+        free(data[index]);
+    }
     return currentIndex;
 }
 
