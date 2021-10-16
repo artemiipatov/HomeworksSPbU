@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "stack.h"
+#include "stackTests.h"
 
 void push(StackElement** head, int number)
 {
