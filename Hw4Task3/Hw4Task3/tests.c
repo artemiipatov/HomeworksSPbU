@@ -29,7 +29,7 @@ bool testReadDataFromFile(PhoneBookEntry* testArray)
 bool testAddNote(PhoneBookEntry* testArray)
 {
     addNote(testArray, "Adam Smith\n", "7(911)-123-45-67\n", 2);
-    return (!strcmp(testArray[2].name, "Adam Smith\n") && !strcmp(testArray[2].phone, "7(911)-123-45-67\n"));
+    return (strcmp(testArray[2].name, "Adam Smith\n") == 0 && strcmp(testArray[2].phone, "7(911)-123-45-67\n") == 0);
 }
 
 bool testSearchFunctions(PhoneBookEntry* testArray)
