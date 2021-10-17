@@ -20,6 +20,10 @@ int readDataFromFile(PhoneBookEntry* notesArray, int currentIndex, const char fi
         char* buffer = malloc(sizeof(char) * 30);
         if (buffer == NULL)
         {
+            for (int index = 0; index < linesRead; index++)
+            {
+                free(data[index]);
+            }
             printf("Allocation failure");
             fclose(notes);
             return -1;
