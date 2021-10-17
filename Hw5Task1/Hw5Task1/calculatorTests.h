@@ -1,4 +1,5 @@
 #pragma once
 #include <stdbool.h>
 
-bool testCalculator();
+// tests postfix calculator with correct and two incorrect inputs
+bool calculatorTests();

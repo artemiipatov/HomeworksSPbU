@@ -6,7 +6,7 @@
 
 int main()
 {
-    if (!(stackTestingMaster() && testCalculator()))
+    if (!(stackTestingMaster() && calculatorTests()))
     {
         printf("Tests failed");
         return -1;
@@ -15,41 +15,12 @@ int main()
     char sequence[30] = { '\0' };
     printf("Print postfix expression: ");
     fgets(sequence, (unsigned)sizeof(sequence), stdin);
-    for (int index = 0; index < 30; index++)
+
+    if (!calculate(&head, sequence))
     {
-        if (sequence[index] != ' ' && sequence[index] != '\0' && sequence[index] != '\n')
-        {
-            switch (sequence[index])
-            {
-                case '*':
-                {
-                    multiply(&head);
-                    break;
-                }
-                case '/':
-                {
-                    divide(&head);
-                    break;
-                }
-                case '-':
-                {
-                    subtract(&head);
-                    break;
-                }
-                case '+':
-                {
-                    add(&head);
-                    break;
-                }
-                default:
-                {
-                    push(&head, (int)(sequence[index] - '0'));
-                    break;
-                }
-            }
-        }
+        printf("Incorrect input");
+        return -1;
     }
     printf("%d", pop(&head));
-    deleteStack(&head);
     return 0;
 }
