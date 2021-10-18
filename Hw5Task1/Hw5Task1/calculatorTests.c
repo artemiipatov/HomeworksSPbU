@@ -9,7 +9,8 @@ bool calculatorTests()
     // tests calculator with correct input 
     StackElement* testHead1 = NULL;
     char testSequence1[30] = "7 4 - 8 9 + * 3 / 9 9 9 + + -";
-    if (!calculate(&testHead1, testSequence1) || pop(&testHead1) != -10)
+    int result = 0;
+    if (!(calculate(&testHead1, testSequence1) && pop(&testHead1, &result) && result == -10))
     {
         return false;
     }

@@ -6,7 +6,7 @@
 
 int main()
 {
-    if (!(stackTestingMaster() && calculatorTests()))
+    if (!(testsStack() && calculatorTests()))
     {
         printf("Tests failed");
         return -1;
@@ -21,6 +21,8 @@ int main()
         printf("Incorrect input");
         return -1;
     }
-    printf("%d", pop(&head));
+    int result = 0;
+    pop(&head, &result);
+    printf("%d", result);
     return 0;
 }
