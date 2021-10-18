@@ -14,8 +14,11 @@ int main()
     push(&head, 10);
     push(&head, 3);
     push(&head, 90);
-    printf("%d ", pop(&head));
-    printf("%d ", pop(&head));
-    printf("%d ", pop(&head));
-    printf("%d ", pop(&head));
+    int value = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        printf("%d", pop(&head, &value));
+        printf(", %d\n", value);
+    }
+    printf("%d\n", pop(&head, &value));
 }

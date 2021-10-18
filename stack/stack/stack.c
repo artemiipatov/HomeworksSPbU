@@ -16,17 +16,17 @@ void push(StackElement** head, int number)
     *head = newElement;
 }
 
-int pop(StackElement** head)
+bool pop(StackElement** head, int* number)
 {
     if (*head == NULL || head == NULL)
     {
-        return -1;
+        return false;
     }
     StackElement* temp = (*head)->next;
-    int value = (*head)->value;
+    *number = (*head)->value;
     free(*head);
     *head = temp;
-    return value;
+    return true;
 }
 
 bool isEmpty(StackElement* head)
@@ -38,6 +38,7 @@ void deleteStack(StackElement** head)
 {
     while (!isEmpty(*head))
     {
-        pop(head);
+        int number = 0;
+        pop(head, &number);
     }
 }
