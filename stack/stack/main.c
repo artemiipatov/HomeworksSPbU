@@ -5,7 +5,7 @@
 
 int main()
 {
-    if (!stackTestingMaster())
+    if (!testsStack())
     {
         printf("Tests failed");
         return -1;

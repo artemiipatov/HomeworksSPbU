@@ -3,31 +3,24 @@
 #include "stackTests.h"
 #include "stack.h"
 
-bool testPush(StackElement** testHead)
-{
-    push(testHead, 10);
-    push(testHead, 25);
-    return ((*testHead)->value) == 25 && (((*testHead)->next)->value) == 10;
-}
-
-bool testPop(StackElement** testHead)
-{
-    return pop(testHead) == 25 && pop(testHead) == 10 && pop(testHead) == -1;
-}
-
-bool testIsEmpty(StackElement** testHead)
-{
-    return isEmpty(*testHead);
-}
-
-bool testDeleteStack(StackElement** testHead)
-{
-    deleteStack(testHead);
-    return (*testHead) == NULL;
-}
-
-bool stackTestingMaster()
+bool testsStack()
 {
     StackElement* testHead = NULL;
-    return testPush(&testHead) && testPop(&testHead) && testIsEmpty(&testHead) && testDeleteStack(&testHead) && testIsEmpty(&testHead);
+    push(&testHead, 10);
+    push(&testHead, 25);
+    push(&testHead, 90);
+    if (!(((testHead)->value) == 90 && (((testHead)->next)->value) == 25))
+    {
+        return false;
+    }
+    if (isEmpty(testHead))
+    {
+        return false;
+    }
+    if (!(pop(&testHead) == 90 && pop(&testHead) == 25))
+    {
+        return false;
+    }
+    deleteStack(&testHead);
+    return isEmpty(testHead) && pop(&testHead) == -1;
 }
