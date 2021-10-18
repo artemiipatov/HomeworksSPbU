@@ -5,7 +5,7 @@
 
 int main()
 {
-    if (!testMaster())
+    if (!stackTestingMaster())
     {
         printf("Tests failed");
         return -1;
@@ -13,9 +13,7 @@ int main()
     StackElement* head = NULL;
     push(&head, 10);
     push(&head, 3);
-    push(&head, 5);
     push(&head, 90);
-    printf("%d ", pop(&head));
     printf("%d ", pop(&head));
     printf("%d ", pop(&head));
     printf("%d ", pop(&head));
