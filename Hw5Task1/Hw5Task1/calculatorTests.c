@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "calculatorTests.h"
 #include "calculatorFunctions.h"
-#include "stack.h"
+#include "../../stack/stack/stack.h"
 
 bool calculatorTests()
 {

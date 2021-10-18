@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "stack.h"
-#include "stackTests.h"
+#include "../../stack/stack/stack.h"
+#include "../../stack/stack/stackTests.h"
 #include "calculatorFunctions.h"
 #include "calculatorTests.h"
 

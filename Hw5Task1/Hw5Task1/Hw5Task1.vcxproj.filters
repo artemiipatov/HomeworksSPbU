@@ -18,30 +18,30 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stack.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stackTests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="calculatorTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="calculatorFunctions.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\stack\stack\stack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\stack\stack\stackTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stackTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="calculatorTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="calculatorFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\stack\stack\stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\stack\stack\stackTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

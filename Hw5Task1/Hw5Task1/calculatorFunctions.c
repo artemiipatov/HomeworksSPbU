@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "stack.h"
+#include "../../stack/stack/stack.h"
 #include "calculatorFunctions.h"
 
 void multiply(StackElement** head)

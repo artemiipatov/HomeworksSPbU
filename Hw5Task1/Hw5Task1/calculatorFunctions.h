@@ -1,5 +1,5 @@
 #pragma once
-#include "stack.h"
+#include "../../stack/stack/stack.h"
 
 // multiplies two values
 void multiply(StackElement** head);
