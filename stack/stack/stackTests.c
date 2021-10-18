@@ -17,10 +17,17 @@ bool testsStack()
     {
         return false;
     }
-    if (!(pop(&testHead) == 90 && pop(&testHead) == 25))
+    int value = 0;
+    bool checkError1 = pop(&testHead, &value);
+    if (!(checkError1 && value == 90))
     {
         return false;
     }
     deleteStack(&testHead);
-    return isEmpty(testHead) && pop(&testHead) == -1;
+    bool checkError2 = pop(&testHead, &value);
+    if (checkError2)
+    {
+        return false;
+    }
+    return isEmpty(testHead);
 }
