@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "filesWork.h"
 
-int readDataFromFile(const char fileName[], int* array[])
+int readDataFromFile(const char fileName[], int array[])
 {
     FILE* file = fopen(fileName, "r");
     if (file == NULL)

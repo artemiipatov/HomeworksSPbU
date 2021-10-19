@@ -1,7 +1,7 @@
 #pragma once
 
 // reads all data from file
-int readDataFromFile(const char fileName[], int* array[]);
+int readDataFromFile(const char fileName[], int array[]);
 
 // writes data from array to the file
 void writeDataToFile(const char fileName[], int array[], int length);
