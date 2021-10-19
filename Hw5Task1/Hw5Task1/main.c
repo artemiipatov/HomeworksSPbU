@@ -11,7 +11,7 @@ int main()
         printf("Tests failed");
         return -1;
     }
-    StackElement* head = NULL;
+    StackElement* head = createStack();
     char sequence[30] = { '\0' };
     printf("Print postfix expression: ");
     fgets(sequence, (unsigned)sizeof(sequence), stdin);

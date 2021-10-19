@@ -41,7 +41,7 @@ void add(StackElement** head)
 
 bool checkCorrectInput(StackElement** head)
 {
-    return ((*head) != NULL && ((*head)->next) != NULL);
+    return ((*head) != NULL && getNext(*head) != NULL);
 }
 
 bool calculate(StackElement** head, char sequence[])
@@ -96,5 +96,5 @@ bool calculate(StackElement** head, char sequence[])
             }
         }
     }
-    return ((*head)->next) == NULL;
+    return getNext(*head) == NULL;
 }
