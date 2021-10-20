@@ -1,8 +1,29 @@
-#include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include "stack.h"
 #include "stackTests.h"
+
+typedef struct StackElement
+{
+    int value;
+    struct StackElement* next;
+} StackElement;
+
+int getValue(StackElement* head)
+{
+    return head->value;
+}
+
+StackElement* getNext(StackElement* head)
+{
+    return head->next;
+}
+
+StackElement* createStack()
+{
+    StackElement* stack = NULL;
+    return stack;
+}
 
 void push(StackElement** head, int number)
 {

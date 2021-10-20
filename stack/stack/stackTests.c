@@ -5,11 +5,11 @@
 
 bool testsStack()
 {
-    StackElement* testHead = NULL;
+    StackElement* testHead = createStack();
     push(&testHead, 10);
     push(&testHead, 25);
     push(&testHead, 90);
-    if (!(((testHead)->value) == 90 && (((testHead)->next)->value) == 25))
+    if (!(getValue(testHead) == 90 && getValue(getNext(testHead))) == 25)
     {
         return false;
     }
