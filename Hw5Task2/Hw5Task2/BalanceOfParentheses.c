@@ -8,60 +8,81 @@ bool checkPreviousBracket(StackElement** head, char currentBracket)
     {
         case ')':
         {
-            char previousBracket = getValue(*head);
-            if (previousBracket == '(')
+            switch (getValue(*head))
             {
-                int buffer = 0;
-                pop(head, &buffer);
-                return true;
+                case '(':
+                {
+                    int buffer = 0;
+                    pop(head, &buffer);
+                    return true;
+                }
+                case '{':
+                case '[':
+                {
+                    return false;
+                }
+                case '}':
+                case ']':
+                {
+                    return true;
+                }
+                default:
+                {
+                    return false;
+                }
             }
-            else if (previousBracket == '{' || previousBracket == '[')
-            {
-                return false;
-            }
-            else if (previousBracket == '}' || previousBracket == ']')
-            {
-                return true;
-            }
-            return false;
         }
         case '}':
         {
-            char previousBracket = getValue(*head);
-            if (previousBracket == '{')
+            switch (getValue(*head))
             {
-                int buffer = 0;
-                pop(head, &buffer);
-                return true;
+                case '{':
+                {
+                    int buffer = 0;
+                    pop(head, &buffer);
+                    return true;
+                }
+                case '(':
+                case '[':
+                {
+                    return false;
+                }
+                case ')':
+                case ']':
+                {
+                    return true;
+                }
+                default:
+                {
+                    return false;
+                }
             }
-            else if (previousBracket == '(' || previousBracket == '[')
-            {
-                return false;
-            }
-            else if (previousBracket == ')' || previousBracket == ']')
-            {
-                return true;
-            }
-            return false;
         }
         case ']':
         {
-            char previousBracket = getValue(*head);
-            if (previousBracket == '[')
+            switch (getValue(*head))
             {
-                int buffer = 0;
-                pop(head, &buffer);
-                return true;
+                case '[':
+                {
+                    int buffer = 0;
+                    pop(head, &buffer);
+                    return true;
+                }
+                case '{':
+                case '(':
+                {
+                    return false;
+                }
+                case '}':
+                case ')':
+                {
+                    return true;
+                }
+                default:
+                {
+                    return false;
+                }
             }
-            else if (previousBracket == '(' || previousBracket == '{')
-            {
-                return false;
-            }
-            else if (previousBracket == '}' || previousBracket == ')')
-            {
-                return true;
-            }
-            return false;
         }
         default:
         {
@@ -77,16 +98,22 @@ bool checkBalance(StackElement* head, char* sequence)
     {
         if (!(sequence[index] == '\0' || sequence[index] == '\n'))
         {
-            if (sequence[index] == ')' || sequence[index] == ']' || sequence[index] == '}')
+            switch (sequence[index])
             {
-                if (isEmpty(head) || !checkPreviousBracket(&head, sequence[index]))
+                case ')':
+                case ']':
+                case '}':
                 {
-                    return false;
+                    if (isEmpty(head) || !checkPreviousBracket(&head, sequence[index]))
+                    {
+                        return false;
+                    }
+                    break;
                 }
-            }
-            else
-            {
-                push(&head, sequence[index]);
+                default:
+                {
+                    push(&head, sequence[index]);
+                }
             }
         }
     }
