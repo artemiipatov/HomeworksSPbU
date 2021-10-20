@@ -19,6 +19,7 @@ int main()
     if (!calculate(&head, sequence))
     {
         printf("Incorrect input");
+        deleteStack(&head);
         return -1;
     }
     int result = 0;

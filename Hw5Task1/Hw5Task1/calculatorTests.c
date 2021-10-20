@@ -14,7 +14,7 @@ bool calculatorTests()
     {
         return false;
     }
-
+    deleteStack(&testHead1);
     // tests calculator with incorrect input
     // case 1, more than one number in a stack after finishing calculations
     StackElement* testHead2 = createStack();
@@ -31,8 +31,10 @@ bool calculatorTests()
     {
         return false;
     }
+    deleteStack(&testHead3);
     // case 3, only operand given
     StackElement* testHead4 = createStack();
     char testSequence4[30] = "+";
     return calculate(&testHead4, testSequence4) == false;
+    deleteStack(&testHead4);
 }
