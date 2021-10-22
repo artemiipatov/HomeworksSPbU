@@ -3,7 +3,7 @@
 #include "stack.h"
 #include "stackTests.h"
 
-typedef struct StackElement
+typedef struct StackElement 
 {
     int value;
     struct StackElement* next;
