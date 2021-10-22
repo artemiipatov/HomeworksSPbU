@@ -2,6 +2,7 @@
 #include "../../stack/stack/stack.h"
 #include "BalanceOfParentheses.h"
 
+// checks previous bracket to find out if balance between previous bracket and current one is kept
 bool checkPreviousBracket(StackElement** head, char currentBracket)
 {
     switch (currentBracket)
@@ -15,11 +16,6 @@ bool checkPreviousBracket(StackElement** head, char currentBracket)
                     int buffer = 0;
                     pop(head, &buffer);
                     return true;
-                }
-                case '{':
-                case '[':
-                {
-                    return false;
                 }
                 case '}':
                 case ']':
@@ -42,11 +38,6 @@ bool checkPreviousBracket(StackElement** head, char currentBracket)
                     pop(head, &buffer);
                     return true;
                 }
-                case '(':
-                case '[':
-                {
-                    return false;
-                }
                 case ')':
                 case ']':
                 {
@@ -68,11 +59,6 @@ bool checkPreviousBracket(StackElement** head, char currentBracket)
                     pop(head, &buffer);
                     return true;
                 }
-                case '{':
-                case '(':
-                {
-                    return false;
-                }
                 case '}':
                 case ')':
                 {
@@ -91,8 +77,9 @@ bool checkPreviousBracket(StackElement** head, char currentBracket)
     }
 }
 
-bool checkBalance(StackElement* head, char* sequence)
+bool checkBalance(char* sequence)
 {
+    StackElement* head = createStack();
     push(&head, sequence[0]);
     for (int index = 1; index < 30; index++)
     {
@@ -117,5 +104,7 @@ bool checkBalance(StackElement* head, char* sequence)
             }
         }
     }
-    return isEmpty(head);
+    bool checkEmpty = isEmpty(head);
+    deleteStack(&head);
+    return checkEmpty;
 }
