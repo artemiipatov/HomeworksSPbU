@@ -21,4 +21,6 @@ int main()
         printf(", %d\n", value);
     }
     printf("%d\n", pop(&head, &value));
+    deleteStack(&head);
+    return 0;
 }
