@@ -5,75 +5,18 @@
 // checks previous bracket to find out if balance between previous bracket and current one is kept
 bool checkPreviousBracket(StackElement** head, char currentBracket)
 {
-    switch (currentBracket)
+    char previousBracket = getValue(*head);
+    if (   (currentBracket == ')' && previousBracket == '(')
+        || (currentBracket == '}' && previousBracket == '{')
+        || (currentBracket == ']' && previousBracket == '[')   )
     {
-        case ')':
-        {
-            switch (getValue(*head))
-            {
-                case '(':
-                {
-                    int buffer = 0;
-                    pop(head, &buffer);
-                    return true;
-                }
-                case '}':
-                case ']':
-                {
-                    return true;
-                }
-                default:
-                {
-                    return false;
-                }
-            }
-        }
-        case '}':
-        {
-            switch (getValue(*head))
-            {
-                case '{':
-                {
-                    int buffer = 0;
-                    pop(head, &buffer);
-                    return true;
-                }
-                case ')':
-                case ']':
-                {
-                    return true;
-                }
-                default:
-                {
-                    return false;
-                }
-            }
-        }
-        case ']':
-        {
-            switch (getValue(*head))
-            {
-                case '[':
-                {
-                    int buffer = 0;
-                    pop(head, &buffer);
-                    return true;
-                }
-                case '}':
-                case ')':
-                {
-                    return true;
-                }
-                default:
-                {
-                    return false;
-                }
-            }
-        }
-        default:
-        {
-            return false;
-        }
+        int buffer = 0;
+        pop(head, &buffer);
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
