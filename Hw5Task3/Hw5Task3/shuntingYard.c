@@ -26,6 +26,7 @@ bool shuntingYard(char infixNotation[], char postfixNotation[], int length)
                     {
                         if (!isValueReceived)
                         {
+                            deleteStack(&head);
                             return false;
                         }
                         postfixNotation[currentIndex] = headValue;
@@ -67,6 +68,11 @@ bool shuntingYard(char infixNotation[], char postfixNotation[], int length)
     currentIndex++;
     while (pop(&head, &headValue))
     {
+        if (headValue == '(')
+        {
+            deleteStack(&head);
+            return false;
+        }
         postfixNotation[currentIndex] = headValue;
         currentIndex++;
     }
