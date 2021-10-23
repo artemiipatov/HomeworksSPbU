@@ -15,7 +15,8 @@ int main()
     char sequence[30] = { '\0' };
     printf("Parentheses sequence: ");
     fgets(sequence, (unsigned)sizeof(sequence), stdin);
-    if (checkBalance(sequence) == 1)
+    int length = 30;
+    if (checkBalance(sequence, length) == 1)
     {
         printf("Balance is kept");
     }

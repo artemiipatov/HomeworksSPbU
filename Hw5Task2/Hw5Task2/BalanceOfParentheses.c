@@ -20,11 +20,11 @@ bool checkPreviousBracket(StackElement** head, char currentBracket)
     }
 }
 
-bool checkBalance(char sequence[])
+bool checkBalance(char sequence[], int length)
 {
     StackElement* head = createStack();
     push(&head, sequence[0]);
-    for (int index = 1; index < 30; index++)
+    for (int index = 1; index < length; index++)
     {
         switch (sequence[index])
         {
