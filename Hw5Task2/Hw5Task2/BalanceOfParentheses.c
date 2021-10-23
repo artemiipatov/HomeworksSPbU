@@ -20,7 +20,7 @@ bool checkPreviousBracket(StackElement** head, char currentBracket)
     }
 }
 
-bool checkBalance(char* sequence)
+bool checkBalance(char sequence[])
 {
     StackElement* head = createStack();
     push(&head, sequence[0]);

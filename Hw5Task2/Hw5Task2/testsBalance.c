@@ -29,7 +29,7 @@ bool testsBalance()
         return false;
     }
     // test 5, checkBalance() must return true;
-    char sequence5[30] = "(){[(){}]}";
+    char sequence5[30] = "(){[()[[[]]]{}]}";
     if (!checkBalance(sequence5))
     {
         return false;
