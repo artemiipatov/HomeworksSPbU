@@ -6,7 +6,7 @@
 
 bool calculatorTests()
 {
-    int length = 30;
+    const int length = 30;
 
     // tests calculator with correct input 
     char testSequence1[30] = "7 4 - 8 9 + * 3 / 9 9 9 + + -";

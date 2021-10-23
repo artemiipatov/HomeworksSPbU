@@ -15,8 +15,7 @@ int main()
     fgets(sequence, (unsigned)sizeof(sequence), stdin);
 
     bool correctInput = true;
-    int length = 30;
-    int result = calculate(sequence, &correctInput, length);
+    int result = calculate(sequence, &correctInput, 30);
     if (!correctInput)
     {
         printf("Incorrect input");
