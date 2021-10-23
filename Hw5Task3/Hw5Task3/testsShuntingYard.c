@@ -16,15 +16,15 @@ bool testIncorrectInput()
 
 bool testCorrectInput()
 {
-    char input[30] = "2+3+4*(9+(2-8/(6-5))*7)";
+    char input[30] = "2+3+4*(9+(2-8/(6-5))*7)+1";
     char output[30] = { '\0' };
-    char correctOutput[18] = { "23+492865-/-7*+*+" };
+    char correctOutput[20] = "23+492865-/-7*+*+1+";
     bool isInputCorrect = shuntingYard(input, output, 30);
     if (!isInputCorrect)
     {
         return false;
     }
-    for (int index = 0; index < 18; index++)
+    for (int index = 0; index < 20; index++)
     {
         if (correctOutput[index] != output[index])
         {
@@ -36,5 +36,5 @@ bool testCorrectInput()
 
 bool testsPassed()
 {
-    return testCorrectInput && testIncorrectInput;
+    return testCorrectInput() && testIncorrectInput();
 }

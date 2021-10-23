@@ -4,7 +4,7 @@
 bool shuntingYard(char infixNotation[], char postfixNotation[], int length)
 {
     StackElement* head = createStack();
-    int currentIndex = 1;
+    int currentIndex = 0;
     for (int index = 0; index < length; index++)
     {
         if (infixNotation[index] != '\n' && infixNotation[index] != '\0')
@@ -38,17 +38,17 @@ bool shuntingYard(char infixNotation[], char postfixNotation[], int length)
                 case '+':
                 case '-':
                 {
-                    int randValue = 0;
-                    while (pop(&head, &randValue))
+                    int headValue = 0;
+                    while (pop(&head, &headValue))
                     {
-                        if (randValue == '*' || randValue == '/' || randValue == '+' || randValue == '-')
+                        if (headValue == '*' || headValue == '/' || headValue == '+' || headValue == '-')
                         {
-                            postfixNotation[currentIndex] = randValue;
+                            postfixNotation[currentIndex] = headValue;
                             currentIndex++;
                         }
                         else
                         {
-                            push(&head, randValue);
+                            push(&head, headValue);
                             break;
                         }
                     }
@@ -65,7 +65,6 @@ bool shuntingYard(char infixNotation[], char postfixNotation[], int length)
         }
     }
     int headValue = 0;
-    currentIndex++;
     while (pop(&head, &headValue))
     {
         if (headValue == '(')

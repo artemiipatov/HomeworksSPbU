@@ -6,7 +6,7 @@
 
 int main()
 {
-    if (!testsStack() && !testsPassed())
+    if (!testsStack() || !testsPassed())
     {
         printf("Tests failed");
         return -1;
