@@ -44,10 +44,10 @@ bool checkCorrectInput(StackElement** head)
     return ((*head) != NULL && getNext(*head) != NULL);
 }
 
- int calculate(char sequence[], bool* correctInput)
+ int calculate(char sequence[], bool* correctInput, int length)
 {
     StackElement* head = createStack();
-    for (int index = 0; index < 30; index++)
+    for (int index = 0; index < length; index++)
     {
         if (sequence[index] != ' ' && sequence[index] != '\0' && sequence[index] != '\n')
         {
