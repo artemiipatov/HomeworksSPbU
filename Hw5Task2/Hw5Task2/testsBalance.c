@@ -3,7 +3,7 @@
 
 bool testsBalance()
 {
-    int length = 30;
+    const int length = 30;
     // test 1, checkBalance() must return false;
     char sequence1[30] = "(()";
     if (checkBalance(sequence1, length))
