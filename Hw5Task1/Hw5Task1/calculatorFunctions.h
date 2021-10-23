@@ -17,4 +17,4 @@ void add(StackElement** head);
 bool checkCorrectInput(StackElement** head);
 
 // gets expression and calculates it using operation functions. Returns true if user input is correct, false if it is incorrect
-bool calculate(StackElement** head, char sequence[]);
+int calculate(char sequence[], bool* correctInput);

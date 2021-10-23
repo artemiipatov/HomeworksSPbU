@@ -10,7 +10,7 @@ int main()
         printf("Tests failed");
         return -1;
     }
-    StackElement* head = NULL;
+    StackElement* head = createStack();
     push(&head, 10);
     push(&head, 3);
     push(&head, 90);

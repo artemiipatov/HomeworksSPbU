@@ -44,8 +44,9 @@ bool checkCorrectInput(StackElement** head)
     return ((*head) != NULL && getNext(*head) != NULL);
 }
 
-bool calculate(StackElement** head, char sequence[])
+ int calculate(char sequence[], bool* correctInput)
 {
+    StackElement* head = createStack();
     for (int index = 0; index < 30; index++)
     {
         if (sequence[index] != ' ' && sequence[index] != '\0' && sequence[index] != '\n')
@@ -54,47 +55,64 @@ bool calculate(StackElement** head, char sequence[])
             {
                 case '*':
                 {
-                    if (!checkCorrectInput(head))
+                    if (!checkCorrectInput(&head))
                     {
-                        return false;
+                        *correctInput = false;
+                        deleteStack(&head);
+                        return 0;
                     }
-                    multiply(head);
+                    multiply(&head);
                     break;
                 }
                 case '/':
                 {
-                    if (!checkCorrectInput(head))
+                    if (!checkCorrectInput(&head))
                     {
-                        return false;
+                        *correctInput = false;
+                        deleteStack(&head);
+                        return 0;
                     }
-                    divide(head);
+                    divide(&head);
                     break;
                 }
                 case '-':
                 {
-                    if (!checkCorrectInput(head))
+                    if (!checkCorrectInput(&head))
                     {
-                        return false;
+                        *correctInput = false;
+                        deleteStack(&head);
+                        return 0;
                     }
-                    subtract(head);
+                    subtract(&head);
                     break;
                 }
                 case '+':
                 {
-                    if (!checkCorrectInput(head))
+                    if (!checkCorrectInput(&head))
                     {
-                        return false;
+                        *correctInput = false;
+                        deleteStack(&head);
+                        return 0;
                     }
-                    add(head);
+                    add(&head);
                     break;
                 }
                 default:
                 {
-                    push(head, (int)(sequence[index] - '0'));
+                    push(&head, (int)(sequence[index] - '0'));
                     break;
                 }
             }
         }
     }
-    return getNext(*head) == NULL;
+    int result = 0;
+    pop(&head, &result);
+    if (!isEmpty(head))
+    {
+        deleteStack(&head);
+        *correctInput = false;
+        return 0;
+    }
+    deleteStack(&head);
+    return result;
 }
