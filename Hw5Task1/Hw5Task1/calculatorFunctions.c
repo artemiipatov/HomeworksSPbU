@@ -3,49 +3,14 @@
 #include "../../stack/stack/stack.h"
 #include "calculatorFunctions.h"
 
-void multiply(StackElement** head)
+bool isInputCorrect(StackElement** head)
 {
-    int firstFactor = 0;
-    pop(head, &firstFactor);
-    int secondFactor = 0;
-    pop(head, &secondFactor);
-    push(head, firstFactor * secondFactor);
-}
-
-void divide(StackElement** head)
-{
-    int divisor = 0;
-    pop(head, &divisor);
-    int dividend = 0;
-    pop(head, &dividend);
-    push(head, dividend / divisor);
-}
-
-void subtract(StackElement** head)
-{
-    int subtrahend = 0;
-    pop(head, &subtrahend);
-    int minuend = 0;
-    pop(head, &minuend);
-    push(head, minuend - subtrahend);
-}
-
-void add(StackElement** head)
-{
-    int firstSummand = 0;
-    pop(head, &firstSummand);
-    int secondSummand = 0;
-    pop(head, &secondSummand);
-    push(head, firstSummand + secondSummand);
-}
-
-bool checkCorrectInput(StackElement** head)
-{
-    return ((*head) != NULL && getNext(*head) != NULL);
+    return (*head) != NULL && getNext(*head) != NULL;
 }
 
  int calculate(char sequence[], bool* correctInput, int length)
 {
+    *correctInput = true;
     StackElement* head = createStack();
     for (int index = 0; index < length; index++)
     {
@@ -54,48 +19,37 @@ bool checkCorrectInput(StackElement** head)
             switch (sequence[index])
             {
                 case '*':
-                {
-                    if (!checkCorrectInput(&head))
-                    {
-                        *correctInput = false;
-                        deleteStack(&head);
-                        return 0;
-                    }
-                    multiply(&head);
-                    break;
-                }
                 case '/':
-                {
-                    if (!checkCorrectInput(&head))
-                    {
-                        *correctInput = false;
-                        deleteStack(&head);
-                        return 0;
-                    }
-                    divide(&head);
-                    break;
-                }
                 case '-':
-                {
-                    if (!checkCorrectInput(&head))
-                    {
-                        *correctInput = false;
-                        deleteStack(&head);
-                        return 0;
-                    }
-                    subtract(&head);
-                    break;
-                }
                 case '+':
                 {
-                    if (!checkCorrectInput(&head))
+                    if (!isInputCorrect(&head))
                     {
                         *correctInput = false;
                         deleteStack(&head);
                         return 0;
                     }
-                    add(&head);
-                    break;
+                    int firstOperand = 0;
+                    pop(&head, &firstOperand);
+                    int secondOperand = 0;
+                    pop(&head, &secondOperand);
+                    if (sequence[index] == '*')
+                    {
+                        push(&head, secondOperand * firstOperand);
+                    }
+                    else if (sequence[index] == '/')
+                    {
+                        push(&head, secondOperand / firstOperand);
+                    }
+                    else if (sequence[index] == '+')
+                    {
+                        push(&head, secondOperand + firstOperand);
+                    }
+                    else
+                    {
+                        push(&head, secondOperand - firstOperand);
+                    }
+                    break; 
                 }
                 default:
                 {
