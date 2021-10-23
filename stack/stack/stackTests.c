@@ -1,6 +1,5 @@
 #include <stdbool.h>
 #include <stdlib.h>
-#include "stackTests.h"
 #include "stack.h"
 
 bool testsStack()
@@ -11,6 +10,7 @@ bool testsStack()
     push(&testHead, 90);
     if (!(getValue(testHead) == 90 && getValue(getNext(testHead))) == 25)
     {
+        deleteStack(&testHead);
         return false;
     }
     if (isEmpty(testHead))
@@ -21,12 +21,14 @@ bool testsStack()
     bool checkError1 = pop(&testHead, &value);
     if (!(checkError1 && value == 90))
     {
+        deleteStack(&testHead);
         return false;
     }
     deleteStack(&testHead);
     bool checkError2 = pop(&testHead, &value);
     if (checkError2)
     {
+        deleteStack(&testHead);
         return false;
     }
     return isEmpty(testHead);

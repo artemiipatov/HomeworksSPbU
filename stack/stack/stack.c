@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "stack.h"
-#include "stackTests.h"
 
 typedef struct StackElement 
 {
@@ -21,8 +20,7 @@ StackElement* getNext(StackElement* head)
 
 StackElement* createStack()
 {
-    StackElement* stack = NULL;
-    return stack;
+    return NULL;
 }
 
 void push(StackElement** head, int number)
@@ -39,7 +37,7 @@ void push(StackElement** head, int number)
 
 bool pop(StackElement** head, int* number)
 {
-    if (*head == NULL || head == NULL)
+    if (head == NULL || *head == NULL)
     {
         return false;
     }
