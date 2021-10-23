@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "stack.h"
-#include "stackTests.h"
 
 typedef struct StackElement 
 {
