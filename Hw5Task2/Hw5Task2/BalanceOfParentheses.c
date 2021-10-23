@@ -26,24 +26,23 @@ bool checkBalance(char sequence[])
     push(&head, sequence[0]);
     for (int index = 1; index < 30; index++)
     {
-        if (!(sequence[index] == '\0' || sequence[index] == '\n'))
+        switch (sequence[index])
         {
-            switch (sequence[index])
+            case ')':
+            case ']':
+            case '}':
             {
-                case ')':
-                case ']':
-                case '}':
+                if (isEmpty(head) || !checkPreviousBracket(&head, sequence[index]))
                 {
-                    if (isEmpty(head) || !checkPreviousBracket(&head, sequence[index]))
-                    {
-                        return false;
-                    }
-                    break;
+                    return false;
                 }
-                default:
-                {
-                    push(&head, sequence[index]);
-                }
+                break;
+            }
+            case '(':
+            case '[':
+            case '{':
+            {
+                push(&head, sequence[index]);
             }
         }
     }
