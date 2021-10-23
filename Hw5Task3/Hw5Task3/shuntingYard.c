@@ -1,5 +1,6 @@
-#include "../../stack/stack/stack.h"
 #include <stdlib.h>
+#include "../../stack/stack/stack.h"
+#include "shuntingYard.h"
 
 bool shuntingYard(char infixNotation[], char postfixNotation[], int length)
 {
