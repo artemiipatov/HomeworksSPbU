@@ -22,6 +22,7 @@ int main()
         printf("Incorrect input");
         return -1;
     }
+    printf("Postfix expresson: ");
     for (int index = 0; index < 30; index++)
     {
         if (output[index] != '\0' && output[index] != '\n')
