@@ -15,6 +15,7 @@ bool testsStack()
     }
     if (isEmpty(testHead))
     {
+        deleteStack(&testHead);
         return false;
     }
     int value = 0;
