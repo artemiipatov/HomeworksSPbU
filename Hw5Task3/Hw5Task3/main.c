@@ -3,6 +3,7 @@
 #include "../../stack/stack/stackTests.h"
 #include "shuntingYard.h"
 #include "testsShuntingYard.h"
+#define LENGTH 30
 
 int main()
 {
@@ -11,11 +12,11 @@ int main()
         printf("Tests failed");
         return -1;
     }
-    char input[30] = { '\0' };
+    char input[LENGTH] = { '\0' };
     printf("Print infix expression: ");
     fgets(input, (unsigned)sizeof(input), stdin);
-    char output[30] = { '\0' };
-    bool isInputCorrect = shuntingYard(input, output, 30);
+    char output[LENGTH] = { '\0' };
+    bool isInputCorrect = shuntingYard(input, output, LENGTH);
 
     if (!isInputCorrect)
     {
@@ -23,7 +24,7 @@ int main()
         return -1;
     }
     printf("Postfix expresson: ");
-    for (int index = 0; index < 30; index++)
+    for (int index = 0; index < LENGTH; index++)
     {
         if (output[index] != '\0' && output[index] != '\n')
         {

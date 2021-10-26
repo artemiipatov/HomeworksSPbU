@@ -1,14 +1,15 @@
 #include <stdbool.h>
 #include "shuntingYard.h"
 #include "testsShuntingYard.h"
+#define LENGTH 30
 
 bool testIncorrectInput()
 {
-    char input1[30] = "2+3+4*(9+(2-8/(6-5)))*7)";
-    char output1[30] = { '\0' };
-    char input2[30] = "2+3+4*(9+((2-8/(6-5))*7)";
-    char output2[30] = { '\0' };
-    if (shuntingYard(input1, output1, 30) || shuntingYard(input2, output2, 30))
+    char input1[LENGTH] = "2+3+4*(9+(2-8/(6-5)))*7)";
+    char output1[LENGTH] = { '\0' };
+    char input2[LENGTH] = "2+3+4*(9+((2-8/(6-5))*7)";
+    char output2[LENGTH] = { '\0' };
+    if (shuntingYard(input1, output1, LENGTH) || shuntingYard(input2, output2, LENGTH))
     {
         return false;
     }
@@ -17,10 +18,10 @@ bool testIncorrectInput()
 
 bool testCorrectInput()
 {
-    char input1[30] = "2+3+4*(9+(2-8/(6-5))*7)+1";
-    char output1[30] = { '\0' };
+    char input1[LENGTH] = "2+3+4*(9+(2-8/(6-5))*7)+1";
+    char output1[LENGTH] = { '\0' };
     const char correctOutput1[20] = "23+492865-/-7*+*+1+";
-    bool isInputCorrect = shuntingYard(input1, output1, 30);
+    bool isInputCorrect = shuntingYard(input1, output1, LENGTH);
     if (!isInputCorrect)
     {
         return false;
@@ -33,14 +34,14 @@ bool testCorrectInput()
         }
     }
 
-    char input2[30] = "(6+7)*5+3*(5+4)-8/(8+(3+9)*7)";
-    char output2[30] = { '\0' };
-    const char correctOutput2[30] = "67+5*354+*+8839+7*+/-";
-    if (!shuntingYard(input2, output2, 30))
+    char input2[LENGTH] = "(6+7)*5+3*(5+4)-8/(8+(3+9)*7)";
+    char output2[LENGTH] = { '\0' };
+    const char correctOutput2[LENGTH] = "67+5*354+*+8839+7*+/-";
+    if (!shuntingYard(input2, output2, LENGTH))
     {
         return false;
     }
-    for (int index = 0; index < 30; index++)
+    for (int index = 0; index < LENGTH; index++)
     {
         if (correctOutput2[index] != output2[index])
         {
