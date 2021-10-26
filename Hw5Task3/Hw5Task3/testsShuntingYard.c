@@ -9,11 +9,7 @@ bool testIncorrectInput()
     char output1[LENGTH] = { '\0' };
     char input2[LENGTH] = "2+3+4*(9+((2-8/(6-5))*7)";
     char output2[LENGTH] = { '\0' };
-    if (shuntingYard(input1, output1, LENGTH) || shuntingYard(input2, output2, LENGTH))
-    {
-        return false;
-    }
-    return true;
+    return !(shuntingYard(input1, output1, LENGTH) || shuntingYard(input2, output2, LENGTH));
 }
 
 bool testCorrectInput()

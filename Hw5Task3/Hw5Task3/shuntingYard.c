@@ -2,7 +2,7 @@
 #include "../../stack/stack/stack.h"
 #include "shuntingYard.h"
 
-bool shuntingYard(char infixNotation[], char postfixNotation[], int length)
+bool shuntingYard(const char infixNotation[], char postfixNotation[], const int length)
 {
     StackElement* head = createStack();
     int currentIndex = 0;
