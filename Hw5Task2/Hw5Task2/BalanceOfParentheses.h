@@ -1,5 +1,5 @@
 #pragma once
 #include <stdbool.h>
 
-// main function, pushes elements to stack and calls checkPreviousBracket() function, returns true if balance is kept, false if it is not
+// checks if balance of parantheses is kept
 bool checkBalance(char sequence[], int length);

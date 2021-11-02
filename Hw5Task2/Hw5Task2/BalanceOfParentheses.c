@@ -2,13 +2,12 @@
 #include "../../stack/stack/stack.h"
 #include "BalanceOfParentheses.h"
 
-// checks previous bracket to find out if balance between previous bracket and current one is kept
 bool checkPreviousBracket(StackElement** head, char currentBracket)
 {
     char previousBracket = getValue(*head);
-    if (   (currentBracket == ')' && previousBracket == '(')
+    if ((currentBracket == ')' && previousBracket == '(')
         || (currentBracket == '}' && previousBracket == '{')
-        || (currentBracket == ']' && previousBracket == '[')   )
+        || (currentBracket == ']' && previousBracket == '['))
     {
         int buffer = 0;
         pop(head, &buffer);
