@@ -5,7 +5,7 @@
 
 bool isInputCorrect(StackElement** head)
 {
-    return (*head) != NULL && getNext(*head) != NULL;
+    return *head != NULL && getNext(*head) != NULL;
 }
 
  int calculate(char sequence[], bool* correctInput, int length)
