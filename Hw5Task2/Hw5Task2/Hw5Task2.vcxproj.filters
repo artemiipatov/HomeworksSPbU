@@ -18,7 +18,7 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shuntingYard.c">
+    <ClCompile Include="BalanceOfParentheses.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\stack\stack\stack.c">
@@ -27,21 +27,21 @@
     <ClCompile Include="..\..\stack\stack\stackTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testsShuntingYard.c">
+    <ClCompile Include="testsBalance.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="shuntingYard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\stack\stack\stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\stack\stack\stackTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="testsShuntingYard.h">
+    <ClInclude Include="BalanceOfParentheses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testsBalance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
