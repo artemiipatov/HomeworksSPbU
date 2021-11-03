@@ -34,7 +34,7 @@ bool createList(List** list)
 
 bool isEmpty(List* list)
 {
-    if (list->head == NULL)
+    if (list == NULL || list->head == NULL)
     {
         return true;
     }

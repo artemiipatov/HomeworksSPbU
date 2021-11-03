@@ -108,5 +108,5 @@ bool programPassedTests()
         free(name);
     }
     deleteList(&testList);
-    return isEmpty;
+    return isEmpty(testList);
 }
