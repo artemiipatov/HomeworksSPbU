@@ -18,10 +18,7 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="calculatorTests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="calculatorFunctions.c">
+    <ClCompile Include="shuntingYard.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\stack\stack\stack.c">
@@ -30,18 +27,21 @@
     <ClCompile Include="..\..\stack\stack\stackTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="testsShuntingYard.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="calculatorTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="calculatorFunctions.h">
+    <ClInclude Include="shuntingYard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\stack\stack\stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\stack\stack\stackTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testsShuntingYard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
