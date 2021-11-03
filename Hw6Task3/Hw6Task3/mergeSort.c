@@ -69,7 +69,7 @@ List* mergeSort(List* mainList, SortBy flag)
         return NULL;
     }
     List* rightBuffer = mergeSort(rightList, flag);
-    if (leftBuffer == NULL)
+    if (rightBuffer == NULL)
     {
         deleteList(&leftList);
         deleteList(&rightList);
