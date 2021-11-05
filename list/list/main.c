@@ -18,6 +18,7 @@ int main()
     Position* position = NULL;
     if (!createPosition(&position))
     {
+        deleteList(&myList);
         return -1;
     }
     add(myList, first(myList, position), 1);

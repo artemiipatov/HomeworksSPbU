@@ -15,7 +15,7 @@
 
 int main()
 {
-    if (!(sortedListTestsPassed()) || !listTestsPassed())
+    if (!sortedListTestsPassed() || !listTestsPassed())
     {
         printf("Tests failed");
         return -1;
@@ -40,7 +40,6 @@ int main()
     printf("3 - print the list");
     
     int userInput = 9;
-    int currentLength = 0;
     while (userInput != 0)
     {
         printf("\nType any number: ");
@@ -59,11 +58,11 @@ int main()
                 printf("value: ");
                 scanf("%d", &value);
                 findPosition(list, value);
-                ++currentLength;
                 break;
             }
             case 2:
             {
+                int currentLength = getLength(list);
                 int itemIndex = 0;
                 printf("index of item to delete (choose 0 to %d): ", currentLength - 1);
                 scanf("%d", &itemIndex);
@@ -73,7 +72,6 @@ int main()
                     break;
                 }
                 deleteItemByIndex(list, itemIndex);
-                --currentLength;
                 break;
             }
             case 3:

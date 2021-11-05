@@ -10,6 +10,7 @@ typedef struct ListElement
 
 typedef struct List
 {
+    int length;
     ListElement* head;
 } List;
 
@@ -21,21 +22,13 @@ typedef struct Position
 bool createList(List** list)
 {
     *list = calloc(1, sizeof(List));
-    if (*list == NULL)
-    {
-        return false;
-    }
-    return true;
+    return *list != NULL;
 }
 
 bool createPosition(Position** position)
 {
     *position = calloc(1, sizeof(Position));
-    if (*position == NULL)
-    {
-        return false;
-    }
-    return true;
+    return *position != NULL;
 }
 
 void deleteList(List** list)
@@ -48,13 +41,13 @@ void deleteList(List** list)
         position = (*list)->head;
     }
     free(*list);
-    (*list) = NULL;
+    *list = NULL;
 }
 
 void deletePosition(Position** position)
 {
     free(*position);
-    (*position) = NULL;
+    *position = NULL;
 }
 
 bool add(List* list, Position* position, int value)
@@ -65,6 +58,7 @@ bool add(List* list, Position* position, int value)
         return false;
     }
     newElement->value = value;
+    list->length++;
     if (position == NULL)
     {
         newElement->next = list->head;
@@ -115,6 +109,7 @@ bool getPreviousPosition(List* list, Position* position)
 
 void deleteItem(List* list, Position* position)
 {
+    list->length--;
     if (position->position == list->head)
     {
         ListElement* temp = list->head->next;
@@ -142,6 +137,11 @@ bool next(Position* currentIndex)
     }
     currentIndex->position = currentIndex->position->next;
     return currentIndex;
+}
+
+int getLength(List* list)
+{
+    return list->length;
 }
 
 bool last(Position* position)

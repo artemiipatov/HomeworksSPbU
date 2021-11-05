@@ -1,3 +1,4 @@
+#pragma once
 #include <stdbool.h>
 
 // list structure
@@ -38,6 +39,9 @@ Position* first(List* list, Position* position);
 
 // puts in position next position, returns true if next is not NULL, false if next is NULL
 bool next(Position* position);
+
+// returns list length
+int getLength(List* list);
 
 // returns true if currentElement is the last one in the list, false if it is not last
 bool last(Position* position);

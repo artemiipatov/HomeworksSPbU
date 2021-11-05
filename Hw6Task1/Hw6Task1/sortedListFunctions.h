@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>
 
 // finds correct position for new value to keep list sorted, returns false if there is an error, true if value was added to the list
 bool findPosition(List* list, int value);

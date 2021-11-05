@@ -13,26 +13,32 @@ bool sortedListTestsPassed()
     }
     if (!findPosition(list, 7))
     {
+        deleteList(&list);
         return false;
     }
     if (!findPosition(list, 10))
     {
+        deleteList(&list);
         return false;
     }
     if (!findPosition(list, 3))
     {
+        deleteList(&list);
         return false;
     }
     if (!findPosition(list, 8))
     {
+        deleteList(&list);
         return false;
     }
     if (!findPosition(list, 5))
     {
+        deleteList(&list);
         return false;
     }
     if (!findPosition(list, 6))
     {
+        deleteList(&list);
         return false;
     }
     const int correctSortedArray1[6] = { 3, 5, 6, 7, 8, 10 };
@@ -40,12 +46,15 @@ bool sortedListTestsPassed()
     Position* index = NULL;
     if (!createPosition(&index))
     {
+        deleteList(&list);
         return false;
     }
     for (first(list, index); !last(index); next(index))
     {
         if (get(list, index) != correctSortedArray1[currentIndex])
         {
+            deletePosition(&index);
+            deleteList(&list);
             return false;
         }
         currentIndex++;
@@ -57,6 +66,8 @@ bool sortedListTestsPassed()
     {
         if (get(list, index) != correctSortedArray2[currentIndex])
         {
+            deletePosition(&index);
+            deleteList(&list);
             return false;
         }
         currentIndex++;
@@ -68,6 +79,8 @@ bool sortedListTestsPassed()
     {
         if (get(list, index) != correctSortedArray3[currentIndex])
         {
+            deletePosition(&index);
+            deleteList(&list);
             return false;
         }
         currentIndex++;
@@ -79,6 +92,8 @@ bool sortedListTestsPassed()
     {
         if (get(list, index) != correctSortedArray4[currentIndex])
         {
+            deletePosition(&index);
+            deleteList(&list);
             return false;
         }
         currentIndex++;
@@ -91,6 +106,8 @@ bool sortedListTestsPassed()
     {
         if (get(list, index) != correctSortedArray5[currentIndex])
         {
+            deletePosition(&index);
+            deleteList(&list);
             return false;
         }
         currentIndex++;
@@ -102,6 +119,8 @@ bool sortedListTestsPassed()
     {
         if (get(list, index) != correctSortedArray6[currentIndex])
         {
+            deletePosition(&index);
+            deleteList(&list);
             return false;
         }
         currentIndex++;
@@ -109,6 +128,8 @@ bool sortedListTestsPassed()
     deleteItemByIndex(list, 1);
     if (get(list, first(list, index)) != 5)
     {
+        deletePosition(&index);
+        deleteList(&list);
         return false;
     }
     deleteItemByIndex(list, 0);

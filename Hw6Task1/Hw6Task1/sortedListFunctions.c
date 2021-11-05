@@ -34,12 +34,11 @@ bool findPosition(List* list, int value)
         if (comparePositions(iterator, first(list, firstItem)))
         {
             add(list, NULL, value);
-            deletePosition(&firstItem);
-            deletePosition(&currentIndex);
-            deletePosition(&iterator);
-            return true;
         }
-        add(list, currentIndex, value);
+        else
+        {
+            add(list, currentIndex, value);
+        }
         deletePosition(&firstItem);
         deletePosition(&currentIndex);
         deletePosition(&iterator);
@@ -48,12 +47,11 @@ bool findPosition(List* list, int value)
     if (first(list, firstItem) == NULL)
     {
         add(list, firstItem, value);
-        deletePosition(&firstItem);
-        deletePosition(&currentIndex);
-        deletePosition(&iterator);
-        return true;
     }
-    add(list, currentIndex, value);
+    else
+    {
+        add(list, currentIndex, value);
+    }
     deletePosition(&firstItem);
     deletePosition(&currentIndex);
     deletePosition(&iterator);
@@ -73,6 +71,7 @@ bool deleteItemByIndex(List* list, int itemIndex)
         if (currentIndex == itemIndex)
         {
             deleteItem(list, iterator);
+            deletePosition(&iterator);
             return true;
         }
         currentIndex++;
