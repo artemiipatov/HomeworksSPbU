@@ -3,6 +3,7 @@
 #include <string.h>
 #include "mergeSort.h"
 #include "tests.h"
+#define NAME_SIZE 20
 
 bool programPassedTests()
 {
@@ -50,23 +51,14 @@ bool programPassedTests()
     int correrctNumberSorting1[11] = { 981, 981, 636, 981, 789, 592, 211, 211, 129, 432, 789 };
     for (int index = 0; index < 11; index++)
     {
-        //char* name = calloc(20, sizeof(char));
-        //char name[20] = { '\0' };
-        char* name = '\0';
-        //if (name == NULL)
-        //{
-        //    deleteList(&testList);
-        //    return false;
-        //}
+        char name[NAME_SIZE] = { '\0' };
         int number = 0;
-        popHead(testList, &name, &number);
+        popHead(testList, name, &number);
         if (!(strcmp(name, correctNameSorting1[index]) == 0 && number == correrctNumberSorting1[index]))
         {
-            //free(name);
             deleteList(&testList);
             return false;
         }
-        //free(name);
     }
 
     if (!addAtTail(testList, "dgfdggd", 981)
@@ -101,17 +93,14 @@ bool programPassedTests()
     int correrctNumberSorting2[11] = { 129, 211, 211, 432, 592, 636, 789, 789, 981, 981, 981 };
     for (int index = 0; index < 11; index++)
     {
-        //char* name = calloc(20, sizeof(char));
-        char name[20] = { '\0' };
+        char name[NAME_SIZE] = { '\0' };
         int number = 0;
-        popHead(testList, &name, &number);
+        popHead(testList, name, &number);
         if (!(strcmp(name, correctNameSorting2[index]) == 0 && number == correrctNumberSorting2[index]))
         {
-            //free(name);
             deleteList(&testList);
             return false;
         }
-        //free(name);
     }
     deleteList(&testList);
     return isEmpty(testList);

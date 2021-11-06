@@ -7,18 +7,12 @@
 bool popAndAdd(List* popFrom, List* addTo)
 {
     char name[NAME_SIZE] = { '\0' };
-    //if (name == NULL)
-    //{
-    //    return false;
-    //}
     int number = 0;
-    popHead(popFrom, &name, &number);
+    popHead(popFrom, name, &number);
     if (!addAtTail(addTo, name, number))
     {
-        //free(name);
         return false;
     }
-    //free(name);
     return true;
 }
 

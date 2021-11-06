@@ -66,9 +66,8 @@ int main()
     {
         char name[NAME_SIZE] = { '\0' };
         int number = 0;
-        popHead(list, &name , &number);
+        popHead(list, name , &number);
         printf("%s -- %d\n", name, number);
-        //free(name);
     }
     deleteList(&list);
     return 0;

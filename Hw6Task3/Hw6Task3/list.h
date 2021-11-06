@@ -19,7 +19,7 @@ void deleteList(List** list);
 int getLength(List* list);
 
 // returns head name and number and deletes head item
-void popHead(List* list, char** name, int* number);
+void popHead(List* list, char* name, int* number);
 
 // adds new value at the tail of the list. Name size should be less than 20 elements
 bool addAtTail(List* list, char* name, const int number);

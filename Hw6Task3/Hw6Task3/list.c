@@ -59,9 +59,9 @@ void copyString(char** destination, char* source, int length)
     }
 }
 
-void popHead(List* list, char** name, int* number)
+void popHead(List* list, char* name, int* number)
 {
-    strcpy(*name, list->head->name);
+    strcpy(name, list->head->name);
     *number = list->head->number;
     list->length--;
     ListElement* temp = list->head->next;
