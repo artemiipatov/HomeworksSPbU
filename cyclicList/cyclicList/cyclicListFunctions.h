@@ -40,6 +40,9 @@ Position* first(List* list, Position* position);
 // puts in position next position, returns true if next is not NULL, false if next is NULL
 bool next(Position* position);
 
+// returns length of the list
+int getLength(List* list);
+
 // puts in position last element of the list and returns true if function did it successfully, false if it failed
 void lastElement(List* list, Position* index);
 
