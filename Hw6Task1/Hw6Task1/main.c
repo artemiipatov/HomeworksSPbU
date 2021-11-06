@@ -15,7 +15,7 @@
 
 int main()
 {
-    if (!sortedListTestsPassed() || !listTestsPassed())
+    if (!listTestsPassed() || !sortedListTestsPassed())
     {
         printf("Tests failed");
         return -1;
@@ -57,7 +57,7 @@ int main()
                 int value = 0;
                 printf("value: ");
                 scanf("%d", &value);
-                findPosition(list, value);
+                addItemToSortedList(list, value);
                 break;
             }
             case 2:

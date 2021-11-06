@@ -11,32 +11,32 @@ bool sortedListTestsPassed()
     {
         return false;
     }
-    if (!findPosition(list, 7))
+    if (!addItemToSortedList(list, 7))
     {
         deleteList(&list);
         return false;
     }
-    if (!findPosition(list, 10))
+    if (!addItemToSortedList(list, 10))
     {
         deleteList(&list);
         return false;
     }
-    if (!findPosition(list, 3))
+    if (!addItemToSortedList(list, 3))
     {
         deleteList(&list);
         return false;
     }
-    if (!findPosition(list, 8))
+    if (!addItemToSortedList(list, 8))
     {
         deleteList(&list);
         return false;
     }
-    if (!findPosition(list, 5))
+    if (!addItemToSortedList(list, 5))
     {
         deleteList(&list);
         return false;
     }
-    if (!findPosition(list, 6))
+    if (!addItemToSortedList(list, 6))
     {
         deleteList(&list);
         return false;
@@ -85,7 +85,7 @@ bool sortedListTestsPassed()
         }
         currentIndex++;
     }
-    findPosition(list, 7);
+    addItemToSortedList(list, 7);
     const int correctSortedArray4[5] = { 3, 5, 6, 7, 8 };
     currentIndex = 0;
     for (first(list, index); !last(index); next(index))

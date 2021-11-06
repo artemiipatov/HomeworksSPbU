@@ -25,9 +25,6 @@ bool add(List* list, Position* position, int value);
 // copies adress from the first position and pastes it to the second position
 void copyPosition(Position* copyFromHere, Position* pasteHere);
 
-// returns previous position
-bool getPreviousPosition(List* list, Position* position);
-
 // compares two positions
 bool comparePositions(Position* position1, Position* position2);
 

@@ -4,7 +4,7 @@
 #include "../../list/list/list.h"
 #include "sortedListFunctions.h"
 
-bool findPosition(List* list, int value)
+bool addItemToSortedList(List* list, int value)
 {
     Position* firstItem = NULL;
     if (!createPosition(&firstItem))

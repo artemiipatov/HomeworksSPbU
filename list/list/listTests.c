@@ -13,7 +13,7 @@ bool listTestsPassed()
     Position* position = NULL;
     if (!createPosition(&position))
     {
-        free(testList);
+        deleteList(&testList);
         return false;
     }
 
@@ -66,9 +66,7 @@ bool listTestsPassed()
     next(position);
     next(position);
     deleteItem(testList, position);
-    next(position);
     deleteItem(testList, position);
-    next(position);
     const int correctOrder3[4] = { 15, 7, 2, 20 };
     currentIndex = 0;
     for (first(testList, position); !last(position); next(position))
