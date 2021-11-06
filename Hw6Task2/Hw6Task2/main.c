@@ -6,7 +6,7 @@
 
 int main()
 {
-    if (!(cyclicListPassedTests && rhymePassedTests))
+    if (!(cyclicListPassedTests() && rhymePassedTests()))
     {
         printf("Tests failed");
         return -1;

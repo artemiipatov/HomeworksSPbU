@@ -13,7 +13,7 @@ int countPosition(int numberOfWarriors, int period)
     Position* position = NULL;
     if (!createPosition(&position))
     {
-        free(list);
+        deleteList(&list);
         return -1;
     }
 
@@ -22,7 +22,12 @@ int countPosition(int numberOfWarriors, int period)
     first(list, position);
     for (int index = 2; index <= numberOfWarriors; index++)
     {
-        add(list, position, index);
+        if (!add(list, position, index))
+        {
+            deleteList(&list);
+            deletePosition(&position);
+            return -1;
+        }
         next(position);
     }
 
@@ -35,25 +40,15 @@ int countPosition(int numberOfWarriors, int period)
         {
             deleteItem(list, position);
         }
-        Position* temp = NULL;
-        if (!createPosition(&temp))
+        if (getLength(list) == 1)
         {
-            deleteList(&list);
-            deletePosition(&position);
-            return -1;
-        }
-        copyPosition(position, temp);
-        next(position);
-        if (comparePositions(temp, position))
-        {
-            free(temp);
             break;
         }
+        next(position);
         ++counter;
-        free(temp);
     }
     int result = get(list, position);
-    free(position);
+    deletePosition(&position);
     deleteList(&list);
     return result;
 }
