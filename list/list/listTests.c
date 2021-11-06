@@ -13,7 +13,7 @@ bool listTestsPassed()
     Position* position = NULL;
     if (!createPosition(&position))
     {
-        free(testList);
+        deleteList(&testList);
         return false;
     }
 
@@ -32,6 +32,8 @@ bool listTestsPassed()
         || !next(position)
         || !add(testList, position, 20))
     {
+        deletePosition(&position);
+        deleteList(&testList);
         return false;
     }
     const int correctOrder1[7] = { 10, 15, 7, 12, 7, 2, 20 };
@@ -40,7 +42,7 @@ bool listTestsPassed()
     {
         if (get(testList, position) != correctOrder1[currentIndex])
         {
-            free(position);
+            deletePosition(&position);
             deleteList(&testList);
             return false;
         }
@@ -54,7 +56,7 @@ bool listTestsPassed()
     {
         if (get(testList, position) != correctOrder2[currentIndex])
         {
-            free(position);
+            deletePosition(&position);
             deleteList(&testList);
             return false;
         }
@@ -64,15 +66,15 @@ bool listTestsPassed()
     next(position);
     next(position);
     deleteItem(testList, position);
-    next(position);
     deleteItem(testList, position);
-    next(position);
     const int correctOrder3[4] = { 15, 7, 2, 20 };
     currentIndex = 0;
     for (first(testList, position); !last(position); next(position))
     {
         if (get(testList, position) != correctOrder3[currentIndex])
         {
+            deletePosition(&position);
+            deleteList(&testList);
             return false;
         }
         currentIndex++;
@@ -88,6 +90,8 @@ bool listTestsPassed()
     {
         if (get(testList, position) != correctOrder4[currentIndex])
         {
+            deletePosition(&position);
+            deleteList(&testList);
             return false;
         }
         currentIndex++;
@@ -96,6 +100,8 @@ bool listTestsPassed()
     deleteItem(testList, first(testList, position));
     if (!last(first(testList, position)))
     {
+        deletePosition(&position);
+        deleteList(&testList);
         return false;
     }
 
@@ -103,6 +109,7 @@ bool listTestsPassed()
     deleteList(&testList);
     if (!createList(&testList))
     {
+        deletePosition(&position);
         return false;
     }
     first(testList, position);
@@ -120,6 +127,8 @@ bool listTestsPassed()
         || !add(testList, position, 20)
         || last(first(testList, position)))
     {
+        deletePosition(&position);
+        deleteList(&testList);
         return false;
     }
     deleteList(&testList);

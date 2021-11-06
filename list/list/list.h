@@ -1,3 +1,4 @@
+#pragma once
 #include <stdbool.h>
 
 // list structure
@@ -24,9 +25,6 @@ bool add(List* list, Position* position, int value);
 // copies adress from the first position and pastes it to the second position
 void copyPosition(Position* copyFromHere, Position* pasteHere);
 
-// returns previous position
-bool getPreviousPosition(List* list, Position* position);
-
 // compares two positions
 bool comparePositions(Position* position1, Position* position2);
 
@@ -38,6 +36,9 @@ Position* first(List* list, Position* position);
 
 // puts in position next position, returns true if next is not NULL, false if next is NULL
 bool next(Position* position);
+
+// returns list length
+int getLength(List* list);
 
 // returns true if currentElement is the last one in the list, false if it is not last
 bool last(Position* position);
