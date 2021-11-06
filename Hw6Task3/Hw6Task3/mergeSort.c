@@ -6,42 +6,104 @@
 
 bool popAndAdd(List* popFrom, List* addTo)
 {
-    char* name = calloc(NAME_SIZE, sizeof(char));
-    if (name == NULL)
-    {
-        return false;
-    }
+    char name[NAME_SIZE] = { '\0' };
+    //if (name == NULL)
+    //{
+    //    return false;
+    //}
     int number = 0;
     popHead(popFrom, &name, &number);
     if (!addAtTail(addTo, name, number))
     {
-        free(name);
+        //free(name);
         return false;
     }
-    free(name);
+    //free(name);
+    return true;
+}
+
+bool mergeLists(List* mainList, List* leftBuffer, List* rightBuffer, SortBy flag)
+{
+    while (!(isEmpty(leftBuffer) && isEmpty(rightBuffer)))
+    {
+        if (isEmpty(leftBuffer))
+        {
+            if (!popAndAdd(rightBuffer, mainList))
+            {
+                return false;
+            }
+            continue;
+        }
+        if (isEmpty(rightBuffer))
+        {
+            if (!popAndAdd(leftBuffer, mainList))
+            {
+                return false;
+            }
+            continue;
+        }
+
+        if (flag == names)
+        {
+            char* leftValue = getHeadName(leftBuffer);
+            char* rightValue = getHeadName(rightBuffer);
+            if (strcmp(leftValue, rightValue) <= 0)
+            {
+                if (!popAndAdd(leftBuffer, mainList))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (!popAndAdd(rightBuffer, mainList))
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            int leftValue = getHeadNumber(leftBuffer);
+            int rightValue = getHeadNumber(rightBuffer);
+            if (leftValue <= rightValue)
+            {
+                if (!popAndAdd(leftBuffer, mainList))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (!popAndAdd(rightBuffer, mainList))
+                {
+                    return false;
+                }
+            }
+        }
+    }
     return true;
 }
 
 List* mergeSort(List* mainList, SortBy flag)
 {
-    int length = getLength(mainList);
+    const int length = getLength(mainList);
     if (length == 1)
     {
         return mainList;
     }
-    List* leftList = NULL;
-    if (!createList(&leftList))
+    List* leftList = createList();
+    if (leftList == NULL)
     {
         return NULL;
     }
-    List* rightList = NULL;
-    if (!createList(&rightList))
+    List* rightList = createList();
+    if (rightList == NULL)
     {
-        free(leftList);
+        deleteList(&leftList);
         return NULL;
     }
-
-    int halfLength = length / 2;
+    const int halfLength = length / 2;
     for (int index = 0; index < halfLength; index++)
     {
         if (!popAndAdd(mainList, leftList))
@@ -76,77 +138,13 @@ List* mergeSort(List* mainList, SortBy flag)
         return NULL;
     }
 
-    while (!(isEmpty(leftBuffer) && isEmpty(rightBuffer)))
+    if (!mergeLists(mainList, leftBuffer, rightBuffer, flag))
     {
-        if (isEmpty(leftBuffer))
-        {
-            if (!popAndAdd(rightBuffer, mainList))
-            {
-                deleteList(&leftList);
-                deleteList(&rightList);
-                return NULL;
-            }
-            continue;
-        }
-        if (isEmpty(rightBuffer))
-        {
-            if (!popAndAdd(leftBuffer, mainList))
-            {
-                deleteList(&leftList);
-                deleteList(&rightList);
-                return NULL;
-            }
-            continue;
-        }
-
-        if (flag == names)
-        {
-            char* leftValue = getHeadName(leftBuffer);
-            char* rightValue = getHeadName(rightBuffer);
-            if (strcmp(leftValue, rightValue) <= 0)
-            {
-                if (!popAndAdd(leftBuffer, mainList))
-                {
-                    deleteList(&leftList);
-                    deleteList(&rightList);
-                    return NULL;
-                }
-            }
-            else
-            {
-                if (!popAndAdd(rightBuffer, mainList))
-                {
-                    deleteList(&leftList);
-                    deleteList(&rightList);
-                    return NULL;
-                }
-            }
-        }
-        else
-        {
-            int leftValue = getHeadNumber(leftBuffer);
-            int rightValue = getHeadNumber(rightBuffer);
-            if (leftValue <= rightValue)
-            {
-                if (!popAndAdd(leftBuffer, mainList))
-                {
-                    deleteList(&leftList);
-                    deleteList(&rightList);
-                    return NULL;
-                }
-            }
-            else
-            {
-                if (!popAndAdd(rightBuffer, mainList))
-                {
-                    deleteList(&leftList);
-                    deleteList(&rightList);
-                    return NULL;
-                }
-            }
-        }
-        
+        deleteList(&leftList);
+        deleteList(&rightList);
+        return NULL;
     }
+
     free(leftList);
     free(rightList);
     return mainList;

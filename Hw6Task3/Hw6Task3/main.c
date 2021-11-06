@@ -17,8 +17,8 @@ int main()
     {
         return -1;
     }
-    List* list = NULL;
-    if (!createList(&list))
+    List* list = createList();
+    if (list == NULL)
     {
         printf("Allocation failure");
         fclose(file);
@@ -64,11 +64,11 @@ int main()
     int length = getLength(list);
     for (int index = 0; index < length; index++)
     {
-        char* name = calloc(NAME_SIZE, sizeof(char));
+        char name[NAME_SIZE] = { '\0' };
         int number = 0;
-        popHead(list, &name, &number);
+        popHead(list, &name , &number);
         printf("%s -- %d\n", name, number);
-        free(name);
+        //free(name);
     }
     deleteList(&list);
     return 0;

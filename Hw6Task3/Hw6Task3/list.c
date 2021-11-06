@@ -14,6 +14,7 @@ typedef struct ListElement
 typedef struct List
 {
     int length;
+    ListElement* tail;
     ListElement* head;
 } List;
 
@@ -22,23 +23,14 @@ typedef struct Position
     ListElement* position;
 } Position;
 
-bool createList(List** list)
+List* createList()
 {
-    *list = calloc(1, sizeof(List));
-    if (*list == NULL)
-    {
-        return false;
-    }
-    return true;
+    return calloc(1, sizeof(List));
 }
 
 bool isEmpty(List* list)
 {
-    if (list == NULL || list->head == NULL)
-    {
-        return true;
-    }
-    return false;
+    return list == NULL || list->head == NULL;
 }
 
 void deleteList(List** list)
@@ -51,12 +43,20 @@ void deleteList(List** list)
         position = (*list)->head;
     }
     free(*list);
-    (*list) = NULL;
+    *list = NULL;
 }
 
 int getLength(List* list)
 {
     return list->length;
+}
+
+void copyString(char** destination, char* source, int length)
+{
+    for (int index = 0; index < length; index++)
+    {
+        *destination[index] = source[index];
+    }
 }
 
 void popHead(List* list, char** name, int* number)
@@ -76,20 +76,17 @@ bool addAtTail(List* list, char* name, int number)
     {
         return false;
     }
+    list->length++;
     strcpy(newElement->name, name);
     newElement->number = number;
-    list->length++;
     if (list->head == NULL)
     {
         list->head = newElement;
+        list->tail = list->head;
         return true;
     }
-    ListElement* currentElement = list->head;
-    while (currentElement->next != NULL)
-    {
-        currentElement = currentElement->next;
-    }
-    currentElement->next = newElement;
+    list->tail->next = newElement;
+    list->tail = newElement;
     return true;
 }
 

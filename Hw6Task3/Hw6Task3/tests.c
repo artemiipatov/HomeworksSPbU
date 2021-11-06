@@ -6,8 +6,8 @@
 
 bool programPassedTests()
 {
-    List* testList = NULL;
-    if (!createList(&testList))
+    List* testList = createList();
+    if (testList == NULL)
     {
         return false;
     }
@@ -19,6 +19,7 @@ bool programPassedTests()
     }
     if (getLength(testList) != 1)
     {
+        deleteList(&testList);
         return false;
     }
     if (!addAtTail(testList, "aaaaaaab", 981) 
@@ -32,10 +33,12 @@ bool programPassedTests()
         || !addAtTail(testList, "eeeeeh", 592)
         || !addAtTail(testList, "aaaaaaaa", 981))
     {
+        deleteList(&testList);
         return false;
     }
     if (getLength(testList) != 11)
     {
+        deleteList(&testList);
         return false;
     }
     if (mergeSort(testList, names) == NULL)
@@ -47,21 +50,23 @@ bool programPassedTests()
     int correrctNumberSorting1[11] = { 981, 981, 636, 981, 789, 592, 211, 211, 129, 432, 789 };
     for (int index = 0; index < 11; index++)
     {
-        char* name = calloc(20, sizeof(char));
-        if (name == NULL)
-        {
-            deleteList(&testList);
-            return false;
-        }
+        //char* name = calloc(20, sizeof(char));
+        //char name[20] = { '\0' };
+        char* name = '\0';
+        //if (name == NULL)
+        //{
+        //    deleteList(&testList);
+        //    return false;
+        //}
         int number = 0;
         popHead(testList, &name, &number);
         if (!(strcmp(name, correctNameSorting1[index]) == 0 && number == correrctNumberSorting1[index]))
         {
-            free(name);
+            //free(name);
             deleteList(&testList);
             return false;
         }
-        free(name);
+        //free(name);
     }
 
     if (!addAtTail(testList, "dgfdggd", 981)
@@ -96,16 +101,17 @@ bool programPassedTests()
     int correrctNumberSorting2[11] = { 129, 211, 211, 432, 592, 636, 789, 789, 981, 981, 981 };
     for (int index = 0; index < 11; index++)
     {
-        char* name = calloc(20, sizeof(char));
+        //char* name = calloc(20, sizeof(char));
+        char name[20] = { '\0' };
         int number = 0;
         popHead(testList, &name, &number);
         if (!(strcmp(name, correctNameSorting2[index]) == 0 && number == correrctNumberSorting2[index]))
         {
-            free(name);
+            //free(name);
             deleteList(&testList);
             return false;
         }
-        free(name);
+        //free(name);
     }
     deleteList(&testList);
     return isEmpty(testList);
