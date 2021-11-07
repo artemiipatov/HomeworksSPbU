@@ -51,14 +51,6 @@ int getLength(List* list)
     return list->length;
 }
 
-void copyString(char** destination, char* source, int length)
-{
-    for (int index = 0; index < length; index++)
-    {
-        *destination[index] = source[index];
-    }
-}
-
 void popHead(List* list, char* name, int* number)
 {
     strcpy(name, list->head->name);
@@ -69,7 +61,7 @@ void popHead(List* list, char* name, int* number)
     list->head = temp;
 }
 
-bool addAtTail(List* list, char* name, int number)
+bool addAtTail(List* list, const char* name, const int number)
 {
     ListElement* newElement = calloc(1, sizeof(ListElement));
     if (newElement == NULL)

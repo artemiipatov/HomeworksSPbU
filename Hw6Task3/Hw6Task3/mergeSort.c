@@ -16,6 +16,26 @@ bool popAndAdd(List* popFrom, List* addTo)
     return true;
 }
 
+bool compareHeads(List* leftBuffer, List* rightBuffer, List* mainList, SortBy flag)
+{
+    if ((flag == names && strcmp(getHeadName(leftBuffer), getHeadName(rightBuffer)) <= 0)
+        || (flag == numbers && getHeadNumber(leftBuffer) <= getHeadNumber(rightBuffer)))
+    {
+        if (!popAndAdd(leftBuffer, mainList))
+        {
+            return false;
+        }
+    }
+    else
+    {
+        if (!popAndAdd(rightBuffer, mainList))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool mergeLists(List* mainList, List* leftBuffer, List* rightBuffer, SortBy flag)
 {
     while (!(isEmpty(leftBuffer) && isEmpty(rightBuffer)))
@@ -36,44 +56,9 @@ bool mergeLists(List* mainList, List* leftBuffer, List* rightBuffer, SortBy flag
             }
             continue;
         }
-
-        if (flag == names)
+        if (!compareHeads(leftBuffer, rightBuffer, mainList, flag))
         {
-            char* leftValue = getHeadName(leftBuffer);
-            char* rightValue = getHeadName(rightBuffer);
-            if (strcmp(leftValue, rightValue) <= 0)
-            {
-                if (!popAndAdd(leftBuffer, mainList))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (!popAndAdd(rightBuffer, mainList))
-                {
-                    return false;
-                }
-            }
-        }
-        else
-        {
-            int leftValue = getHeadNumber(leftBuffer);
-            int rightValue = getHeadNumber(rightBuffer);
-            if (leftValue <= rightValue)
-            {
-                if (!popAndAdd(leftBuffer, mainList))
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (!popAndAdd(rightBuffer, mainList))
-                {
-                    return false;
-                }
-            }
+            return false;
         }
     }
     return true;

@@ -1,3 +1,4 @@
+#pragma once
 #include <stdbool.h>
 
 // list structure
@@ -22,7 +23,7 @@ int getLength(List* list);
 void popHead(List* list, char* name, int* number);
 
 // adds new value at the tail of the list. Name size should be less than 20 elements
-bool addAtTail(List* list, char* name, const int number);
+bool addAtTail(List* list, const char* name, const int number);
 
 // returns name of the first element of the list
 char* getHeadName(List* list);

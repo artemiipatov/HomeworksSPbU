@@ -5,13 +5,8 @@
 #include "tests.h"
 #define NAME_SIZE 20
 
-bool programPassedTests()
+bool testOneElementArray(List* testList)
 {
-    List* testList = createList();
-    if (testList == NULL)
-    {
-        return false;
-    }
     addAtTail(testList, "dgfdggd", 981);
     if (mergeSort(testList, names) == NULL || mergeSort(testList, numbers) == NULL)
     {
@@ -23,7 +18,12 @@ bool programPassedTests()
         deleteList(&testList);
         return false;
     }
-    if (!addAtTail(testList, "aaaaaaab", 981) 
+    return true;
+}
+
+bool testSortingByNames(List* testList)
+{
+    if (!addAtTail(testList, "aaaaaaab", 981)
         || !addAtTail(testList, "zcvzx", 432)
         || !addAtTail(testList, "zcvzx", 789)
         || !addAtTail(testList, "asdsdfsd", 636)
@@ -60,7 +60,11 @@ bool programPassedTests()
             return false;
         }
     }
+    return true;
+}
 
+bool testSortingByNumbers(List* testList)
+{
     if (!addAtTail(testList, "dgfdggd", 981)
         || !addAtTail(testList, "aaaaaaab", 981)
         || !addAtTail(testList, "zcvzx", 432)
@@ -73,17 +77,19 @@ bool programPassedTests()
         || !addAtTail(testList, "eeeeeh", 592)
         || !addAtTail(testList, "aaaaaaaa", 981))
     {
+        deleteList(&testList);
         return false;
     }
     if (strcmp(getHeadName(testList), "dgfdggd") != 0)
     {
+        deleteList(&testList);
         return false;
     }
     if (getHeadNumber(testList) != 981)
     {
+        deleteList(&testList);
         return false;
     }
-
     if (mergeSort(testList, numbers) == NULL)
     {
         deleteList(&testList);
@@ -102,6 +108,17 @@ bool programPassedTests()
             return false;
         }
     }
+    return true;
+}
+
+bool programPassedTests()
+{
+    List* testList = createList();
+    if (testList == NULL)
+    {
+        return false;
+    }
+    bool testsPassed = testOneElementArray(testList) && testSortingByNames(testList) && testSortingByNumbers(testList);
     deleteList(&testList);
-    return isEmpty(testList);
+    return testsPassed && isEmpty(testList);
 }
