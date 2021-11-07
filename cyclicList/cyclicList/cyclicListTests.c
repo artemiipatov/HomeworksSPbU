@@ -13,7 +13,7 @@ bool cyclicListPassedTests()
     Position* position = NULL;
     if (!createPosition(&position))
     {
-        free(testList);
+        deleteList(&testList);
         return false;
     }
 
@@ -32,6 +32,7 @@ bool cyclicListPassedTests()
         || !next(position)
         || !add(testList, position, 20))
     {
+        deleteList(&testList);
         return false;
     }
     const int correctOrder1[14] = { 10, 15, 7, 12, 7, 2, 20, 10, 15, 7, 12, 7, 2, 20 };
@@ -123,6 +124,7 @@ bool cyclicListPassedTests()
         || !add(testList, position, 20)
         || last(testList, first(testList, position)))
     {
+        deleteList(&testList);
         return false;
     }
     deleteList(&testList);
