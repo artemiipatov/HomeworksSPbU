@@ -70,10 +70,9 @@ int main()
             }
             default:
             {
-                printf("You've chosen the wrong number. Choose 0 to 4.\n");
+                printf("You've chosen wrong number. Choose 0 to 4.\n");
             }
         }
     }
-    deleteDictionary(&dict);
     return 0;
 }
