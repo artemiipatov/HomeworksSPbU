@@ -106,21 +106,21 @@ void zigZag(Node* x)
     Node* ggp = x->parent->parent->parent;
     Node* gp = x->parent->parent;
     Node* p = x->parent;
-    Node* b = x->leftSon;
-    Node* c = x->rightSon;
+    Node* xLeft = x->leftSon;
+    Node* xRight = x->rightSon;
     if (x == p->leftSon)
     {
         attach(x, p, right);
         attach(x, gp, left);
-        attach(p, c, left);
-        attach(gp, b, right);
+        attach(p, xRight, left);
+        attach(gp, xLeft, right);
     }
     else
     {
         attach(x, p, left);
         attach(x, gp, right);
-        attach(p, b, right);
-        attach(gp, c, left);
+        attach(p, xLeft, right);
+        attach(gp, xRight, left);
     }
     if (ggp != NULL)
     {
@@ -234,7 +234,6 @@ Node* deleteNode(Node* root, int key)
     {
         return root;
     }
-    Node* parent = x->parent;
     if (x->rightSon != NULL)
     {
         Node* i = x->rightSon;
@@ -263,10 +262,16 @@ Node* deleteNode(Node* root, int key)
     {
         if (x->parent != NULL)
         {
-            x->parent->leftSon = x->leftSon;
+            if (x == x->parent->leftSon)
+            {
+                x->parent->leftSon = x->leftSon;
+            }
+            else
+            {
+                x->parent->rightSon = x->leftSon;
+            }
         }
         x->leftSon->parent = x->parent;
-        Node* returningNode = x->leftSon;
         root = x == root ? root : splay(x->parent);
         free(x);
     }
@@ -284,7 +289,7 @@ Node* deleteNode(Node* root, int key)
         {
             x->parent->rightSon = NULL;
         }
-        root = x == root ? root : splay(x->parent);
+        root = splay(x->parent);
         free(x);
     }
     return root;
