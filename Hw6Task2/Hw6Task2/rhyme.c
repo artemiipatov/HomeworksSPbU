@@ -18,7 +18,12 @@ int countPosition(int numberOfWarriors, int period)
     }
 
     // filling the list with positions of warriors
-    add(list, position, 1);
+    if (!add(list, position, 1))
+    {
+        deleteList(&list);
+        deletePosition(&position);
+        return -1;
+    }
     first(list, position);
     for (int index = 2; index <= numberOfWarriors; index++)
     {
