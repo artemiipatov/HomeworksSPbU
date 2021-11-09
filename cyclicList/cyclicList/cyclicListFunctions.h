@@ -37,11 +37,20 @@ Position* first(List* list, Position* position);
 // puts in position next position, returns true if next is not NULL, false if next is NULL
 bool next(Position* position);
 
+<<<<<<< HEAD:list/list/list.h
 // returns list length
 int getLength(List* list);
 
+=======
+// returns length of the list
+int getLength(List* list);
+
+// puts in position last element of the list and returns true if function did it successfully, false if it failed
+void lastElement(List* list, Position* index);
+
+>>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListFunctions.h
 // returns true if currentElement is the last one in the list, false if it is not last
-bool last(Position* position);
+bool last(List* list, Position* position);
 
 // returns value of the list element on the current position
 int get(List* list, Position* position);

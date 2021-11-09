@@ -18,20 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="list.c" />
-    <ClCompile Include="listTests.c" />
-    <ClCompile Include="main.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="list.h" />
-    <ClInclude Include="listTests.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8974f591-08dc-403b-a46a-896b7e538753}</ProjectGuid>
-    <RootNamespace>list</RootNamespace>
+    <ProjectGuid>{89989f76-0c5f-48b6-b4e2-55d62bd7cb2c}</ProjectGuid>
+    <RootNamespace>Hw5Task2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -94,7 +85,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -147,6 +138,19 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\stack\stack\stack.c" />
+    <ClCompile Include="..\..\stack\stack\stackTests.c" />
+    <ClCompile Include="BalanceOfParentheses.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="testsBalance.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\stack\stack\stack.h" />
+    <ClInclude Include="..\..\stack\stack\stackTests.h" />
+    <ClInclude Include="BalanceOfParentheses.h" />
+    <ClInclude Include="testsBalance.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,11 +1,10 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "list.h"
-#include "listTests.h"
+#include "cyclicListFunctions.h"
+#include "cyclicListTests.h"
 
 int main()
 {
-    if (!listTestsPassed())
+    if (!cyclicListPassedTests())
     {
         printf("Tests failed");
         return -1;
@@ -27,9 +26,11 @@ int main()
     add(myList, position, 3);
     next(position);
     add(myList, position, 4);
-    for (first(myList, position); !last(position); next(position))
+    first(myList, position);
+    for (int index = 0; index < 8; index++)
     {
-        printf("%d ", get(myList, position));
+        printf("%d\n", get(myList, position));
+        next(position);
     }
     deleteList(&myList);
     deletePosition(&position);
