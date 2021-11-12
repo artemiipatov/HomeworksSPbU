@@ -1,6 +1,6 @@
 #include <stdbool.h>
-#include "rhyme.h"
-#include "rhymeTests.h"
+#include "countingOut.h"
+#include "countingOutTests.h"
 
 bool rhymePassedTests()
 {

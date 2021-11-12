@@ -141,8 +141,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\cyclicList\cyclicList\cyclicListFunctions.c" />
     <ClCompile Include="..\..\cyclicList\cyclicList\cyclicListTests.c" />
-    <ClCompile Include="rhyme.c" />
-    <ClCompile Include="rhymeTests.c" />
+    <ClCompile Include="countingOut.c" />
+    <ClCompile Include="countingOutTests.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>

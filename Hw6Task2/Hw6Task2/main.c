@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include "rhyme.h"
-#include "rhymeTests.h"
+#include "countingOut.h"
+#include "countingOutTests.h"
 #include "../../cyclicList/cyclicList/cyclicListTests.h"
 
 int main()

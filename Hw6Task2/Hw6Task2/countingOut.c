@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "rhyme.h"
+#include "countingOut.h"
 #include "../../cyclicList/cyclicList/cyclicListFunctions.h"
 
 int countPosition(int numberOfWarriors, int period)

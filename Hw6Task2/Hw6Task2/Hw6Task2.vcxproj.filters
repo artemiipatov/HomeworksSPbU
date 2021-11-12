@@ -21,10 +21,10 @@
     <ClCompile Include="..\..\cyclicList\cyclicList\cyclicListFunctions.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rhyme.c">
+    <ClCompile Include="countingOut.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rhymeTests.c">
+    <ClCompile Include="countingOutTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\cyclicList\cyclicList\cyclicListTests.c">
