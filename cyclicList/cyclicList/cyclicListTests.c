@@ -5,13 +5,13 @@
 
 bool cyclicListPassedTests()
 {
-    List* testList = NULL;
-    if (!createList(&testList) || testList == NULL)
+    List* testList = createList();
+    if (testList == NULL)
     {
         return false;
     }
-    Position* position = NULL;
-    if (!createPosition(&position))
+    Position* position = createPosition();
+    if (position == NULL)
     {
         deleteList(&testList);
         return false;
@@ -32,6 +32,7 @@ bool cyclicListPassedTests()
         || !next(position)
         || !add(testList, position, 20))
     {
+        deletePosition(&position);
         deleteList(&testList);
         return false;
     }
@@ -41,7 +42,7 @@ bool cyclicListPassedTests()
     {
         if (get(testList, position) != correctOrder1[index])
         {
-            free(position);
+            deletePosition(&position);
             deleteList(&testList);
             return false;
         }
@@ -56,7 +57,7 @@ bool cyclicListPassedTests()
     {
         if (get(testList, position) != correctOrder2[index])
         {
-            free(position);
+            deletePosition(&position);
             deleteList(&testList);
             return false;
         }
@@ -65,18 +66,15 @@ bool cyclicListPassedTests()
 
     first(testList, position);
     next(position);
-    next(position);
     deleteItem(testList, position);
-    next(position);
     deleteItem(testList, position);
-    next(position);
     const int correctOrder3[8] = { 15, 7, 2, 20, 15, 7, 2, 20 };
     first(testList, position);
     for (int index = 0; index < 8; index++)
     {
         if (get(testList, position) != correctOrder3[index])
         {
-            free(position);
+            deletePosition(&position);
             deleteList(&testList);
             return false;
         }
@@ -94,7 +92,7 @@ bool cyclicListPassedTests()
     {
         if (get(testList, position) != correctOrder4[index])
         {
-            free(position);
+            deletePosition(&position);
             deleteList(&testList);
             return false;
         }
@@ -105,7 +103,8 @@ bool cyclicListPassedTests()
 
     // deleteList() testing
     deleteList(&testList);
-    if (!createList(&testList))
+    testList = createList();
+    if (testList == NULL)
     {
         return false;
     }
@@ -124,6 +123,7 @@ bool cyclicListPassedTests()
         || !add(testList, position, 20)
         || last(testList, first(testList, position)))
     {
+        deletePosition(&position);
         deleteList(&testList);
         return false;
     }

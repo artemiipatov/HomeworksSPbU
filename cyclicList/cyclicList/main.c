@@ -9,13 +9,13 @@ int main()
         printf("Tests failed");
         return -1;
     }
-    List* myList = NULL;
-    if (!createList(&myList))
+    List* myList = createList();
+    if (myList == NULL)
     {
         return -1;
     }
-    Position* position = NULL;
-    if (!createPosition(&position))
+    Position* position = createPosition();
+    if (position == NULL)
     {
         deleteList(&myList);
         return -1;

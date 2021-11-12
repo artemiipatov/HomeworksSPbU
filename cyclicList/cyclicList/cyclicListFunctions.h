@@ -8,10 +8,10 @@ typedef struct List List;
 typedef struct Position Position;
 
 // allocates memory for list
-bool createList(List** list);
+List* createList();
 
 // allocates memory for position
-bool createPosition(Position** position);
+Position* createPosition();
 
 // deletes all list elements and list
 void deleteList(List** list);
@@ -24,9 +24,6 @@ bool add(List* list, Position* position, int value);
 
 // copies adress from the first position and pastes it to the second position
 void copyPosition(Position* copyFromHere, Position* pasteHere);
-
-// returns previous position
-bool getPreviousPosition(List* list, Position* position);
 
 // compares two positions
 bool comparePositions(Position* position1, Position* position2);
@@ -42,9 +39,6 @@ bool next(Position* position);
 
 // returns length of the list
 int getLength(List* list);
-
-// puts in position last element of the list and returns true if function did it successfully, false if it failed
-void lastElement(List* list, Position* index);
 
 // returns true if currentElement is the last one in the list, false if it is not last
 bool last(List* list, Position* position);
