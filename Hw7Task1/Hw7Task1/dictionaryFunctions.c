@@ -270,9 +270,14 @@ Node* deleteNode(Node* root, int key)
             {
                 x->parent->rightSon = x->leftSon;
             }
+            x->leftSon->parent = x->parent;
+            root = splay(x->parent);
         }
-        x->leftSon->parent = x->parent;
-        root = x == root ? root : splay(x->parent);
+        else
+        {
+            x->leftSon->parent = x->parent;
+            root = x->leftSon;
+        }
         free(x);
     }
     else if (x->parent == NULL)
