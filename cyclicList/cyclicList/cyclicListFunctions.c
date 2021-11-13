@@ -6,6 +6,7 @@ typedef struct ListElement
 {
     int value;
     struct ListElement* next;
+    struct ListElement* previous;
 } ListElement;
 
 typedef struct List
@@ -20,23 +21,22 @@ typedef struct Position
     ListElement* currentPosition;
 } Position;
 
-bool createList(List** list)
+List* createList()
 {
-    *list = calloc(1, sizeof(List));
-    return *list != NULL;
+    return calloc(1, sizeof(List));
 }
 
-bool createPosition(Position** position)
+Position* createPosition()
 {
-    *position = calloc(1, sizeof(Position));
-    return *position != NULL;
+    return calloc(1, sizeof(Position));
 }
 
 void deleteList(List** list)
 {
     if ((*list)->length == 0)
     {
-        (*list) = NULL;
+        free(*list);
+        *list = NULL;
         return;
     }
     while ((*list)->head->next != (*list)->head)
@@ -68,18 +68,29 @@ bool add(List* list, Position* position, int value)
     list->length++;
     if (position == NULL)
     {
+        newElement->previous = list->head->previous;
+        list->head->previous->next = newElement;
         newElement->next = list->head;
+        list->head->previous = newElement;
         list->head = newElement;
         return true;
     }
     if (position->currentPosition == NULL)
     {
-        newElement->next = newElement;
         list->head = newElement;
+        newElement->previous = newElement;
+        newElement->next = newElement;
         return true;
     }
+<<<<<<< HEAD
     newElement->next = position->currentPosition->next;
     position->currentPosition->next = newElement;
+=======
+    newElement->previous = position->position;
+    newElement->next = position->position->next;
+    position->position->next->previous = newElement;
+    position->position->next = newElement;
+>>>>>>> cyclicList
     return true;
 }
 
@@ -91,29 +102,41 @@ void copyPosition(Position* copyFromHere, Position* pasteHere)
 
 bool comparePositions(Position* position1, Position* position2)
 {
+<<<<<<< HEAD
     return position1->currentPosition == position2->currentPosition;
+=======
+    return position1->position == position2->position;
+>>>>>>> cyclicList
 }
 
 void deleteItem(List* list, Position* position)
 {
     list->length--;
+<<<<<<< HEAD
 <<<<<<< HEAD:list/list/list.c
     if (position->currentPosition == list->head)
 =======
     if (position->position == list->head)
 >>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListFunctions.c
+=======
+    position->position->previous->next = position->position->next;
+    position->position->next->previous = position->position->previous;
+    ListElement* temp = position->position->next;
+    bool isHead = position->position == list->head;
+    free(position->position);
+    if (isHead)
+>>>>>>> cyclicList
     {
-        lastElement(list, position);
-        position->position->next = list->head->next;
-        ListElement* temp = list->head->next;
-        free(list->head);
         list->head = temp;
-        return;
     }
+<<<<<<< HEAD
     ListElement* temp = position->currentPosition->next;
     free(position->previousPosition->next);
     position->previousPosition->next = temp;
     position->currentPosition = temp;
+=======
+    position->position = temp;
+>>>>>>> cyclicList
 }
 
 Position* first(List* list, Position* position)
@@ -142,15 +165,6 @@ int getLength(List* list)
 int getLength(List* list)
 {
     return list->length;
-}
-
-void lastElement(List* list, Position* index)
-{
-    first(list, index);
-    while (!(index->position->next == list->head))
-    {
-        next(index);
-    }
 }
 
 bool last(List* list, Position* position)

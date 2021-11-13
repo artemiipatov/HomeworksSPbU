@@ -8,10 +8,10 @@ typedef struct List List;
 typedef struct Position Position;
 
 // allocates memory for list
-bool createList(List** list);
+List* createList();
 
 // allocates memory for position
-bool createPosition(Position** position);
+Position* createPosition();
 
 // deletes all list elements and list
 void deleteList(List** list);
@@ -45,10 +45,13 @@ int getLength(List* list);
 // returns length of the list
 int getLength(List* list);
 
+<<<<<<< HEAD
 // puts in position last element of the list and returns true if function did it successfully, false if it failed
 void lastElement(List* list, Position* index);
 
 >>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListFunctions.h
+=======
+>>>>>>> cyclicList
 // returns true if currentElement is the last one in the list, false if it is not last
 bool last(List* list, Position* position);
 

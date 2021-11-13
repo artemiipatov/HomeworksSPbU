@@ -5,13 +5,13 @@
 
 bool cyclicListPassedTests()
 {
-    List* testList = NULL;
-    if (!createList(&testList) || testList == NULL)
+    List* testList = createList();
+    if (testList == NULL)
     {
         return false;
     }
-    Position* position = NULL;
-    if (!createPosition(&position))
+    Position* position = createPosition();
+    if (position == NULL)
     {
         deleteList(&testList);
         return false;
@@ -32,10 +32,14 @@ bool cyclicListPassedTests()
         || !next(position)
         || !add(testList, position, 20))
     {
+<<<<<<< HEAD
 <<<<<<< HEAD:list/list/listTests.c
         deletePosition(&position);
 =======
 >>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListTests.c
+=======
+        deletePosition(&position);
+>>>>>>> cyclicList
         deleteList(&testList);
         return false;
     }
@@ -69,15 +73,17 @@ bool cyclicListPassedTests()
 
     first(testList, position);
     next(position);
-    next(position);
     deleteItem(testList, position);
     deleteItem(testList, position);
+<<<<<<< HEAD
 <<<<<<< HEAD:list/list/listTests.c
     const int correctOrder3[4] = { 15, 7, 2, 20 };
     currentIndex = 0;
     for (first(testList, position); !last(position); next(position))
 =======
     next(position);
+=======
+>>>>>>> cyclicList
     const int correctOrder3[8] = { 15, 7, 2, 20, 15, 7, 2, 20 };
     first(testList, position);
     for (int index = 0; index < 8; index++)
@@ -85,11 +91,15 @@ bool cyclicListPassedTests()
     {
         if (get(testList, position) != correctOrder3[index])
         {
+<<<<<<< HEAD
 <<<<<<< HEAD:list/list/listTests.c
             deletePosition(&position);
 =======
             free(position);
 >>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListTests.c
+=======
+            deletePosition(&position);
+>>>>>>> cyclicList
             deleteList(&testList);
             return false;
         }
@@ -107,11 +117,15 @@ bool cyclicListPassedTests()
     {
         if (get(testList, position) != correctOrder4[index])
         {
+<<<<<<< HEAD
 <<<<<<< HEAD:list/list/listTests.c
             deletePosition(&position);
 =======
             free(position);
 >>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListTests.c
+=======
+            deletePosition(&position);
+>>>>>>> cyclicList
             deleteList(&testList);
             return false;
         }
@@ -131,7 +145,8 @@ bool cyclicListPassedTests()
 
     // deleteList() testing
     deleteList(&testList);
-    if (!createList(&testList))
+    testList = createList();
+    if (testList == NULL)
     {
         deletePosition(&position);
         return false;
@@ -151,10 +166,14 @@ bool cyclicListPassedTests()
         || !add(testList, position, 20)
         || last(testList, first(testList, position)))
     {
+<<<<<<< HEAD
 <<<<<<< HEAD:list/list/listTests.c
         deletePosition(&position);
 =======
 >>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListTests.c
+=======
+        deletePosition(&position);
+>>>>>>> cyclicList
         deleteList(&testList);
         return false;
     }
