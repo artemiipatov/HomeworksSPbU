@@ -5,6 +5,12 @@
 #include <string.h>
 #include "dictionaryFunctions.h"
 
+typedef enum Direction
+{
+    left,
+    right
+} Direction;
+
 typedef struct Node
 {
     struct Node* leftSon;
@@ -39,11 +45,17 @@ void deleteDictionary(Node** root)
 void attach(Node* parent, Node* child, Direction direction)
 {
     if (direction == left)
+    {
         parent->leftSon = child;
+    }
     else
+    {
         parent->rightSon = child;
+    }
     if (child != NULL)
+    {
         child->parent = parent;
+    }
 }
 
 void zig(Node* x)
@@ -159,11 +171,15 @@ Node* splay(Node* x)
     return splay(x);
 }
 
-Node* addNode(Node* root, int key, char* value)
+Node* addNode(Node* root, const int key, const char* value)
 {
     if (root == NULL)
     {
         Node* newRoot = calloc(1, sizeof(Node));
+        if (newRoot == NULL)
+        {
+            return NULL;
+        }
         newRoot->key = key;
         strcpy(newRoot->value, value);
         return newRoot;
@@ -176,6 +192,10 @@ Node* addNode(Node* root, int key, char* value)
             if (i->rightSon == NULL)
             {
                 Node* newRoot = calloc(1, sizeof(Node));
+                if (newRoot == NULL)
+                {
+                    return NULL;
+                }
                 newRoot->key = key;
                 strcpy(newRoot->value, value);
                 i->rightSon = newRoot;
@@ -194,6 +214,10 @@ Node* addNode(Node* root, int key, char* value)
             if (i->leftSon == NULL)
             {
                 Node* newRoot = calloc(1, sizeof(Node));
+                if (newRoot == NULL)
+                {
+                    return NULL;
+                }
                 newRoot->key = key;
                 strcpy(newRoot->value, value);
                 i->leftSon = newRoot;
@@ -206,7 +230,7 @@ Node* addNode(Node* root, int key, char* value)
     return root;
 }
 
-Node* search(Node* root, int key)
+Node* search(Node* root, const int key)
 {
     Node* i = root;
     while (i != NULL)
@@ -221,13 +245,14 @@ Node* search(Node* root, int key)
         }
         else
         {
+            i = splay(i);
             return i;
         }
     }
-    return i;
+    return NULL;
 }
 
-Node* deleteNode(Node* root, int key)
+Node* deleteNode(Node* root, const int key)
 {
     Node* x = search(root, key);
     if (x == NULL)
@@ -245,77 +270,41 @@ Node* deleteNode(Node* root, int key)
         strcpy(x->value, i->value);
         if (i == x->rightSon)
         {
-            x->rightSon = i->rightSon;
+            attach(x, i->rightSon, right);
         }
         else
         {
-            i->parent->leftSon = i->rightSon;
+            attach(i->parent, i->rightSon, left);
         }
-        if (i->rightSon != NULL)
-        {
-            i->rightSon->parent = i->parent;
-        }
-        root = x == root ? root : splay(x->parent);
         free(i);
     }
     else if (x->leftSon != NULL)
     {
-        if (x->parent != NULL)
-        {
-            if (x == x->parent->leftSon)
-            {
-                x->parent->leftSon = x->leftSon;
-            }
-            else
-            {
-                x->parent->rightSon = x->leftSon;
-            }
-            x->leftSon->parent = x->parent;
-            root = splay(x->parent);
-        }
-        else
-        {
-            x->leftSon->parent = x->parent;
-            root = x->leftSon;
-        }
+        Node* temp = x->leftSon;
         free(x);
-    }
-    else if (x->parent == NULL)
-    {
-        deleteDictionary(&root);
+        temp->parent = NULL;
+        x = temp;
     }
     else
     {
-        if (x == x->parent->leftSon)
-        {
-            x->parent->leftSon = NULL;
-        }
-        else
-        {
-            x->parent->rightSon = NULL;
-        }
-        root = splay(x->parent);
         free(x);
+        x = NULL;
     }
-    return root;
+    return x;
 }
 
-char* getValue(Node** root, int key)
+char* getValue(Node** root, const int key)
 {
     Node* wantedNode = search(*root, key);
     if (wantedNode != NULL)
     {
-        *root = splay(wantedNode);
+        *root = wantedNode;
     }
     return wantedNode == NULL ? '\0' : wantedNode->value;
 }
 
-bool inDictionary(Node** root, int key)
+bool inDictionary(Node** root, const int key)
 {
     Node* wantedNode = search(*root, key);
-    if (wantedNode != NULL)
-    {
-        *root = splay(wantedNode);
-    }
     return wantedNode != NULL;
 }

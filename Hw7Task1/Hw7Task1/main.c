@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdbool.h>
 #include "dictionaryFunctions.h"
@@ -40,8 +39,13 @@ int main()
                 printf("Enter key: ");
                 scanf_s("%d%*c", &key);
                 printf("Enter value (it should be less than 50 symbols): ");
-                gets(value);
+                gets_s(value, 50);
                 dict = addNode(dict, key, value);
+                if (dict == NULL)
+                {
+                    printf("Allocation failure");
+                    return -1;
+                }
                 break;
             }
             case 2:
