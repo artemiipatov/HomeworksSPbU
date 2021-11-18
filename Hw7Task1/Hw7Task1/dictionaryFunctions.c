@@ -181,7 +181,7 @@ Node* addNode(Node* root, const int key, const char* value)
             return NULL;
         }
         newRoot->key = key;
-        strcpy(newRoot->value, value);
+        strcpy_s(newRoot->value, 50, value);
         return newRoot;
     }
     Node* i = root;
