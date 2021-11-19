@@ -269,7 +269,7 @@ void deleteNode(Dict* dict, int key)
     }
     else if (x->parent == NULL)
     {
-        deleteDictionary(dict);
+        deleteDictionary(&dict);
     }
     else
     {
@@ -290,10 +290,6 @@ void deleteNode(Dict* dict, int key)
 char* getValue(Dict* dict, const int key)
 {
     Node* wantedNode = search(dict->root, key);
-    if (wantedNode != NULL)
-    {
-        dict->root = wantedNode;
-    }
     return wantedNode == NULL ? '\0' : wantedNode->value;
 }
 
