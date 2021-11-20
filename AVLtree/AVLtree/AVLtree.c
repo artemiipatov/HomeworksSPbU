@@ -44,6 +44,10 @@ void deleteTreeRecursive(Node* root)
 
 void deleteDictionary(Dict** dict)
 {
+    if (*dict == NULL)
+    {
+        return;
+    }
     deleteTreeRecursive((*dict)->root);
     free(*dict);
     *dict = NULL;
@@ -53,14 +57,20 @@ void correctHeight(Node* node)
 {
     if (node->leftSon == NULL && node->rightSon == NULL)
     {
-        node->height = 1; 
+        node->height = 1;
     }
-    if (node->leftSon != NULL && node->rightSon != NULL)
+    else if (node->leftSon == NULL)
     {
-        node->height = node->height > node->rightSon->height + 1 ? node->height : node->rightSon->height + 1;
-        return;
+        node->height = node->rightSon->height + 1;
     }
-    node->height = node->leftSon != NULL ? node->leftSon->height + 1 : node->rightSon->height + 1;
+    else if (node->rightSon == NULL)
+    {
+        node->height = node->leftSon->height + 1;
+    }
+    else
+    {
+        node->height = node->rightSon->height > node->leftSon->height ? node->rightSon->height + 1 : node->leftSon->height + 1;
+    }
 }
 
 int balanceFactor(Node* node)
@@ -69,44 +79,70 @@ int balanceFactor(Node* node)
     {
         return 0;
     }
-    else if (node->leftSon != NULL)
+    else if (node->leftSon == NULL)
     {
-        return -1;
+        return -node->rightSon->height;
     }
-    return 1;
+    else if (node->rightSon == NULL)
+    {
+        return node->leftSon->height;
+    }
+    return node->leftSon->height - node->rightSon->height;
+}
+
+void attach(Node* parent, Node* child, Direction direction)
+{
+    if (direction == left)
+    {
+        parent->leftSon = child;
+    }
+    else
+    {
+        parent->rightSon = child;
+    }
+    if (child != NULL)
+    {
+        child->parent = parent;
+    }
 }
 
 Node* rotateLeft(Node* a)
 {
     Node* b = a->rightSon;
-    a->rightSon->leftSon = a;
-    a->rightSon = b->rightSon;
+    attach(a, b->leftSon, right);
+    b->parent = a->parent;
+    attach(b, a, left);
+    correctHeight(a);
+    correctHeight(b);
     return b;
 }
 
 Node* rotateRight(Node* a)
 {
-    Node* b = a->leftSon;
-    a->leftSon->rightSon = b;
-    a->leftSon = b->leftSon;
+    Node* b = a->leftSon; 
+    attach(a, b->rightSon, left);
+    b->parent = a->parent;
+    attach(b, a, right);
+    correctHeight(a);
+    correctHeight(b);
     return b;
 }
 
 Node* bigRotateLeft(Node* a)
 {
-    a = rotateRight(a->rightSon);
+    a->rightSon = rotateRight(a->rightSon);
     return rotateLeft(a); 
 }
 
 Node* bigRotateRight(Node* a)
 {
-    a = rotateLeft(a->leftSon);
+    a->leftSon = rotateLeft(a->leftSon);
     return rotateRight(a);
 }
 
 Node* balance(Node* node)
 {
-    if (balanceFactor(node) == 2)
+    if (balanceFactor(node) == -2)
     {
         if (balanceFactor(node->rightSon) <= 0)
         {
@@ -116,16 +152,16 @@ Node* balance(Node* node)
     }
     if (balanceFactor(node) == -2)
     {
-        if (balanceFactor(node->leftSon) <= 0)
+        if (balanceFactor(node->leftSon) >= 0)
         {
-            return rotateRight(node);
+            return rotateLeft(node);
         }
         return bigRotateRight(node);
     }
     return node;
 }
 
-Node* insertRecursive(Node* node, const int key, const char* value)
+Node* insertRecursive(Node* parent, Node* node, const int key, const char* value)
 {
     if (node == NULL)
     {
@@ -137,16 +173,17 @@ Node* insertRecursive(Node* node, const int key, const char* value)
         newNode->key = key;
         strcpy_s(newNode->value, 50, value);
         newNode->height = 1;
+        newNode->parent = parent;
         return newNode;
     }
     if (key < node->key)
     {
-        node->leftSon = insertRecursive(node->leftSon, key, value);
+        node->leftSon = insertRecursive(node, node->leftSon, key, value);
         correctHeight(node);
     }
     else if (key > node->key)
     {
-        node->rightSon = insertRecursive(node->rightSon, key, value);
+        node->rightSon = insertRecursive(node, node->rightSon, key, value);
         correctHeight(node);
     }
     else
@@ -159,7 +196,7 @@ Node* insertRecursive(Node* node, const int key, const char* value)
 
 bool insert(Dict* dict, const int key, const char* value)
 {
-    Node* returnedNode = insertRecursive(dict->root, key, value);
+    Node* returnedNode = insertRecursive(dict->root, dict->root, key, value);
     if (returnedNode == NULL)
     {
         return false;
@@ -198,28 +235,35 @@ Node* searchMin(Node* node)
     return node;
 }
 
-void fullBalance(Node* x)
+Node* fullBalance(Node* x, int key)
 {
     if (x == NULL)
     {
-        return;
+        return NULL;
     }
-    Node* i = x->leftSon;
-    while (i != NULL)
+    if (key > x->key)
     {
-        int oldHeight = i->height;
-        correctHeight(i);
-        if (oldHeight == i->height || i->parent == NULL)
-        {
-            break;
-        }
-        i = i->parent;
+        x->rightSon = fullBalance(x->rightSon, key);
+        correctHeight(x);
+        x = balance(x);
     }
+    else if (key < x->key)
+    {
+        x->leftSon = fullBalance(x->leftSon, key);
+        correctHeight(x);
+        x = balance(x);
+    }
+    else
+    {
+        correctHeight(x);
+        x = balance(x);
+    }
+    return x;
 }
 
-void deleteNode(Dict* dict, int key)
+void deleteNode(Dict** dict, int key)
 {
-    Node* root = dict->root;
+    Node* root = (*dict)->root;
     Node* x = search(root, key);
     if (x == NULL)
     {
@@ -242,7 +286,7 @@ void deleteNode(Dict* dict, int key)
         {
             minimum->rightSon->parent = minimum->parent;
         }
-        fullBalance(minimum->parent);
+        (*dict)->root = fullBalance((*dict)->root, x->key);
         free(minimum);
     }
     else if (x->leftSon != NULL)
@@ -264,12 +308,12 @@ void deleteNode(Dict* dict, int key)
             x->leftSon->parent = NULL;
             root = x->leftSon;
         }
-        fullBalance(x->parent);
+        (*dict)->root = fullBalance((*dict)->root, x->key);
         free(x);
     }
     else if (x->parent == NULL)
     {
-        deleteDictionary(&dict);
+        deleteDictionary(dict);
     }
     else
     {
@@ -281,7 +325,7 @@ void deleteNode(Dict* dict, int key)
         {
             x->parent->rightSon = NULL;
         }
-        fullBalance(x->parent);
+        (*dict)->root = fullBalance((*dict)->root, x->key);
         free(x);
     }
     return;
@@ -289,12 +333,20 @@ void deleteNode(Dict* dict, int key)
 
 char* getValue(Dict* dict, const int key)
 {
+    if (dict == NULL)
+    {
+        return NULL;
+    }
     Node* wantedNode = search(dict->root, key);
     return wantedNode == NULL ? '\0' : wantedNode->value;
 }
 
 bool inDictionary(Dict* dict, const int key)
 {
+    if (dict == NULL)
+    {
+        return false;
+    }
     Node* wantedNode = search(dict->root, key);
     return wantedNode != NULL;
 }

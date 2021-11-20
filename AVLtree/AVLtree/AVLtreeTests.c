@@ -69,21 +69,21 @@ bool testAddAndGet(Dict* dict)
 
 bool testDeleteAndInDictionary(Dict* dict)
 {
-    deleteNode(dict, 0);
+    deleteNode(&dict, 0);
     if (inDictionary(dict, 0))
     {
         deleteDictionary(&dict);
-        return false;
+        return  false;
     }
     if (inDictionary(dict, 10))
     {
         deleteDictionary(&dict);
         return false;
     }
-    deleteNode(dict, 2);
-    deleteNode(dict, 5);
-    deleteNode(dict, 9);
-    deleteNode(dict, 3);
+    deleteNode(&dict, 2);
+    deleteNode(&dict, 5);
+    deleteNode(&dict, 9);
+    deleteNode(&dict, 3);
     if (inDictionary(dict, 2) || inDictionary(dict, 5)
         || inDictionary(dict, 9) || inDictionary(dict, 3)
         || !inDictionary(dict, 8) || !inDictionary(dict, 6))
@@ -91,8 +91,8 @@ bool testDeleteAndInDictionary(Dict* dict)
         deleteDictionary(&dict);
         return false;
     }
-    deleteNode(dict, 8);
-    deleteNode(dict, 6);
+    deleteNode(&dict, 8);
+    deleteNode(&dict, 6);
     if (inDictionary(dict, 8) || inDictionary(dict, 6))
     {
         deleteDictionary(&dict);
@@ -104,6 +104,11 @@ bool testDeleteAndInDictionary(Dict* dict)
 
 bool testDeleteDictionary(Dict* dict)
 {
+    dict = createDictionary();
+    if (dict == NULL)
+    {
+        return false;
+    }
     insert(dict, 3, "nbcb");
     insert(dict, 8, "qwt");
     insert(dict, 5, "wef");
