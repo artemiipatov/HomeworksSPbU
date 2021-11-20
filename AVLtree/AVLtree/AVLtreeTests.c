@@ -12,38 +12,59 @@ bool testAddAndGet(Dict* dict)
         deleteDictionary(&dict);
         return false;
     }
-    //if (!insert(dict, 3, "nbcb")
-    //    || !insert(dict, 8, "qwt")
-    //    || !insert(dict, 5, "wef")
-    //    || !insert(dict, 0, "bnvmv")
-    //    || !insert(dict, 3, "zxc")
-    //    || !insert(dict, 2, "asfsd")
-    //    || !insert(dict, 9, "qwer")
-    //    || !insert(dict, 19, "ogmwq")
-    //    || !insert(dict, 40, "omogas")
-    //    || !insert(dict, 1, "lpwqtp")
-    //    || !insert(dict, 13, "mdigm")
-    //    || !insert(dict, 20, "zxooqwkero")
-    //    || !insert(dict, 14, "ewtkqwo")
-    //    || !insert(dict, -1, "fkpodsmgf"))
-    //{
-    //    return false;
-    //}
-    insert(dict, 3, "nbcb");
-    insert(dict, 8, "qwt");
-    insert(dict, 5, "wef");
-    insert(dict, 0, "bnvmv");
-    insert(dict, 3, "zxc");
-    insert(dict, 2, "asfsd");
-    insert(dict, 9, "qwer");
-    insert(dict, 19, "ogmwq");
-    insert(dict, 40, "omogas");
-    insert(dict, 1, "lpwqtp");
-    insert(dict, 13, "mdigm");
-    insert(dict, 20, "zxooqwkero");
-    insert(dict, 14, "ewtkqwo");
-    insert(dict, -1, "fkpodsmgf");
+    if (!insert(dict, 3, "nbcb")
+        || !insert(dict, 8, "qwt")
+        || !insert(dict, 5, "wef")
+        || !insert(dict, 0, "bnvmv")
+        || !insert(dict, 3, "zxc")
+        || !insert(dict, 2, "asfsd")
+        || !insert(dict, 9, "qwer")
+        || !insert(dict, 19, "ogmwq")
+        || !insert(dict, 40, "omogas")
+        || !insert(dict, 1, "lpwqtp")
+        || !insert(dict, 13, "mdigm")
+        || !insert(dict, 20, "zxooqwkero")
+        || !insert(dict, 14, "ewtkqwo")
+        || !insert(dict, -1, "fkpodsmgf"))
+    {
+        return false;
+    }
     if (strcmp(getValue(dict, 3), "zxc") != 0)
+    {
+        deleteDictionary(&dict);
+        return false;
+    }
+    if (getValue(dict, 19) == NULL || strcmp(getValue(dict, 19), "ogmwq") != 0)
+    {
+        deleteDictionary(&dict);
+        return false;
+    }
+    if (getValue(dict, 1) == NULL || strcmp(getValue(dict, 1), "lpwqtp") != 0)
+    {
+        deleteDictionary(&dict);
+        return false;
+    }
+    if (getValue(dict, 14) == NULL || strcmp(getValue(dict, 14), "ewtkqwo") != 0)
+    {
+        deleteDictionary(&dict);
+        return false;
+    }
+    if (getValue(dict, 20) == NULL || strcmp(getValue(dict, 20), "zxooqwkero") != 0)
+    {
+        deleteDictionary(&dict);
+        return false;
+    }
+    if (getValue(dict, 13) == NULL || strcmp(getValue(dict, 13), "mdigm") != 0)
+    {
+        deleteDictionary(&dict);
+        return false;
+    }
+    if (getValue(dict, 40) == NULL || strcmp(getValue(dict, 40), "omogas") != 0)
+    {
+        deleteDictionary(&dict);
+        return false;
+    }
+    if (getValue(dict, -1) == NULL || strcmp(getValue(dict, -1), "fkpodsmgf") != 0)
     {
         deleteDictionary(&dict);
         return false;
@@ -108,7 +129,7 @@ bool testDeleteAndInDictionary(Dict* dict)
     deleteNode(&dict, 19);
     deleteNode(&dict, 9);
     deleteNode(&dict, 3);
-    if (inDictionary(dict, 2) || inDictionary(dict, 5)
+    if (inDictionary(dict, 2) || inDictionary(dict, 19)
         || inDictionary(dict, 9) || inDictionary(dict, 3)
         || !inDictionary(dict, 8) || !inDictionary(dict, 6))
     {
@@ -139,7 +160,14 @@ bool testDeleteDictionary(Dict* dict)
         || !insert(dict, 0, "bnvmv")
         || !insert(dict, 3, "zxc")
         || !insert(dict, 2, "asfsd")
-        || !insert(dict, 9, "qwer"))
+        || !insert(dict, 9, "qwer")
+        || !insert(dict, 19, "ogmwq")
+        || !insert(dict, 40, "omogas")
+        || !insert(dict, 1, "lpwqtp")
+        || !insert(dict, 13, "mdigm")
+        || !insert(dict, 20, "zxooqwkero")
+        || !insert(dict, 14, "ewtkqwo")
+        || !insert(dict, -1, "fkpodsmgf"))
     {
         return false;
     }
