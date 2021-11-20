@@ -150,11 +150,11 @@ Node* balance(Node* node)
         }
         return bigRotateLeft(node);
     }
-    if (balanceFactor(node) == -2)
+    if (balanceFactor(node) == 2)
     {
         if (balanceFactor(node->leftSon) >= 0)
         {
-            return rotateLeft(node);
+            return rotateRight(node);
         }
         return bigRotateRight(node);
     }

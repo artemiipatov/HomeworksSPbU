@@ -12,6 +12,23 @@ bool testAddAndGet(Dict* dict)
         deleteDictionary(&dict);
         return false;
     }
+    //if (!insert(dict, 3, "nbcb")
+    //    || !insert(dict, 8, "qwt")
+    //    || !insert(dict, 5, "wef")
+    //    || !insert(dict, 0, "bnvmv")
+    //    || !insert(dict, 3, "zxc")
+    //    || !insert(dict, 2, "asfsd")
+    //    || !insert(dict, 9, "qwer")
+    //    || !insert(dict, 19, "ogmwq")
+    //    || !insert(dict, 40, "omogas")
+    //    || !insert(dict, 1, "lpwqtp")
+    //    || !insert(dict, 13, "mdigm")
+    //    || !insert(dict, 20, "zxooqwkero")
+    //    || !insert(dict, 14, "ewtkqwo")
+    //    || !insert(dict, -1, "fkpodsmgf"))
+    //{
+    //    return false;
+    //}
     insert(dict, 3, "nbcb");
     insert(dict, 8, "qwt");
     insert(dict, 5, "wef");
@@ -19,6 +36,13 @@ bool testAddAndGet(Dict* dict)
     insert(dict, 3, "zxc");
     insert(dict, 2, "asfsd");
     insert(dict, 9, "qwer");
+    insert(dict, 19, "ogmwq");
+    insert(dict, 40, "omogas");
+    insert(dict, 1, "lpwqtp");
+    insert(dict, 13, "mdigm");
+    insert(dict, 20, "zxooqwkero");
+    insert(dict, 14, "ewtkqwo");
+    insert(dict, -1, "fkpodsmgf");
     if (strcmp(getValue(dict, 3), "zxc") != 0)
     {
         deleteDictionary(&dict);
@@ -81,7 +105,7 @@ bool testDeleteAndInDictionary(Dict* dict)
         return false;
     }
     deleteNode(&dict, 2);
-    deleteNode(&dict, 5);
+    deleteNode(&dict, 19);
     deleteNode(&dict, 9);
     deleteNode(&dict, 3);
     if (inDictionary(dict, 2) || inDictionary(dict, 5)
@@ -109,13 +133,16 @@ bool testDeleteDictionary(Dict* dict)
     {
         return false;
     }
-    insert(dict, 3, "nbcb");
-    insert(dict, 8, "qwt");
-    insert(dict, 5, "wef");
-    insert(dict, 0, "bnvmv");
-    insert(dict, 3, "zxc");
-    insert(dict, 2, "asfsd");
-    insert(dict, 9, "qwer");
+    if (!insert(dict, 3, "nbcb")
+        || !insert(dict, 8, "qwt")
+        || !insert(dict, 5, "wef")
+        || !insert(dict, 0, "bnvmv")
+        || !insert(dict, 3, "zxc")
+        || !insert(dict, 2, "asfsd")
+        || !insert(dict, 9, "qwer"))
+    {
+        return false;
+    }
     deleteDictionary(&dict);
     return dict == NULL;
 }
