@@ -4,14 +4,11 @@
 // tree node structure
 typedef struct Node Node;
 
-// creates tree
-Node* createTree();
-
 // deletes whole tree
 void deleteTree(Node** root);
 
-// reads data from file and fills the tree with input expression
-bool parse(Node** root, FILE* file);
+// creates tree, reads data from file with given name and fills the tree with input expression
+Node* parse(const char* fileName);
 
 // evaluates input expression
 int eval(Node* root);

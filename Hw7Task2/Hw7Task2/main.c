@@ -6,27 +6,19 @@
 
 int main()
 {
-	if (!programPassedTests())
-	{
-		printf("tests failed");
-		return -1;
-	}
-	FILE* file = fopen("input.txt", "r");
-	if (file == NULL)
-	{
-		return -1;
-	}
-	Node* root = createTree();
-	if (!parse(&root, file))
-	{
-		fclose(file);
-		deleteTree(&root);
-		return -1;
-	}
-	fclose(file);
-	printf("expression: ");
-	printPreorder(root);
-	printf("\nresult: %d", eval(root));
-	deleteTree(&root);
-	return 0;
+    if (!programPassedTests())
+    {
+        printf("tests failed");
+        return -1;
+    }
+    Node* root = parse("input.txt");
+    if (root == NULL)
+    {
+        return -1;
+    }
+    printf("expression: ");
+    printPreorder(root);
+    printf("\nresult: %d", eval(root));
+    deleteTree(&root);
+    return 0;
 }

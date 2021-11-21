@@ -5,25 +5,16 @@
 
 bool programPassedTests()
 {
-	FILE* testFile = fopen("testFile.txt", "r");
-	if (testFile == NULL)
-	{
-		return false;
-	}
-	Node* root = createTree();
-	if (!parse(&root, testFile))
-	{
-		fclose(testFile);
-		deleteTree(&root);
-		return false;
-	}
-	fclose(testFile);
-	if (eval(root) != 10494)
-	{
-		fclose(testFile);
-		deleteTree(&root);
-		return false;
-	}
-	deleteTree(&root);
-	return isEmpty(root);
+    Node* root = parse("testFile.txt");
+    if (root == NULL)
+    {
+        return false;
+    }
+    if (eval(root) != 10494)
+    {
+        deleteTree(&root);
+        return false;
+    }
+    deleteTree(&root);
+    return isEmpty(root);
 }

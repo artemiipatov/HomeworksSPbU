@@ -36,7 +36,7 @@ void deleteTree(Node** root)
     *root = NULL;
 }
 
-bool addNode(Node** root, int value, bool isOperation)
+bool addNode(Node** root, const int value, bool isOperation)
 {
     if (isOperation)
     {
@@ -44,7 +44,7 @@ bool addNode(Node** root, int value, bool isOperation)
         {
             case ')':
             {
-                (*root) = (*root)->parent == NULL ? (*root) : (*root)->parent;
+                *root = (*root)->parent == NULL ? *root : (*root)->parent;
                 break;
             }
             case '+':
@@ -67,10 +67,15 @@ bool addNode(Node** root, int value, bool isOperation)
                         (*root)->leftSon = newRoot;
                         *root = (*root)->leftSon;
                     }
-                    else
+                    else if ((*root)->rightSon == NULL)
                     {
                         (*root)->rightSon = newRoot;
                         *root = (*root)->rightSon;
+                    }
+                    else
+                    {
+                        free(newRoot);
+                        return false;
                     }
                 }
                 else
@@ -95,16 +100,27 @@ bool addNode(Node** root, int value, bool isOperation)
         {
             (*root)->leftSon = newRoot;
         }
-        else
+        else if ((*root)->rightSon == NULL)
         {
             (*root)->rightSon = newRoot;
+        }
+        else
+        {
+            free(newRoot);
+            return false;
         }
     }
     return true;
 }
 
-bool parse(Node** root, FILE* file)
+Node* parse(const char* fileName)
 {
+    FILE* file = fopen(fileName, "r");
+    if (file == NULL)
+    {
+        return NULL;
+    }
+    Node* root = createTree();
     while (!feof(file))
     {
         char ch = fgetc(file);
@@ -129,9 +145,11 @@ bool parse(Node** root, FILE* file)
                 if (temp == ' ' || temp == ')' || temp == EOF)
                 {
                     ungetc(temp, file);
-                    if (!addNode(root, (int)ch, true))
+                    if (!addNode(&root, (int)ch, true))
                     {
-                        return false;
+                        fclose(file);
+                        deleteTree(&root);
+                        return NULL;
                     }
                     continue;
                 }
@@ -142,14 +160,17 @@ bool parse(Node** root, FILE* file)
                 ungetc(ch, file);
                 int value = 0;
                 fscanf(file, "%d", &value);
-                if (!addNode(root, value, false))
+                if (!addNode(&root, value, false))
                 {
-                    return false;
+                    fclose(file);
+                    deleteTree(&root);
+                    return NULL;
                 }
             }
         }
     }
-    return true;
+    fclose(file);
+    return root;
 }
 
 int eval(Node* root)
@@ -158,8 +179,8 @@ int eval(Node* root)
     {
         return root->value;
     }
-    int firstOperand = eval(root->leftSon);
-    int secondOperand = eval(root->rightSon);
+    const int firstOperand = eval(root->leftSon);
+    const int secondOperand = eval(root->rightSon);
     int result = 0;
     switch (root->value)
     {
@@ -195,29 +216,7 @@ void printPreorder(Node* root)
     }
     if (root->isOperation)
     {
-        switch (root->value)
-        {
-            case '+':
-            {
-                printf("( + ");
-                break;
-            }
-            case '-':
-            {
-                printf("( - ");
-                break;
-            }
-            case '*':
-            {
-                printf("( * ");
-                break;
-            }
-            case '/':
-            {
-                printf("( / ");
-                break;
-            }
-        }
+        printf("( %c ", root->value);
     }
     else
     {
