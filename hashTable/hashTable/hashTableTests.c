@@ -23,6 +23,10 @@ bool hashTablePassedTests()
         deleteHashTable(&hashTable);
         return false;
     }
+    int averageLength = getAverageLength(hashTable);
+    int maximumLength = getMaxLength(hashTable);
+    int loadFactor = getLoadFactor(hashTable);
+    int numberOfElements = getNumberOfElements(hashTable);
     deleteHashTable(&hashTable);
-    return true;
+    return hashTable == NULL && averageLength == 0 && maximumLength == 2 && loadFactor == 0 && numberOfElements == 24;
 }

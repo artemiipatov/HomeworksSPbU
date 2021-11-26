@@ -1,14 +1,16 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include "hashTable.h"
 #include "list.h"
-#define ARRAY_SIZE 500
+#define ARRAY_SIZE 2000
 
 typedef struct hashTable
 {
     List* array[ARRAY_SIZE];
+    int numberOfElements;
 } hashTable;
 
 hashTable* createHashTable()
@@ -29,6 +31,7 @@ void deleteHashTable(hashTable** hashTable)
 bool addItemToHashTable(hashTable* hashTable, char word[])
 {
     int hash = hashFunction(word);
+    ++hashTable->numberOfElements;
     if (!addItemToList(&(hashTable->array[hash]), word))
     {
         return false;
@@ -42,12 +45,7 @@ bool parse(hashTable* hashTable, char* fileName)
     while (!feof(file))
     {
         char word[50] = {'\0'};
-        //fscanf_s(file, "%[^ ]%*c", &word, 50);
         fscanf_s(file, "%s%*c", &word, 50);
-        //if (strcmp(word, "") == 0)
-        //{
-        //    return 
-        //}
         if (!addItemToHashTable(hashTable, word))
         {
             fclose(file);
@@ -82,4 +80,44 @@ void printHashTable(hashTable* hashTable)
     {
         printList(hashTable->array[arrayIndex]);
     }
+}
+
+int getMaxLength(hashTable* hashTable)
+{
+    int maxLength = 0;
+    for (int index = 0; index < ARRAY_SIZE; index++)
+    {
+        if (hashTable->array[index] != NULL)
+        {
+            int length = getLength(hashTable->array[index]);
+            if (length > maxLength)
+            {
+                maxLength = length;
+            }
+        }
+    }
+    return maxLength;
+}
+
+int getAverageLength(hashTable* hashTable)
+{
+    int sumOfLengths = 0;
+    for (int index = 0; index < ARRAY_SIZE; index++)
+    {
+        if (hashTable->array[index] != NULL)
+        {
+            sumOfLengths += getLength(hashTable->array[index]);
+        }
+    }
+    return sumOfLengths / ARRAY_SIZE;
+}
+
+int getLoadFactor(hashTable* hashTable)
+{
+    return hashTable->numberOfElements / ARRAY_SIZE;
+}
+
+int getNumberOfElements(hashTable* hashTable)
+{
+    return hashTable->numberOfElements;
 }

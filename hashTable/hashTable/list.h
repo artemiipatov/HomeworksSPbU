@@ -22,6 +22,8 @@ int getLength(List* list);
 // adds new value at the tail of the list. Name size should be less than 20 elements
 bool addItemToList(List** list, const char* name);
 
+// returns word frequency
 int getCounterFromList(List* list, const char word[]);
 
+// prints list in console
 void printList(List* list);

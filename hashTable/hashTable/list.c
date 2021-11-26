@@ -84,7 +84,6 @@ bool addItemToList(List** list, const char* word)
         (*list)->length++;
         (*list)->head = newElement;
         (*list)->tail = newElement;
-        return true;
     }
     else
     {
