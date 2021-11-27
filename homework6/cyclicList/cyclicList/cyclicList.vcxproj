@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{eaa15be1-38d5-49b5-9d6c-1ee1bf7ccb5c}</ProjectGuid>
-    <RootNamespace>Hw5Task1</RootNamespace>
+    <ProjectGuid>{f43d33cb-ffbf-499f-9f0f-b350cb7ad0db}</ProjectGuid>
+    <RootNamespace>cyclicList</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -85,7 +85,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -139,17 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\stack\stack\stack.c" />
-    <ClCompile Include="..\..\stack\stack\stackTests.c" />
-    <ClCompile Include="calculatorFunctions.c" />
-    <ClCompile Include="calculatorTests.c" />
+    <ClCompile Include="cyclicListFunctions.c" />
+    <ClCompile Include="cyclicListTests.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\stack\stack\stack.h" />
-    <ClInclude Include="..\..\stack\stack\stackTests.h" />
-    <ClInclude Include="calculatorFunctions.h" />
-    <ClInclude Include="calculatorTests.h" />
+    <ClInclude Include="cyclicListFunctions.h" />
+    <ClInclude Include="cyclicListTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
