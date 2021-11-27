@@ -17,8 +17,7 @@ typedef struct List
 
 typedef struct Position
 {
-    ListElement* previousPosition;
-    ListElement* currentPosition;
+    ListElement* position;
 } Position;
 
 List* createList()
@@ -65,7 +64,6 @@ bool add(List* list, Position* position, int value)
     }
     list->length++;
     newElement->value = value;
-    list->length++;
     if (position == NULL)
     {
         newElement->previous = list->head->previous;
@@ -75,91 +73,59 @@ bool add(List* list, Position* position, int value)
         list->head = newElement;
         return true;
     }
-    if (position->currentPosition == NULL)
+    if (position->position == NULL)
     {
         list->head = newElement;
         newElement->previous = newElement;
         newElement->next = newElement;
         return true;
     }
-<<<<<<< HEAD
-    newElement->next = position->currentPosition->next;
-    position->currentPosition->next = newElement;
-=======
     newElement->previous = position->position;
     newElement->next = position->position->next;
     position->position->next->previous = newElement;
     position->position->next = newElement;
->>>>>>> cyclicList
     return true;
 }
 
 void copyPosition(Position* copyFromHere, Position* pasteHere)
 {
-    pasteHere->currentPosition = copyFromHere->currentPosition;
-    pasteHere->previousPosition = copyFromHere->previousPosition;
+    pasteHere->position = copyFromHere->position;
 }
 
 bool comparePositions(Position* position1, Position* position2)
 {
-<<<<<<< HEAD
-    return position1->currentPosition == position2->currentPosition;
-=======
     return position1->position == position2->position;
->>>>>>> cyclicList
 }
 
 void deleteItem(List* list, Position* position)
 {
     list->length--;
-<<<<<<< HEAD
-<<<<<<< HEAD:list/list/list.c
-    if (position->currentPosition == list->head)
-=======
-    if (position->position == list->head)
->>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListFunctions.c
-=======
     position->position->previous->next = position->position->next;
     position->position->next->previous = position->position->previous;
     ListElement* temp = position->position->next;
     bool isHead = position->position == list->head;
     free(position->position);
     if (isHead)
->>>>>>> cyclicList
     {
         list->head = temp;
     }
-<<<<<<< HEAD
-    ListElement* temp = position->currentPosition->next;
-    free(position->previousPosition->next);
-    position->previousPosition->next = temp;
-    position->currentPosition = temp;
-=======
     position->position = temp;
->>>>>>> cyclicList
 }
 
 Position* first(List* list, Position* position)
 {
-    position->previousPosition = NULL;
-    position->currentPosition = list->head;
+    position->position = list->head;
     return position;
 }
 
 bool next(Position* currentIndex)
 {
-    if (currentIndex->currentPosition == NULL)
+    if (currentIndex->position == NULL)
     {
         return false;
     }
-    currentIndex->previousPosition = currentIndex->currentPosition;
-    currentIndex->currentPosition = currentIndex->currentPosition->next;
-    return true;
-}
-
-int getLength(List* list)
-{
-    return list->length;
+    currentIndex->position = currentIndex->position->next;
+    return currentIndex;
 }
 
 int getLength(List* list)
@@ -169,14 +135,10 @@ int getLength(List* list)
 
 bool last(List* list, Position* position)
 {
-<<<<<<< HEAD:list/list/list.c
-    return position->currentPosition == NULL;
-=======
     return position->position->next == list->head;
->>>>>>> 08b9a35d3337b52d8799024ba3ee1e34eb0637c8:cyclicList/cyclicList/cyclicListFunctions.c
 }
 
 int get(List* list, Position* position)
 {
-    return position->currentPosition->value;
+    return position->position->value;
 }
