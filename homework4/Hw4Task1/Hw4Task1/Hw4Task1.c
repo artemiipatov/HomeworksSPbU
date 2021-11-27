@@ -135,6 +135,7 @@ bool testCorrectExecutionOfAllFunctions()
     return binaryToDecimal(binarySum3) == -19432;
 }
 
+// test comments
 int main(int argc, int argv[])
 {
     // Russian symbols
