@@ -5,12 +5,16 @@
 #include "tests.h"
 #define NAME_SIZE 20
 
-int main()
+int main(int argc, char argv[])
 {
     if (!programPassedTests())
     {
         printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        return 0;
     }
     FILE* file = fopen("data.txt", "r");
     if (file == NULL)

@@ -5,12 +5,16 @@
 #include "testsShuntingYard.h"
 #define LENGTH 30
 
-int main()
+int main(int argc, char argv[])
 {
     if (!testsStack() || !testsPassed())
     {
         printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        return 0;
     }
     char input[LENGTH] = { '\0' };
     printf("Print infix expression: ");

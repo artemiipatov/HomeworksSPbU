@@ -161,7 +161,7 @@ bool testBinSearchCorrectExecution()
     return true;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
     // Test
     if (!testQSortCorrectExecution() && !testBinSearchCorrectExecution())
@@ -169,8 +169,11 @@ int main()
         printf("Test failed");
         return -1;
     }
+    if (argc > 1)
+    {
+        return 0;
+    }
     int length = 0;
-
     // Memory allocation
     printf("Length or main array: ");
     scanf("%d", &length);

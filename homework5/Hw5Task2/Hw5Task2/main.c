@@ -4,14 +4,17 @@
 #include "BalanceOfParentheses.h"
 #include "testsBalance.h"
 
-int main()
+int main(int argc, char argv[])
 {
     if (!(testsStack() && testsBalance()))
     {
         printf("Tests failed");
         return -1;
     }
-    
+    if (argc > 1)
+    {
+        return 0;
+    }
     char sequence[30] = { '\0' };
     printf("Parentheses sequence: ");
     fgets(sequence, (unsigned)sizeof(sequence), stdin);

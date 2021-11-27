@@ -3,12 +3,16 @@
 #include "list.h"
 #include "listTests.h"
 
-int main()
+int main(int argc, char argv[])
 {
     if (!listTestsPassed())
     {
         printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        return 0;
     }
     List* myList = NULL;
     if (!createList(&myList))

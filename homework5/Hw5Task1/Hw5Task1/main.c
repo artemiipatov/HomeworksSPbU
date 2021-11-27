@@ -3,12 +3,16 @@
 #include "calculatorFunctions.h"
 #include "calculatorTests.h"
 
-int main()
+int main(int argc, char argv[])
 {
     if (!(testsStack() && calculatorTests()))
     {
         printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        return 0;
     }
     char sequence[30] = { '\0' };
     printf("Print postfix expression: ");

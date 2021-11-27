@@ -13,12 +13,16 @@
 3 – print list
 */
 
-int main()
+int main(int argc, char argv[])
 {
     if (!listTestsPassed() || !sortedListTestsPassed())
     {
         printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        return 0;
     }
     List* list = NULL;
     if (!createList(&list))
