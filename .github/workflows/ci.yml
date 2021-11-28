@@ -3,7 +3,7 @@ name: MSBuild
 on: [push]
 
 env:
-  SOLUTION_FILE_PATH: .
+  SOLUTION_FILE_PATH: ./homework4/Hw4Task3
   BUILD_CONFIGURATION: Release
 
 jobs:
