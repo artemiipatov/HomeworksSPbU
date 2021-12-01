@@ -49,7 +49,7 @@ void deleteHashTable(hashTable** hashTable)
     {
         deleteList(&((*hashTable)->array[index]));
     }
-    free(*((*hashTable)->array));
+    free((*hashTable)->array);
     free(*hashTable);
     *hashTable = NULL;
 }

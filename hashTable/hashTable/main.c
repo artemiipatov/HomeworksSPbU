@@ -25,7 +25,7 @@ int main()
     printHashTable(myHashTable);
     printf("\nAverage list length: %d", getAverageLength(myHashTable));
     printf("\nMaximum list length: %d", getMaxLength(myHashTable));
-    printf("\nLoad factor: %d", getLoadFactor(myHashTable));
+    printf("\nLoad factor: %f", getLoadFactor(myHashTable));
     deleteHashTable(&myHashTable);
     return 0;
 }
