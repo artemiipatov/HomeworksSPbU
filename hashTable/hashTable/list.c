@@ -29,6 +29,11 @@ List* createList()
     return calloc(1, sizeof(List));
 }
 
+Position* createPosition()
+{
+    return calloc(1, sizeof(Position));
+}
+
 bool isEmpty(List* list)
 {
     return list == NULL || list->head == NULL;
@@ -49,6 +54,11 @@ void deleteList(List** list)
     }
     free(*list);
     *list = NULL;
+}
+
+void deletePosition(Position** position)
+{
+    free(*position);
 }
 
 int getLength(List* list)
@@ -140,4 +150,24 @@ void printList(List* list)
         printf("%5d", currentElement->counter);
         currentElement = currentElement->next;
     }
+}
+
+void first(List* list, Position** position)
+{
+    (*position)->position = list->head;
+}
+
+char* getValue(Position* position)
+{
+    return position->position->word;
+}
+
+void next(Position** position)
+{
+    (*position)->position = (*position)->position->next;
+}
+
+bool isNull(Position* position)
+{
+    return position->position == NULL;
 }

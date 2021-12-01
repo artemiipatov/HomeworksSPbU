@@ -10,6 +10,8 @@ typedef struct Position Position;
 // allocates memory for list
 List* createList();
 
+Position* createPosition();
+
 // checks if list is empty
 bool isEmpty(List* list);
 
@@ -27,3 +29,11 @@ int getCounterFromList(List* list, const char word[]);
 
 // prints list in console
 void printList(List* list);
+
+void first(List* list, Position** position);
+
+char* getValue(Position* position);
+
+void next(Position** position);
+
+bool isNull(Position* position);

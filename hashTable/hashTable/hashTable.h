@@ -14,7 +14,7 @@ void deleteHashTable(hashTable** hashTable);
 bool parse(hashTable* hashTable, char* fileName);
 
 // counts hash for given word
-int hashFunction(const char word[]);
+int hashFunction(const char word[], int arraySize);
 
 // returns word frequency
 int getCounter(hashTable* hashTable, const char word[]);
@@ -29,7 +29,7 @@ int getMaxLength(hashTable* hashTable);
 int getAverageLength(hashTable* hashTable);
 
 // returns load factor of hash table
-int getLoadFactor(hashTable* hashTable);
+double getLoadFactor(hashTable* hashTable);
 
 // returns number of elements in hash table
 int getNumberOfElements(hashTable* hashTable);
