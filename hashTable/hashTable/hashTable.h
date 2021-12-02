@@ -2,34 +2,34 @@
 #include <stdbool.h>
 
 // hash table struct
-typedef struct hashTable hashTable;
+typedef struct HashTable HashTable;
 
 // creates hash table
-hashTable* createHashTable();
+HashTable* createHashTable();
 
 // deletes hash table
-void deleteHashTable(hashTable** hashTable);
+void deleteHashTable(HashTable** hashTable);
 
 // parses file
-bool parse(hashTable* hashTable, char* fileName);
+bool parse(HashTable* hashTable, char* fileName);
 
 // counts hash for given word
 int hashFunction(const char word[], int arraySize);
 
 // returns word frequency
-int getCounter(hashTable* hashTable, const char word[]);
+int getCounter(HashTable* hashTable, const char word[]);
 
 // prints all words from hash table and their frequency in console
-void printHashTable(hashTable* hashTable);
+void printHashTable(HashTable* hashTable);
 
 // returns max length of hash table lists
-int getMaxLength(hashTable* hashTable);
+int getMaxLength(HashTable* hashTable);
 
 // returns average length of hash table lists
-int getAverageLength(hashTable* hashTable);
+int getAverageLength(HashTable* hashTable);
 
 // returns load factor of hash table
-double getLoadFactor(hashTable* hashTable);
+double getLoadFactor(HashTable* hashTable);
 
 // returns number of elements in hash table
-int getNumberOfElements(hashTable* hashTable);
+int getNumberOfElements(HashTable* hashTable);

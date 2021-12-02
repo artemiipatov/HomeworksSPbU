@@ -1,11 +1,12 @@
 #include <stdbool.h>
 #include <stdlib.h>
+#include <math.h>
 #include "hashTable.h"
 #include "list.h"
 
 bool hashTablePassedTests()
 {
-    hashTable* hashTable = createHashTable();
+    HashTable* hashTable = createHashTable();
     if (hashTable == NULL)
     {
         return false;
@@ -25,8 +26,8 @@ bool hashTablePassedTests()
     }
     int averageLength = getAverageLength(hashTable);
     int maximumLength = getMaxLength(hashTable);
-    int loadFactor = getLoadFactor(hashTable);
+    double loadFactor = -getLoadFactor(hashTable);
     int numberOfElements = getNumberOfElements(hashTable);
     deleteHashTable(&hashTable);
-    return hashTable == NULL && averageLength == 0 && maximumLength == 2 && loadFactor == 0 && numberOfElements == 24;
+    return hashTable == NULL && averageLength == 0 && maximumLength == 2 && loadFactor < 1 && numberOfElements == 24;
 }

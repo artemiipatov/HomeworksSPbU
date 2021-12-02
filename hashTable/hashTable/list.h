@@ -10,6 +10,7 @@ typedef struct Position Position;
 // allocates memory for list
 List* createList();
 
+// creates position
 Position* createPosition();
 
 // checks if list is empty
@@ -17,6 +18,9 @@ bool isEmpty(List* list);
 
 // deletes all list elements and list
 void deleteList(List** list);
+
+// deletes position
+void deletePosition(Position** position);
 
 // returns length of the list
 int getLength(List* list);

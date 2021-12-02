@@ -10,7 +10,7 @@ int main()
         printf("Tests failed");
         return -1;
     }
-    hashTable* myHashTable = createHashTable();
+    HashTable* myHashTable = createHashTable();
     if (myHashTable == NULL)
     {
         printf("Allocation error");

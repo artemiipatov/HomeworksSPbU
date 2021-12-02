@@ -6,16 +6,16 @@
 #include "hashTable.h"
 #include "list.h"
 
-typedef struct hashTable
+typedef struct HashTable
 {
     List** array;
     int numberOfElements;
     int arraySize;
-} hashTable;
+} HashTable;
 
-hashTable* createHashTable()
+HashTable* createHashTable()
 {
-    hashTable* hashTable = calloc(1, sizeof(hashTable));
+    HashTable* hashTable = calloc(1, sizeof(HashTable));
     if (hashTable == NULL)
     {
         return NULL;
@@ -42,7 +42,7 @@ void deleteArray(List** array, int arraySize)
     }
 }
 
-void deleteHashTable(hashTable** hashTable) 
+void deleteHashTable(HashTable** hashTable)
 {
     int arraySize = (*hashTable)->arraySize;
     for (int index = 0; index < arraySize; index++)
@@ -54,7 +54,7 @@ void deleteHashTable(hashTable** hashTable)
     *hashTable = NULL;
 }
 
-bool addItemToHashTable(hashTable* hashTable, const char word[])
+bool addItemToHashTable(HashTable* hashTable, const char word[])
 {
     int hash = hashFunction(word, hashTable->arraySize);
     ++hashTable->numberOfElements;
@@ -65,7 +65,7 @@ bool addItemToHashTable(hashTable* hashTable, const char word[])
     return true;
 }
 
-bool resize(hashTable* hashTable)
+bool resize(HashTable* hashTable)
 {
     int oldSize = hashTable->arraySize;
     List** newArray = calloc(oldSize * 2, sizeof(List*));
@@ -98,7 +98,7 @@ bool resize(hashTable* hashTable)
     return true;
 }
 
-bool parse(hashTable* hashTable, char* fileName)
+bool parse(HashTable* hashTable, char* fileName)
 {
     FILE* file = fopen(fileName, "r");
     while (!feof(file))
@@ -130,14 +130,14 @@ int hashFunction(const char word[], int arraySize)
     return hash % arraySize;
 }
 
-int getCounter(hashTable* hashTable, const char word[])
+int getCounter(HashTable* hashTable, const char word[])
 {
     int hash = hashFunction(word, hashTable->arraySize);
     List* list = hashTable->array[hash];
     return getCounterFromList(list, word);
 }
 
-void printHashTable(hashTable* hashTable)
+void printHashTable(HashTable* hashTable)
 {
     int arraySize = hashTable->arraySize;
     for (int arrayIndex = 0; arrayIndex < arraySize; arrayIndex++)
@@ -146,7 +146,7 @@ void printHashTable(hashTable* hashTable)
     }
 }
 
-int getMaxLength(hashTable* hashTable)
+int getMaxLength(HashTable* hashTable)
 {
     int maxLength = 0;
     int arraySize = hashTable->arraySize;
@@ -164,7 +164,7 @@ int getMaxLength(hashTable* hashTable)
     return maxLength;
 }
 
-int getAverageLength(hashTable* hashTable)
+int getAverageLength(HashTable* hashTable)
 {
     int sumOfLengths = 0;
     int arraySize = hashTable->arraySize;
@@ -178,12 +178,12 @@ int getAverageLength(hashTable* hashTable)
     return sumOfLengths / arraySize;
 }
 
-double getLoadFactor(hashTable* hashTable)
+double getLoadFactor(HashTable* hashTable)
 {
     return (double)hashTable->numberOfElements / (double)hashTable->arraySize;
 }
 
-int getNumberOfElements(hashTable* hashTable)
+int getNumberOfElements(HashTable* hashTable)
 {
     return hashTable->numberOfElements;
 }
