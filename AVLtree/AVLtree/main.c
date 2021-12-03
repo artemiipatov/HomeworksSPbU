@@ -5,11 +5,17 @@
 
 int main()
 {
-    if (!AVLtreePassedTests())
+    if (!AvlTreePassedTests())
     {
+        printf("Tests failed");
         return -1;
     }
     Dict* dict = createDictionary();
+    if (dict == NULL)
+    {
+        printf("Allocation failure");
+        return -1;
+    }
     printf("This is a dictionary implementation.\n");
     printf("Dictionary functions: \n");
     printf("0 - Quit\n");
@@ -33,10 +39,11 @@ int main()
             }
             case 1:
             {
-                int key = 0;
+                char key[50] = { '\0' };
                 char value[50] = { '\0' };
                 printf("Enter key: ");
-                scanf_s("%d%*c", &key);
+                gets_s(key, 50);
+                //scanf_s("%s%*c", &key);
                 printf("Enter value (it should be less than 50 symbols): ");
                 gets_s(value, 50);
                 if (!insert(dict, key, value))
@@ -44,34 +51,33 @@ int main()
                     printf("An error occured while inserting.");
                     return -1;
                 }
-                if (dict == NULL)
-                {
-                    printf("Allocation failure");
-                    return -1;
-                }
                 break;
             }
             case 2:
             {
-                int key = 0;
+                char key[50] = { '\0' };
                 printf("Enter key: ");
-                scanf_s("%d%*c", &key);
-                printf("Value: %s\n", getValue(dict, key));
+                gets_s(key, 50);
+                //scanf_s("%s%*c", &key);
+                const char* value = getValue(dict, key);
+                printf("Value: %s\n", value == "" ? NULL : value);
                 break;
             }
             case 3:
             {
-                int key = 0;
+                char key[50] = { '\0' };
                 printf("Enter key: ");
-                scanf_s("%d%*c", &key);
+                gets_s(key, 50);
+                //scanf_s("%s%*c", &key);
                 inDictionary(dict, key) ? printf("This key is in the dictionary.\n") : printf("This key is NOT in the dictionary.\n");
                 break;
             }
             case 4:
             {
-                int key = 0;
+                char key[50] = { '\0' };
                 printf("Enter key: ");
-                scanf_s("%d%*c", &key);
+                gets_s(key, 50);
+                //scanf_s("%d%*c", &key);
                 deleteNode(&dict, key);
                 break;
             }

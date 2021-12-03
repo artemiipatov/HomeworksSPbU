@@ -2,4 +2,4 @@
 #include <stdbool.h>
 
 // tests all dictionary functions.
-bool AVLtreePassedTests();
+bool AvlTreePassedTests();

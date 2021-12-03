@@ -16,7 +16,7 @@ typedef struct Node
     struct Node* leftSon;
     struct Node* rightSon;
     struct Node* parent;
-    int key;
+    char key[50];
     char value[50];
     int height;
 } Node;
@@ -73,7 +73,7 @@ void correctHeight(Node* node)
     }
 }
 
-int balanceFactor(Node* node)
+int getBalanceFactor(Node* node)
 {
     if (node->leftSon == NULL && node->rightSon == NULL)
     {
@@ -142,17 +142,17 @@ Node* bigRotateRight(Node* a)
 
 Node* balance(Node* node)
 {
-    if (balanceFactor(node) == -2)
+    if (getBalanceFactor(node) == -2)
     {
-        if (balanceFactor(node->rightSon) <= 0)
+        if (getBalanceFactor(node->rightSon) <= 0)
         {
             return rotateLeft(node);
         }
         return bigRotateLeft(node);
     }
-    if (balanceFactor(node) == 2)
+    if (getBalanceFactor(node) == 2)
     {
-        if (balanceFactor(node->leftSon) >= 0)
+        if (getBalanceFactor(node->leftSon) >= 0)
         {
             return rotateRight(node);
         }
@@ -161,7 +161,7 @@ Node* balance(Node* node)
     return node;
 }
 
-Node* insertRecursive(Node* parent, Node* node, const int key, const char* value)
+Node* insertRecursive(Node* parent, Node* node, const char* key, const char* value)
 {
     if (node == NULL)
     {
@@ -170,18 +170,18 @@ Node* insertRecursive(Node* parent, Node* node, const int key, const char* value
         {
             return NULL;
         }
-        newNode->key = key;
+        strcpy_s(newNode->key, 50, key);
         strcpy_s(newNode->value, 50, value);
         newNode->height = 1;
         newNode->parent = parent;
         return newNode;
     }
-    if (key < node->key)
+    if (strcmp(key, node->key) < 0)
     {
         node->leftSon = insertRecursive(node, node->leftSon, key, value);
         correctHeight(node);
     }
-    else if (key > node->key)
+    else if (strcmp(key, node->key) > 0)
     {
         node->rightSon = insertRecursive(node, node->rightSon, key, value);
         correctHeight(node);
@@ -194,7 +194,7 @@ Node* insertRecursive(Node* parent, Node* node, const int key, const char* value
     return balance(node);
 }
 
-bool insert(Dict* dict, const int key, const char* value)
+bool insert(Dict* dict, const char* key, const char* value)
 {
     Node* returnedNode = insertRecursive(dict->root, dict->root, key, value);
     if (returnedNode == NULL)
@@ -205,16 +205,16 @@ bool insert(Dict* dict, const int key, const char* value)
     return true;
 }
 
-Node* search(Node* root, const int key)
+Node* search(Node* root, const char* key)
 {
     Node* i = root;
     while (i != NULL)
     {
-        if (key > i->key)
+        if (strcmp(key, i->key) > 0)
         {
             i = i->rightSon;
         }
-        else if (key < i->key)
+        else if (strcmp(key, i->key) < 0)
         {
             i = i->leftSon;
         }
@@ -235,33 +235,26 @@ Node* searchMin(Node* node)
     return node;
 }
 
-Node* fullBalance(Node* x, int key)
+Node* fullBalance(Node* x, const char* key)
 {
     if (x == NULL)
     {
         return NULL;
     }
-    if (key > x->key)
+    if (strcmp(key, x->key) > 0)
     {
         x->rightSon = fullBalance(x->rightSon, key);
-        correctHeight(x);
-        x = balance(x);
     }
-    else if (key < x->key)
+    else if (strcmp(key, x->key) < 0)
     {
         x->leftSon = fullBalance(x->leftSon, key);
-        correctHeight(x);
-        x = balance(x);
     }
-    else
-    {
-        correctHeight(x);
-        x = balance(x);
-    }
+    correctHeight(x);
+    x = balance(x);
     return x;
 }
 
-void deleteNode(Dict** dict, int key)
+void deleteNode(Dict** dict, const char* key)
 {
     Node* root = (*dict)->root;
     Node* x = search(root, key);
@@ -272,7 +265,7 @@ void deleteNode(Dict** dict, int key)
     if (x->rightSon != NULL)
     {
         Node* minimum = searchMin(x->rightSon);
-        x->key = minimum->key;
+        strcpy_s(x->key, 50, minimum->key);
         strcpy_s(x->value, 50, minimum->value);
         if (minimum == x->rightSon)
         {
@@ -328,20 +321,19 @@ void deleteNode(Dict** dict, int key)
         (*dict)->root = fullBalance((*dict)->root, x->key);
         free(x);
     }
-    return;
 }
 
-char* getValue(Dict* dict, const int key)
+const char* getValue(Dict* dict, const char* key)
 {
     if (dict == NULL)
     {
         return NULL;
     }
     Node* wantedNode = search(dict->root, key);
-    return wantedNode == NULL ? '\0' : wantedNode->value;
+    return wantedNode == NULL ? "" : wantedNode->value;
 }
 
-bool inDictionary(Dict* dict, const int key)
+bool inDictionary(Dict* dict, const char* key)
 {
     if (dict == NULL)
     {
@@ -349,4 +341,10 @@ bool inDictionary(Dict* dict, const int key)
     }
     Node* wantedNode = search(dict->root, key);
     return wantedNode != NULL;
+}
+
+int getBalanceByKey(Dict* dict, const char* key)
+{
+    Node* node = search(dict->root, key);
+    return node == NULL ? 0 : getBalanceFactor(node);
 }
