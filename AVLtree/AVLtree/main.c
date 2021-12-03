@@ -43,7 +43,6 @@ int main()
                 char value[50] = { '\0' };
                 printf("Enter key: ");
                 gets_s(key, 50);
-                //scanf_s("%s%*c", &key);
                 printf("Enter value (it should be less than 50 symbols): ");
                 gets_s(value, 50);
                 if (!insert(dict, key, value))
@@ -58,7 +57,6 @@ int main()
                 char key[50] = { '\0' };
                 printf("Enter key: ");
                 gets_s(key, 50);
-                //scanf_s("%s%*c", &key);
                 const char* value = getValue(dict, key);
                 printf("Value: %s\n", value == "" ? NULL : value);
                 break;
@@ -68,7 +66,6 @@ int main()
                 char key[50] = { '\0' };
                 printf("Enter key: ");
                 gets_s(key, 50);
-                //scanf_s("%s%*c", &key);
                 inDictionary(dict, key) ? printf("This key is in the dictionary.\n") : printf("This key is NOT in the dictionary.\n");
                 break;
             }
@@ -77,7 +74,6 @@ int main()
                 char key[50] = { '\0' };
                 printf("Enter key: ");
                 gets_s(key, 50);
-                //scanf_s("%d%*c", &key);
                 deleteNode(&dict, key);
                 break;
             }
