@@ -140,17 +140,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="graph.c" />
+    <ClCompile Include="graphTests.c" />
     <ClCompile Include="list.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="states.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graph.h" />
+    <ClInclude Include="graphTests.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="states.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
+    <Text Include="inputTest.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

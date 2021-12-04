@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include "list.h"
 
@@ -113,4 +114,23 @@ int getCityIndex(Position* position)
 int getPositionValue(Position* position)
 {
     return position->position->city;
+}
+
+bool isNull(Position* position)
+{
+    return position->position == NULL;
+}
+
+void printList(List* list)
+{
+    if (list == NULL)
+    {
+        return;
+    }
+    ListElement* currentElement = list->capital;
+    while (currentElement != NULL)
+    {
+        printf("%d ", currentElement->city);
+        currentElement = currentElement->next;
+    }
 }

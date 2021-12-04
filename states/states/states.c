@@ -1,4 +1,5 @@
 #include <limits.h>
+#include <stdio.h>
 #include "list.h"
 #include "states.h"
 
@@ -19,20 +20,35 @@ int getNearestCity(Graph* graph, int start, int* length)
     return nearestCity;
 }
 
-void capture(Graph* graph)
+void removeRoadsToCapitals(Graph* graph)
 {
+    List** capitals = getCapitals(graph);
+    int numberOfCapitals = getNumberOfCapitals(graph);
+    for (int i = 0; i < numberOfCapitals; i++)
+    {
+        deleteColumn(graph, getHeadNumber(capitals[i]));
+    }
+}
+
+bool capture(Graph* graph)
+{
+    removeRoadsToCapitals(graph);
     int numberOfCapitals = getNumberOfCapitals(graph);
     int numberOfCities = getNumberOfCities(graph);
     int numberOfCapturedCities = numberOfCapitals;
     List** states = getCapitals(graph);
+    int index = 0;
     while (numberOfCapturedCities < numberOfCities)
     {
-        int index = numberOfCapturedCities % numberOfCapitals;
-        List* state = states[index];
+        List* state = states[index % numberOfCapitals];
         int stateSize = getLength(state);
         int shortestWay = INT_MAX;
-        int nearestCity = 0;
+        int nearestCity = -1;
         Position* position = createPosition();
+        if (position == NULL)
+        {
+            return false;
+        }
         first(state, &position);
         for (int i = 0; i < stateSize; i++)
         {
@@ -46,9 +62,25 @@ void capture(Graph* graph)
             }
             next(&position);
         }
-        addAtTail(state, nearestCity);
-        deleteColumn(graph, nearestCity);
+        if (nearestCity != -1)
+        {
+            addAtTail(state, nearestCity);
+            ++numberOfCapturedCities;
+            deleteColumn(graph, nearestCity);
+        }
+        ++index;
         deletePosition(&position);
-        ++numberOfCapturedCities;
+    }
+    return true;
+}
+
+void printStates(Graph* graph)
+{
+    int numberOfCapitals = getNumberOfCapitals(graph);
+    List** capitals = getCapitals(graph);
+    for (int i = 0; i < numberOfCapitals; i++)
+    {
+        printf("\nstate %d\n", getHeadNumber(capitals[i]));
+        printList(capitals[i]);
     }
 }
