@@ -4,12 +4,16 @@
 #include "states.h"
 #include"graphTests.h"
 
-int main(void)
+int main(int argc, char argv[])
 {
     if (!graphPassedTests())
     {
         printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        return 0;
     }
     Graph* graph = parse("input.txt");
     if (graph == NULL)
@@ -24,4 +28,5 @@ int main(void)
     }
     printStates(graph);
     deleteGraph(&graph);
+    return 0;
 }
