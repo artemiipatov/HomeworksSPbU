@@ -80,7 +80,8 @@ void printStates(Graph* graph)
     List** capitals = getCapitals(graph);
     for (int i = 0; i < numberOfCapitals; i++)
     {
-        printf("\nstate %d\n", getHeadNumber(capitals[i]));
+        printf("state %d\n", getHeadNumber(capitals[i]));
         printList(capitals[i]);
+        printf("\n");
     }
 }

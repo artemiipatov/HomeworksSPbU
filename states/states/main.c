@@ -17,7 +17,11 @@ int main(void)
         printf("An error occured while parsing");
         return -1;
     }
-    capture(graph);
+    if (!capture(graph))
+    {
+        printf("An error occured while capturing world");
+        return -1;
+    }
     printStates(graph);
     deleteGraph(&graph);
 }

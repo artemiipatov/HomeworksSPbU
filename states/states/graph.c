@@ -16,6 +16,11 @@ Graph* createGraph(void)
 {
     Graph* graph = calloc(1, sizeof(Graph));
     graph->capitals = calloc(NUMBER_OF_CITIES, sizeof(List*));
+    if (graph->capitals == NULL)
+    {
+        free(graph);
+        return NULL;
+    }
     graph->numberOfCities = 0;
     return graph;
 }
@@ -45,6 +50,10 @@ void setEdge(Graph* graph, int firstNode, int secondNode, int weight)
 Graph* parse(char* fileName)
 {
     Graph* graph = createGraph();
+    if (graph == NULL)
+    {
+        return NULL;
+    }
     FILE* input = fopen(fileName, "r");
     int numberOfCities = 0;
     int numberOfRoads = 0;
@@ -62,6 +71,7 @@ Graph* parse(char* fileName)
         if (cityIndex1 >= NUMBER_OF_CITIES || cityIndex2 >= NUMBER_OF_CITIES)
         {
             printf("City index should be less than %d", NUMBER_OF_CITIES);
+            deleteGraph(&graph);
             fclose(input);
             return NULL;
         }
@@ -75,7 +85,12 @@ Graph* parse(char* fileName)
         int capitalIndex = 0;
         fscanf_s(input, "%d%*c", &capitalIndex);
         graph->capitals[index] = createList();
-        addAtTail(graph->capitals[index], capitalIndex);
+        if (!addAtTail(graph->capitals[index], capitalIndex))
+        {
+            deleteGraph(&graph);
+            fclose(input);
+            return NULL;
+        }
     }
     fclose(input);
     return graph;

@@ -10,7 +10,10 @@ bool testCapturing(void)
     {
         return false;
     }
-    capture(graph);
+    if (!capture(graph))
+    {
+        return false;
+    }
     List** states = getCapitals(graph);
     int numberOfCapitals = getNumberOfCapitals(graph);
     int correctStates[3][4] = { { 6, 3, 0, 7 }, { 4, 5 }, { 2, 1 } };
