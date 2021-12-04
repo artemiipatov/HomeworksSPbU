@@ -12,7 +12,7 @@ void deleteGraph(Graph** graph);
 int getEdge(Graph* graph, int firstNode, int secondNode);
 
 // parses file
-Graph* parse(char* fileName);
+Graph* readFile(char* fileName);
 
 // deletes whole column
 void deleteColumn(Graph* graph, int column);

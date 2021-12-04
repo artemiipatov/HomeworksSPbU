@@ -47,7 +47,7 @@ void setEdge(Graph* graph, int firstNode, int secondNode, int weight)
     graph->matrix[secondNode][firstNode] = weight;
 }
 
-Graph* parse(char* fileName)
+Graph* readFile(char* fileName)
 {
     Graph* graph = createGraph();
     if (graph == NULL)

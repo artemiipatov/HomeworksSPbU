@@ -15,7 +15,7 @@ int main(int argc, char argv[])
     {
         return 0;
     }
-    Graph* graph = parse("input.txt");
+    Graph* graph = readFile("input.txt");
     if (graph == NULL)
     {
         printf("An error occured while parsing");

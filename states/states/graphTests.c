@@ -5,7 +5,7 @@
 
 bool testCapturing(void)
 {
-    Graph* graph = parse("inputTest.txt");
+    Graph* graph = readFile("inputTest.txt");
     if (graph == NULL)
     {
         return false;
@@ -46,7 +46,7 @@ bool testCapturing(void)
 
 bool testParsing(void)
 {
-    Graph* graph = parse("inputTest.txt");
+    Graph* graph = readFile("inputTest.txt");
     if (graph == NULL)
     {
         return false;
