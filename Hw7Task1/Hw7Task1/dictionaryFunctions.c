@@ -206,7 +206,7 @@ Node* addNode(Node* root, const int key, const char* value)
         }
         else if (key == i->key)
         {
-            strcpy(i->value, value);
+            strcpy_s(i->value, 50, value);
             return splay(i);
         }
         else
@@ -219,7 +219,7 @@ Node* addNode(Node* root, const int key, const char* value)
                     return NULL;
                 }
                 newRoot->key = key;
-                strcpy(newRoot->value, value);
+                strcpy_s(newRoot->value, 50, value);
                 i->leftSon = newRoot;
                 newRoot->parent = i;
                 return splay(newRoot);
