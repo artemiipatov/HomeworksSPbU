@@ -37,7 +37,7 @@
     <Text Include="data.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="testFIle.txt">
+    <Text Include="testFile.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
