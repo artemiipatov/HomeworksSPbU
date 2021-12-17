@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include "hashTable.h"
 #include "hashTableTests.h"
 
 int main()
 {
+    setlocale(LC_ALL, "");
     if (!hashTablePassedTests())
     {
         printf("Tests failed");
@@ -16,9 +18,9 @@ int main()
         printf("Allocation error");
         return -1;
     }
-    if (!parse(myHashTable, "data.txt"))
+    if (!readFile(myHashTable, "data.txt"))
     {
-        printf("An error occured while parsing");
+        printf("An error occured while reading file");
         deleteHashTable(&myHashTable);
         return -1;
     }

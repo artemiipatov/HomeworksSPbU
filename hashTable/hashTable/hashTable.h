@@ -11,10 +11,7 @@ HashTable* createHashTable();
 void deleteHashTable(HashTable** hashTable);
 
 // parses file
-bool parse(HashTable* hashTable, char* fileName);
-
-// counts hash for given word
-int hashFunction(const char word[], int arraySize);
+bool readFile(HashTable* hashTable, const char* fileName);
 
 // returns word frequency
 int getCounter(HashTable* hashTable, const char word[]);

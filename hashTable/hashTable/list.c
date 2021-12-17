@@ -16,7 +16,6 @@ typedef struct List
 {
     int length;
     ListElement* head;
-    ListElement* tail;
 } List;
 
 typedef struct Position
@@ -93,12 +92,11 @@ bool addItemToList(List** list, const char* word)
         }
         (*list)->length++;
         (*list)->head = newElement;
-        (*list)->tail = newElement;
     }
     else
     {
         ListElement* currentElement = (*list)->head;
-        while (currentElement != NULL)
+        while (currentElement->next != NULL)
         {
             if (strcmp(currentElement->word, word) == 0)
             {
@@ -107,14 +105,18 @@ bool addItemToList(List** list, const char* word)
             }
             currentElement = currentElement->next;
         }
+        if (strcmp(currentElement->word, word) == 0)
+        {
+            ++currentElement->counter;
+            return true;
+        }
         ListElement* newElement = createElement(word);
         if (newElement == NULL)
         {
             return false;
         }
         ++(*list)->length;
-        (*list)->tail->next = newElement;
-        (*list)->tail = (*list)->tail->next;
+        currentElement->next = newElement;
     }
     return true;
 }

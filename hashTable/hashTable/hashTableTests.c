@@ -11,7 +11,7 @@ bool hashTablePassedTests()
     {
         return false;
     }
-    if (!parse(hashTable, "testData.txt"))
+    if (!readFile(hashTable, "testData.txt"))
     {
         deleteHashTable(&hashTable);
         return false;

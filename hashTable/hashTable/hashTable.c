@@ -30,45 +30,67 @@ HashTable* createHashTable()
     return hashTable;
 }
 
-void deleteArray(List** array, int arraySize)
+void deleteArray(List*** array, int arraySize)
 {
-    if (array == NULL)
+    if ((*array) == NULL)
     {
         return;
     }
     for (int index = 0; index < arraySize; index++)
     {
-        deleteList(&array[index]);
+        deleteList(&(*array)[index]);
     }
+    free(*array);
+    (*array) = NULL;
 }
 
 void deleteHashTable(HashTable** hashTable)
 {
-    int arraySize = (*hashTable)->arraySize;
-    for (int index = 0; index < arraySize; index++)
-    {
-        deleteList(&((*hashTable)->array[index]));
-    }
-    free((*hashTable)->array);
+    const int arraySize = (*hashTable)->arraySize;
+    deleteArray(&((*hashTable)->array), (*hashTable)->arraySize);
     free(*hashTable);
     *hashTable = NULL;
 }
 
+int hashFunction(const char word[], int arraySize)
+{
+    const int length = (int)strlen(word);
+    int hash = 0;
+    for (int i = 0; i < length; i++)
+    {
+        hash = (hash * 3 + word[i] + arraySize) % arraySize;
+    }
+    return hash % arraySize;
+}
+
+bool resize(HashTable* hashTable);
+
 bool addItemToHashTable(HashTable* hashTable, const char word[])
 {
-    int hash = hashFunction(word, hashTable->arraySize);
-    ++hashTable->numberOfElements;
+    const int hash = hashFunction(word, hashTable->arraySize);
     if (!addItemToList(&(hashTable->array[hash]), word))
     {
         return false;
+    }
+    ++hashTable->numberOfElements;
+    if (getLoadFactor(hashTable) > 1.0)
+    {
+        if (!resize(hashTable))
+        {
+            return false;
+        }
     }
     return true;
 }
 
 bool resize(HashTable* hashTable)
 {
-    int oldSize = hashTable->arraySize;
+    const int oldSize = hashTable->arraySize;
     List** newArray = calloc(oldSize * 2, sizeof(List*));
+    if (newArray == NULL)
+    {
+        return false;
+    }
     hashTable->arraySize = oldSize * 2;
     List** oldArray = hashTable->array;
     hashTable->array = newArray;
@@ -80,7 +102,7 @@ bool resize(HashTable* hashTable)
             Position* position = createPosition();
             if (position == NULL)
             {
-                deleteArray(newArray, oldSize * 2);
+                deleteArray(&newArray, oldSize * 2);
                 return false;
             }
             first(oldArray[index], &position);
@@ -92,15 +114,19 @@ bool resize(HashTable* hashTable)
             deletePosition(&position);
         }
     }
-    deleteArray(oldArray, oldSize);
+    deleteArray(&oldArray, oldSize);
     hashTable->array = newArray;
     hashTable->arraySize = oldSize * 2;
     return true;
 }
 
-bool parse(HashTable* hashTable, char* fileName)
+bool readFile(HashTable* hashTable, const char* fileName)
 {
     FILE* file = fopen(fileName, "r");
+    if (file == NULL)
+    {
+        return false;
+    }
     while (!feof(file))
     {
         char word[50] = {'\0'};
@@ -110,36 +136,21 @@ bool parse(HashTable* hashTable, char* fileName)
             fclose(file);
             return false;
         }
-        if (getLoadFactor(hashTable) > 1.0)
-        {
-            resize(hashTable);
-        }
     }
     fclose(file);
     return true;
 }
 
-int hashFunction(const char word[], int arraySize)
-{
-    int length = (int)strlen(word);
-    int hash = 0;
-    for (int i = 0; i < length; i++)
-    {
-        hash = (hash * 3 + word[i]) % arraySize;
-    }
-    return hash % arraySize;
-}
-
 int getCounter(HashTable* hashTable, const char word[])
 {
-    int hash = hashFunction(word, hashTable->arraySize);
+    const int hash = hashFunction(word, hashTable->arraySize);
     List* list = hashTable->array[hash];
     return getCounterFromList(list, word);
 }
 
 void printHashTable(HashTable* hashTable)
 {
-    int arraySize = hashTable->arraySize;
+    const int arraySize = hashTable->arraySize;
     for (int arrayIndex = 0; arrayIndex < arraySize; arrayIndex++)
     {
         printList(hashTable->array[arrayIndex]);
@@ -149,7 +160,7 @@ void printHashTable(HashTable* hashTable)
 int getMaxLength(HashTable* hashTable)
 {
     int maxLength = 0;
-    int arraySize = hashTable->arraySize;
+    const int arraySize = hashTable->arraySize;
     for (int index = 0; index < arraySize; index++)
     {
         if (hashTable->array[index] != NULL)
@@ -167,7 +178,7 @@ int getMaxLength(HashTable* hashTable)
 int getAverageLength(HashTable* hashTable)
 {
     int sumOfLengths = 0;
-    int arraySize = hashTable->arraySize;
+    const int arraySize = hashTable->arraySize;
     for (int index = 0; index < arraySize; index++)
     {
         if (hashTable->array[index] != NULL)
