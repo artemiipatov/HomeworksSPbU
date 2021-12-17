@@ -111,12 +111,17 @@ bool testQSortCorrectExecution()
     return true;
 }
 
-int main()
+int main(int argc, char argv[])
 {
     if (!testQSortCorrectExecution())
     {
-        printf("Test failed");
+        printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        printf("Tests passed");
+        return 0;
     }
     int length = 0;
 

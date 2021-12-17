@@ -4,12 +4,16 @@
 #include "countingOutTests.h"
 #include "../../cyclicList/cyclicList/cyclicListTests.h"
 
-int main()
+int main(int argc, char argv[])
 {
     if (!(cyclicListPassedTests() && rhymePassedTests()))
     {
         printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        return 0;
     }
     int numberOfWarriors = 0;
     printf("Number of warriors: ");

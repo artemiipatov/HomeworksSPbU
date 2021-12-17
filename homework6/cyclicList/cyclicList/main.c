@@ -2,12 +2,16 @@
 #include "cyclicListFunctions.h"
 #include "cyclicListTests.h"
 
-int main()
+int main(int argc, char argv[])
 {
     if (!cyclicListPassedTests())
     {
         printf("Tests failed");
         return -1;
+    }
+    if (argc > 1)
+    {
+        return 0;
     }
     List* myList = createList();
     if (myList == NULL)
