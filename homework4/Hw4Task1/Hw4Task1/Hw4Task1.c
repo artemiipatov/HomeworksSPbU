@@ -135,7 +135,8 @@ bool testCorrectExecutionOfAllFunctions()
     return binaryToDecimal(binarySum3) == -19432;
 }
 
-int main()
+// test comments
+int main(int argc, int argv[])
 {
     // Russian symbols
     setlocale(0, "Russian");
@@ -145,7 +146,10 @@ int main()
         printf("Программа не прошла тесты.");
         return -1;
     }
-
+    if (argc > 1)
+    {
+        return 0;
+    }
     // Two decimal numbers
     printf("Введите числа:\n");
     int firstDecimalNumber = 0;

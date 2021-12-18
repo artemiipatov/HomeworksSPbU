@@ -159,14 +159,17 @@ bool testQSortCorrectExecution()
     return true;
 }
 
-int main()
+int main(int argv, char* argc[])
 {
     if (!testQSortCorrectExecution() || !testMostFrequentElement())
     {
         printf("Test failed");
         return -1;
     }
-
+    if (argv > 1)
+    {
+        return 0;
+    }
     int length = 0;
     printf("Length of main array: ");
     scanf("%d", &length);

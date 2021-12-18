@@ -4,14 +4,18 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-int main()
+int main(int argc, char* argv[])
 {
     if (!uniteTestingFuctions())
     {
         printf("Test failed");
         return -1;
     }
-
+    if (argc > 1)
+    {
+        printf("Tests passed");
+        return 0;
+    }
     printf("0 - exit\n");
     printf("1 - add note\n"); 
     printf("2 - print all notes\n");
@@ -22,6 +26,10 @@ int main()
     int userInput = 1;
     PhoneBookEntry notesArray[100] = { '\0' };
     int currentIndex = readDataFromFile(notesArray, 0, "data.txt");
+    if (currentIndex == -1)
+    {
+        return -1;
+    }
     while (userInput != 0)
     {
         printf("\nType any number: ");
