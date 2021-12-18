@@ -106,11 +106,6 @@ void next(Position** position)
     (*position)->position = (*position)->position->next;
 }
 
-int getCityIndex(Position* position)
-{
-    return position->position->city;
-}
-
 int getPositionValue(Position* position)
 {
     return position->position->city;

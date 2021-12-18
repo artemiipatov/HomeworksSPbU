@@ -125,7 +125,7 @@ bool capture(States* states)
         first(state, &position);
         for (int i = 0; i < stateSize; i++)
         {
-            int stateNumber = getCityIndex(position);
+            int stateNumber = getPositionValue(position);
             int length = INT_MAX;
             int currentNearestCity = getNearestCity(states, getPositionValue(position), &length);
             if (length < shortestWay)

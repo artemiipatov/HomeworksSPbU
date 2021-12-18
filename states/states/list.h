@@ -40,9 +40,6 @@ void first(List* list, Position** position);
 // fills position with the next element of the list
 void next(Position** position);
 
-// returns city index
-int getCityIndex(Position* position);
-
 // returns position value
 int getPositionValue(Position* position);
 
