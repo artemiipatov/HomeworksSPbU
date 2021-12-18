@@ -1,38 +1,38 @@
 #include <stdlib.h>
 #include "graphTests.h"
-#include "graph.h"
 #include "states.h"
 
 bool testCapturing(void)
 {
-    Graph* graph = readFile("inputTest.txt");
-    if (graph == NULL)
+    States* states = readFile("inputTest.txt");
+    if (states == NULL)
     {
         return false;
     }
-    if (!capture(graph))
+    if (!capture(states))
     {
+        deleteStates(&states);
         return false;
     }
-    List** states = getCapitals(graph);
-    int numberOfCapitals = getNumberOfCapitals(graph);
+    List** arrayOfStates = getCapitals(states);
+    int numberOfCapitals = getNumberOfCapitals(states);
     int correctStates[3][4] = { { 6, 3, 0, 7 }, { 4, 5 }, { 2, 1 } };
     for (int i = 0; i < numberOfCapitals; i++)
     {
         Position* position = createPosition();
         if (position == NULL)
         {
-            deleteGraph(&graph);
+            deleteStates(&states);
             return false;
         }
-        first(states[i], &position);
+        first(arrayOfStates[i], &position);
         int column = 0;
         while (!isNull(position))
         {
             if (getPositionValue(position) != correctStates[i][column])
             {
                 deletePosition(&position);
-                deleteGraph(&graph);
+                deleteStates(&states);
                 return false;
             }
             next(&position);
@@ -40,22 +40,22 @@ bool testCapturing(void)
         }
         deletePosition(&position);
     }
-    deleteGraph(&graph);
-    return graph == NULL;
+    deleteStates(&states);
+    return states == NULL;
 }
 
 bool testParsing(void)
 {
-    Graph* graph = readFile("inputTest.txt");
-    if (graph == NULL)
+    States* states = readFile("inputTest.txt");
+    if (states == NULL)
     {
         return false;
     }
-    int matrix[NUMBER_OF_CITIES][NUMBER_OF_CITIES] = { 0 };
-    getMatrix(graph, matrix);
-    if (!(getNumberOfCities(graph) == 8 && getNumberOfCapitals(graph) == 3))
+    int matrix[NUMBER_OF_NODES][NUMBER_OF_NODES] = { 0 };
+    getMatrix(getGraph(states), matrix);
+    if (!(getNumberOfCities(states) == 8 && getNumberOfCapitals(states) == 3))
     {
-        deleteGraph(&graph);
+        deleteStates(&states);
         return false;
     }
     if (!(matrix[0][1] == matrix[1][0] && matrix[0][1] == 7
@@ -72,11 +72,11 @@ bool testParsing(void)
         && matrix[6][4] == matrix[4][6] && matrix[6][4] == 6
         && matrix[6][7] == matrix[7][6] && matrix[6][7] == 34))
     {
-        deleteGraph(&graph);
+        deleteStates(&states);
         return false;
     }
-    deleteGraph(&graph);
-    return graph == NULL;
+    deleteStates(&states);
+    return states == NULL;
 }
 
 bool graphPassedTests(void)

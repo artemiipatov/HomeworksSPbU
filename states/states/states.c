@@ -1,16 +1,89 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <limits.h>
-#include <stdio.h>
-#include "list.h"
+#include <stdlib.h>
 #include "states.h"
 
-int getNearestCity(Graph* graph, int start, int* length)
+typedef struct States
 {
-    int cities[NUMBER_OF_CITIES] = { 0 };
-    getRelatedCities(graph, start, &cities);
-    int nearestCity = 0;
-    for (int index = 0; index < NUMBER_OF_CITIES; index++)
+    List** capitals;
+    int numberOfCapitals;
+    Graph* graph;
+} States;
+
+States* createStates(void)
+{
+    States* states = calloc(1, sizeof(States));
+    if (states == NULL)
     {
-        int edge = getEdge(graph, start, index);
+        return NULL;
+    }
+    states->capitals = calloc(NUMBER_OF_NODES, sizeof(List*));
+    return states->capitals == NULL ? NULL : states;
+}
+
+void deleteStates(States** states)
+{
+    deleteGraph(&((*states)->graph));
+    const int numberOfCapitals = (*states)->numberOfCapitals;
+    for (int i = 0; i < numberOfCapitals; i++)
+    {
+        deleteList(&((*states)->capitals[i]));
+    }
+    free((*states)->capitals);
+    (*states)->capitals = NULL;
+    free(*states);
+    *states = NULL;
+}
+
+States* readFile(const char* fileName)
+{
+    States* states = createStates();
+    if (states == NULL)
+    {
+        return NULL;
+    }
+    FILE* input = fopen(fileName, "r");
+    if (input == NULL)
+    {
+        return NULL;
+    }
+    states->graph = buildGraph(input);
+    if (states->graph == NULL)
+    {
+        deleteStates(&states);
+        fclose(input);
+        return NULL;
+    }
+    int numberOfCapitals = 0;
+    fscanf_s(input, "%d%*c", &numberOfCapitals);
+    states->numberOfCapitals = numberOfCapitals;
+    for (int index = 0; index < numberOfCapitals; index++)
+    {
+        int capitalIndex = 0;
+        fscanf_s(input, "%d%*c", &capitalIndex);
+        states->capitals[index] = createList();
+        if (!addAtTail(states->capitals[index], capitalIndex))
+        {
+            deleteStates(&states);
+            fclose(input);
+            return NULL;
+        }
+    }
+    fclose(input);
+    return states;
+}
+
+List** getCapitals(States* states)
+{
+    return states->capitals;
+}
+
+int getNearestCity(States* states, int start, int* length)
+{
+    int nearestCity = 0;
+    for (int index = 0; index < NUMBER_OF_NODES; index++)
+    {
+        int edge = getEdge(states->graph, start, index);
         if (edge != 0 && edge < *length)
         {
             *length = edge;
@@ -20,28 +93,28 @@ int getNearestCity(Graph* graph, int start, int* length)
     return nearestCity;
 }
 
-void removeRoadsToCapitals(Graph* graph)
+void removeRoadsToCapitals(States* states)
 {
-    List** capitals = getCapitals(graph);
-    int numberOfCapitals = getNumberOfCapitals(graph);
+    List** capitals = getCapitals(states);
+    const int numberOfCapitals = states->numberOfCapitals;
     for (int i = 0; i < numberOfCapitals; i++)
     {
-        deleteColumn(graph, getHeadNumber(capitals[i]));
+        deleteColumn(states->graph, getHeadNumber(capitals[i]));
     }
 }
 
-bool capture(Graph* graph)
+bool capture(States* states)
 {
-    removeRoadsToCapitals(graph);
-    int numberOfCapitals = getNumberOfCapitals(graph);
-    int numberOfCities = getNumberOfCities(graph);
+    removeRoadsToCapitals(states);
+    const int numberOfCapitals = states->numberOfCapitals;
+    const int numberOfCities = getNumberOfNodes(states->graph);
     int numberOfCapturedCities = numberOfCapitals;
-    List** states = getCapitals(graph);
+    List** arrayOfStates = getCapitals(states);
     int index = 0;
     while (numberOfCapturedCities < numberOfCities)
     {
-        List* state = states[index % numberOfCapitals];
-        int stateSize = getLength(state);
+        List* state = arrayOfStates[index % numberOfCapitals];
+        const int stateSize = getLength(state);
         int shortestWay = INT_MAX;
         int nearestCity = -1;
         Position* position = createPosition();
@@ -54,7 +127,7 @@ bool capture(Graph* graph)
         {
             int stateNumber = getCityIndex(position);
             int length = INT_MAX;
-            int currentNearestCity = getNearestCity(graph, getPositionValue(position), &length);
+            int currentNearestCity = getNearestCity(states, getPositionValue(position), &length);
             if (length < shortestWay)
             {
                 shortestWay = length;
@@ -66,7 +139,7 @@ bool capture(Graph* graph)
         {
             addAtTail(state, nearestCity);
             ++numberOfCapturedCities;
-            deleteColumn(graph, nearestCity);
+            deleteColumn(states->graph, nearestCity);
         }
         ++index;
         deletePosition(&position);
@@ -74,10 +147,25 @@ bool capture(Graph* graph)
     return true;
 }
 
-void printStates(Graph* graph)
+Graph* getGraph(States* states)
 {
-    int numberOfCapitals = getNumberOfCapitals(graph);
-    List** capitals = getCapitals(graph);
+    return states->graph;
+}
+
+int getNumberOfCapitals(States* states)
+{
+    return states->numberOfCapitals;
+}
+
+int getNumberOfCities(States* states)
+{
+    return getNumberOfNodes(states->graph);
+}
+
+void printStates(States* states)
+{
+    const int numberOfCapitals = states->numberOfCapitals;
+    List** capitals = getCapitals(states);
     for (int i = 0; i < numberOfCapitals; i++)
     {
         printf("state %d\n", getHeadNumber(capitals[i]));

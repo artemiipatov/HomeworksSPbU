@@ -1,134 +1,81 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdbool.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "graph.h"
 
 typedef struct Graph
 {
-    List** capitals;
-    int numberOfCapitals;
-    int numberOfCities;
-    int matrix[NUMBER_OF_CITIES][NUMBER_OF_CITIES];
+    int numberOfNodes;
+    int matrix[NUMBER_OF_NODES][NUMBER_OF_NODES];
 } Graph;
-
-Graph* createGraph(void)
-{
-    Graph* graph = calloc(1, sizeof(Graph));
-    graph->capitals = calloc(NUMBER_OF_CITIES, sizeof(List*));
-    if (graph->capitals == NULL)
-    {
-        free(graph);
-        return NULL;
-    }
-    graph->numberOfCities = 0;
-    return graph;
-}
 
 void deleteGraph(Graph** graph)
 {
-    int numberOfCapitals = (*graph)->numberOfCapitals;
-    for (int i = 0; i < numberOfCapitals; i++)
-    {
-        deleteList(&((*graph)->capitals[i]));
-    }
     free(*graph);
     *graph = NULL;
 }
 
-int getEdge(Graph* graph, int start, int end)
+int getEdge(Graph* graph, const int start, const int end)
 {
     return graph->matrix[start][end];
 }
 
-void setEdge(Graph* graph, int firstNode, int secondNode, int weight)
+void setEdge(Graph* graph, const int firstNode, const int secondNode, const int weight)
 {
     graph->matrix[firstNode][secondNode] = weight;
     graph->matrix[secondNode][firstNode] = weight;
 }
 
-Graph* readFile(char* fileName)
+Graph* buildGraph(FILE* input)
 {
-    Graph* graph = createGraph();
+    Graph* graph = calloc(1, sizeof(Graph));
     if (graph == NULL)
     {
         return NULL;
     }
-    FILE* input = fopen(fileName, "r");
-    int numberOfCities = 0;
+    graph->numberOfNodes = 0;
+    int numberOfNodes = 0;
     int numberOfRoads = 0;
-    fscanf_s(input, "%d%*c", &numberOfCities);
-    graph->numberOfCities = numberOfCities;
+    fscanf_s(input, "%d%*c", &numberOfNodes);
+    graph->numberOfNodes = numberOfNodes;
     fscanf_s(input, "%d%*c", &numberOfRoads);
     for (int index = 0; index < numberOfRoads; index++)
     {
-        int cityIndex1 = 0;
-        int cityIndex2 = 0;
+        int nodeIndex1 = 0;
+        int nodeIndex2 = 0;
         int roadLength = 0;
-        fscanf_s(input, "%d%*c", &cityIndex1);
-        fscanf_s(input, "%d%*c", &cityIndex2);
+        fscanf_s(input, "%d%*c", &nodeIndex1);
+        fscanf_s(input, "%d%*c", &nodeIndex2);
         fscanf_s(input, "%d%*c", &roadLength);
-        if (cityIndex1 >= NUMBER_OF_CITIES || cityIndex2 >= NUMBER_OF_CITIES)
+        if (nodeIndex1 >= NUMBER_OF_NODES || nodeIndex2 >= NUMBER_OF_NODES)
         {
-            printf("City index should be less than %d", NUMBER_OF_CITIES);
+            printf("City index should be less than %d", NUMBER_OF_NODES);
             deleteGraph(&graph);
-            fclose(input);
             return NULL;
         }
-        setEdge(graph, cityIndex1, cityIndex2, roadLength);
+        setEdge(graph, nodeIndex1, nodeIndex2, roadLength);
     }
-    int numberOfCapitals = 0;
-    fscanf_s(input, "%d%*c", &numberOfCapitals);
-    graph->numberOfCapitals = numberOfCapitals;
-    for (int index = 0; index < numberOfCapitals; index++)
-    {
-        int capitalIndex = 0;
-        fscanf_s(input, "%d%*c", &capitalIndex);
-        graph->capitals[index] = createList();
-        if (!addAtTail(graph->capitals[index], capitalIndex))
-        {
-            deleteGraph(&graph);
-            fclose(input);
-            return NULL;
-        }
-    }
-    fclose(input);
     return graph;
 }
 
-void deleteColumn(Graph* graph, int column)
+void deleteColumn(Graph* graph, const int column)
 {
-    for (int index = 0; index < NUMBER_OF_CITIES; index++)
+    for (int index = 0; index < NUMBER_OF_NODES; index++)
     {
         graph->matrix[index][column] = 0;
     }
 }
 
-int getNumberOfCapitals(Graph* graph)
+int getNumberOfNodes(Graph* graph)
 {
-    return graph->numberOfCapitals;
+    return graph->numberOfNodes;
 }
 
-int getNumberOfCities(Graph* graph)
+void getMatrix(Graph* graph, int matrix[NUMBER_OF_NODES][NUMBER_OF_NODES])
 {
-    return graph->numberOfCities;
-}
-
-List** getCapitals(Graph* graph)
-{
-    return graph->capitals;
-}
-
-void getRelatedCities(Graph* graph, int city, int* cities[NUMBER_OF_CITIES])
-{
-    *cities = graph->matrix[city];
-}
-
-void getMatrix(Graph* graph, int matrix[NUMBER_OF_CITIES][NUMBER_OF_CITIES])
-{
-    for (int row = 0; row < NUMBER_OF_CITIES; row++)
+    for (int row = 0; row < NUMBER_OF_NODES; row++)
     {
-        for (int column = 0; column < NUMBER_OF_CITIES; column++)
+        for (int column = 0; column < NUMBER_OF_NODES; column++)
         {
             matrix[row][column] = graph->matrix[row][column];
         }

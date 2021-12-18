@@ -15,18 +15,18 @@ int main(int argc, char argv[])
     {
         return 0;
     }
-    Graph* graph = readFile("input.txt");
-    if (graph == NULL)
+    States* states = readFile("input.txt");
+    if (states == NULL)
     {
-        printf("An error occured while parsing");
+        printf("An error occured while reading file");
         return -1;
     }
-    if (!capture(graph))
+    if (!capture(states))
     {
         printf("An error occured while capturing world");
         return -1;
     }
-    printStates(graph);
-    deleteGraph(&graph);
+    printStates(states);
+    deleteStates(&states);
     return 0;
 }
