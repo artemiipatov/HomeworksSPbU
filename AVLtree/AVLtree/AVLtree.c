@@ -250,8 +250,7 @@ Node* fullBalance(Node* x, const char* key)
         x->leftSon = fullBalance(x->leftSon, key);
     }
     correctHeight(x);
-    x = balance(x);
-    return x;
+    return balance(x);
 }
 
 void deleteNode(Dict** dict, const char* key)

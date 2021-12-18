@@ -22,8 +22,9 @@ bool insertItems(Dict* dict)
         && insert(dict, "-1", "fkpodsmgf");
 }
 
-bool testAddAndGet(Dict* dict)
+bool testAddAndGet(void)
 {
+    Dict* dict = createDictionary();
     insert(dict, "6", "enrg");
     if (dict == NULL)
     {
@@ -127,11 +128,14 @@ bool testAddAndGet(Dict* dict)
         deleteDictionary(&dict);
         return false;
     }
+    deleteDictionary(&dict);
     return true;
 }
 
-bool testDeleteAndInDictionary(Dict* dict)
+bool testDeleteAndInDictionary(void)
 {
+    Dict* dict = createDictionary();
+    insertItems(dict);
     deleteNode(&dict, "0");
     if (inDictionary(dict, "0"))
     {
@@ -149,14 +153,13 @@ bool testDeleteAndInDictionary(Dict* dict)
     deleteNode(&dict, "3");
     if (inDictionary(dict, "2") || inDictionary(dict, "19")
         || inDictionary(dict, "9") || inDictionary(dict, "3")
-        || !inDictionary(dict, "8") || !inDictionary(dict, "6"))
+        || !inDictionary(dict, "8"))
     {
         deleteDictionary(&dict);
         return false;
     }
     deleteNode(&dict, "8");
-    deleteNode(&dict, "6");
-    if (inDictionary(dict, "8") || inDictionary(dict, "6"))
+    if (inDictionary(dict, "8"))
     {
         deleteDictionary(&dict);
         return false;
@@ -165,9 +168,9 @@ bool testDeleteAndInDictionary(Dict* dict)
     return dict == NULL;
 }
 
-bool testDeleteDictionary(Dict* dict)
+bool testDeleteDictionary(void)
 {
-    dict = createDictionary();
+    Dict* dict = createDictionary();
     if (dict == NULL)
     {
         return false;
@@ -183,6 +186,5 @@ bool testDeleteDictionary(Dict* dict)
 
 bool AvlTreePassedTests()
 {
-    Dict* dict = createDictionary();
-    return testAddAndGet(dict) && testDeleteAndInDictionary(dict) && testDeleteDictionary(dict);
+    return testAddAndGet() && testDeleteAndInDictionary() && testDeleteDictionary();
 }
