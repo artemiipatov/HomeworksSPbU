@@ -36,17 +36,17 @@ Graph* buildGraph(FILE* input)
     graph->numberOfNodes = 0;
     int numberOfNodes = 0;
     int numberOfRoads = 0;
-    fscanf_s(input, "%d%*c", &numberOfNodes);
+    fscanf_s(input, "%d", &numberOfNodes);
     graph->numberOfNodes = numberOfNodes;
-    fscanf_s(input, "%d%*c", &numberOfRoads);
+    fscanf_s(input, "%d", &numberOfRoads);
     for (int index = 0; index < numberOfRoads; index++)
     {
         int nodeIndex1 = 0;
         int nodeIndex2 = 0;
         int roadLength = 0;
-        fscanf_s(input, "%d%*c", &nodeIndex1);
-        fscanf_s(input, "%d%*c", &nodeIndex2);
-        fscanf_s(input, "%d%*c", &roadLength);
+        fscanf_s(input, "%d", &nodeIndex1);
+        fscanf_s(input, "%d", &nodeIndex2);
+        fscanf_s(input, "%d", &roadLength);
         if (nodeIndex1 >= NUMBER_OF_NODES || nodeIndex2 >= NUMBER_OF_NODES)
         {
             printf("City index should be less than %d", NUMBER_OF_NODES);

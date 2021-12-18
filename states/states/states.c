@@ -55,12 +55,12 @@ States* readFile(const char* fileName)
         return NULL;
     }
     int numberOfCapitals = 0;
-    fscanf_s(input, "%d%*c", &numberOfCapitals);
+    fscanf_s(input, "%d", &numberOfCapitals);
     states->numberOfCapitals = numberOfCapitals;
     for (int index = 0; index < numberOfCapitals; index++)
     {
         int capitalIndex = 0;
-        fscanf_s(input, "%d%*c", &capitalIndex);
+        fscanf_s(input, "%d", &capitalIndex);
         states->capitals[index] = createList();
         if (!addAtTail(states->capitals[index], capitalIndex))
         {
