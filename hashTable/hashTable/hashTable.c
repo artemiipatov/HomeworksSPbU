@@ -58,7 +58,7 @@ int hashFunction(const char word[], int arraySize)
     int hash = 0;
     for (int i = 0; i < length; i++)
     {
-        hash = (hash * 3 + word[i] + arraySize) % arraySize;
+        hash = (hash * 3 + (word[i] % arraySize) + arraySize) % arraySize;
     }
     return hash % arraySize;
 }
@@ -115,8 +115,6 @@ bool resize(HashTable* hashTable)
         }
     }
     deleteArray(&oldArray, oldSize);
-    hashTable->array = newArray;
-    hashTable->arraySize = oldSize * 2;
     return true;
 }
 
