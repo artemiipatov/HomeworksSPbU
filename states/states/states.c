@@ -45,6 +45,7 @@ States* readFile(const char* fileName)
     FILE* input = fopen(fileName, "r");
     if (input == NULL)
     {
+        deleteStates(&states);
         return NULL;
     }
     states->graph = buildGraph(input);
