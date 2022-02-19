@@ -1,2 +1,2 @@
-# HomeworksSPbU
-SPbU homeworks
+# HomeworksSPbUsem1
+SPbU homeworks semester 1
